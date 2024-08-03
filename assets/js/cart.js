@@ -40,7 +40,7 @@ async function AddProductToCart() {
                 const quantity = document.getElementById("quantity").value;
 
                 cartItem.innerHTML = `
-                    <img alt="Giày ${product.productName}" src="${product.productImage}">
+                    <img alt="Giày ${product.productName}" src="${imageBaseURL + product.productImage}">
                     <div class="item-info">
                         <div class="cartItemInfo">
                             <p class="product-name">${product.productName}</p>
@@ -94,7 +94,7 @@ function displayCart(cart) {
         cartItem.classList.add("cart-item");
 
         cartItem.innerHTML = `
-            <img alt="Giày ${product.productName}" src="${product.productImage}">
+            <img alt="Giày ${product.productName}" src="${imageBaseURL + product.productImage}">
             <div class="item-info">
                 <div class="cartItemInfo">
                     <p class="product-name">${product.productName}</p>

@@ -21,7 +21,7 @@ function displayProductsInCart(cart) {
         sumPrice += product.quantity * product.price;
 
         cartItem.innerHTML = `
-            <img alt="Giày ${product.productName}" src="${product.productImage}">
+            <img alt="Giày ${product.productName}" src="${imageBaseURL + product.productImage}">
             <div class="productItem-info">
                 <div class="productInfo">
                     <p class="product-name">${product.productName}</p>
@@ -109,7 +109,7 @@ async function createOrder(customerId, orderDetails) {
 
         const data = await response.json();
         window.alert("Đơn hàng được đặt thành công!")
-        window.location.href = '/user/account.html';
+        window.location.href = '/user/profile.html';
         console.log('Order created successfully:', data);
         return data;
     } catch (error) {

@@ -29,13 +29,13 @@ async function updateBannerImages() {
         
         bannerCarousel.innerHTML = `
             <div class="carousel-item active">
-                <img id="banner1" src="../public/img/homepage/banner/${fileList[0]}" class="d-block w-100" alt="...">
+                <img id="banner1" src="${imageBaseURL}/img/homepage/banner/${fileList[0]}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img id="banner2" src="../public/img/homepage/banner/${fileList[1]}" class="d-block w-100" alt="...">
+                <img id="banner2" src="${imageBaseURL}/img/homepage/banner/${fileList[1]}" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img id="banner3" src="../public/img/homepage/banner/${fileList[2]}" class="d-block w-100" alt="...">
+                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/${fileList[2]}" class="d-block w-100" alt="...">
             </div>
         `;
     } catch (error) {
@@ -74,18 +74,18 @@ async function updatePosterImages() {
         bannerCarousel.innerHTML = `
             <div class="poster-main-left">
                 <a href="#" style="text-decoration: none; color: black">
-                    <img id="poster-main" src="../public/img/homepage/poster/${fileList[0]}" class="card-img-top" alt="...">
+                    <img id="poster-main" src="../assets/img/homepage/poster/${fileList[0]}" class="card-img-top" alt="...">
                 </a>
             </div>
             <div class="poster-main-right">
                 <div class="poster-main-right-div" style="margin-bottom: 10px;">
                     <a href="#" style="text-decoration: none; color: black">
-                        <img id="poster2" src="../public/img/homepage/poster/${fileList[1]}" alt="...">
+                        <img id="poster2" src="../assets/img/homepage/poster/${fileList[1]}" alt="...">
                     </a>
                 </div>
                 <div class="poster-main-right-div">
                     <a href="#" style="text-decoration: none; color: black">
-                        <img id="poster3" src="../public/img/homepage/poster/${fileList[2]}" alt="...">
+                        <img id="poster3" src="../assets/img/homepage/poster/${fileList[2]}" alt="...">
                     </a>
                 </div>
             </div>

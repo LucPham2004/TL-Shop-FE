@@ -44,7 +44,7 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
     const productImages = document.getElementById('productImages').files;
     const FfirstImageFile = productImages[0];
 
-    formData.set('productImage', '../assets/img/products/' + convertProductName(formData.get('productName'))
+    formData.set('productImage', '/img/products/' + convertProductName(formData.get('productName'))
                                     + "/" + `${convertProductName(formData.get('productName'))}_1.${FfirstImageFile.name.split('.').pop()}`);
     formData.set('productQuantity', productQuantity);
     formData.set('reviewCount', 0);

@@ -113,7 +113,7 @@ async function fetchCustomerOrders() {
                 orderProduct.classList.add('orderProduct');
     
                 orderProduct.innerHTML = `
-                    <img alt="Giày ${orderDetails.productName}" src="${orderDetails.productImage}">
+                    <img alt="Giày ${orderDetails.productName}" src="${imageBaseURL + orderDetails.productImage}">
                     <div class="productItem-info">
                         <div class="productInfo">
                             <p class="product-name">${orderDetails.productName}</p>

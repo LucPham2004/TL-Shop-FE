@@ -1,4 +1,5 @@
 
+const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {
     const products = await fetchProducts();

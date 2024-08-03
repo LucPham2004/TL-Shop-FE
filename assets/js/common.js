@@ -1,10 +1,11 @@
 const domain = "http://127.0.0.1:8080";
+const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
 document.addEventListener("DOMContentLoaded", function() {
     
     const headerHTML = `
     <header>
         <div class="header-container">
-            <a href="../public/index.html"><div id="logo"><img src="../public/img/logo/TL.png">TL SHOP</div></a>
+            <a href="../public/index.html"><div id="logo"><img src="../assets/img/logo/TL.png">TL SHOP</div></a>
             <div class="header-menu">
                 <a href="../public/index.html"><div class="header-item">Home</div></a>
                 <a href="../public/shop.html"><div class="header-item">Cửa Hàng</div></a>
