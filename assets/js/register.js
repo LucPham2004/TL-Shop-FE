@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Đăng ký thành công!');
 
             if(window.location.href ==  '/admin/admin.html'){
-                fetchCustomers();
+                const customers = await fetchCustomers();
+                showCustomersInAdminPage(customers);
             }
 
             if(window.location.href ==  '/public/register.html'){

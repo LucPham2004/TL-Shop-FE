@@ -2,13 +2,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 16.6667%;
+    width: 13%;
     height: 100%;
     background-color: #f8f9fa;
     padding-top: 20px;
 }
 #content-tab {
-    margin-left: 16.6667%;
+    margin-left: 13%;
+    width: 87%;
     padding: 20px;
 }
 

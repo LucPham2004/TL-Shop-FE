@@ -22,7 +22,7 @@ async function loadSummary() {
     summaryDiv.innerHTML = '';
 
     try {
-        const response = await fetch(domain + `/admin/api/dashboard`);
+        const response = await fetch(domain + `/api/v1/admin/dashboard`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

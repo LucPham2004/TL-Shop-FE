@@ -16,14 +16,23 @@ function getCookie(name) {
 
 // Check if user logged in or not
 function checkLogin() {
-    let userLoggedIn = getCookie("userLoggedIn");
-    let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
+    const customerInfo = JSON.parse(localStorage.getItem('user')) || [];
+    const token = JSON.parse(localStorage.getItem('token')) || [];
     
-    if(userLoggedIn === "true" || customerInfo != null) {
+    if(token != null && customerInfo != null) {
         return true
     } else {
         return false
     }
+}
+
+function checkRoles() {
+    let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
+    if (customerInfo.authorities && Array.isArray(customerInfo.authorities)) {
+        return customerInfo.authorities.map(auth => auth.authority);
+    }
+    
+    return [];
 }
 
 // Get user's id
@@ -42,7 +51,7 @@ function resetIdleTime() {
 
 function checkIdleTime() {
     idleTime += 600;
-    if (idleTime >= idleLimit) {
+    if (idleTime >= idleLimit && checkLogin()) {
         logout();
     }
 }
@@ -69,6 +78,8 @@ async function logout() {
         if (!response.ok) {
             throw new Error('Đăng xuất thất bại');
         }
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
         window.location.href = '/public/index.html';
 
     } catch (error) {

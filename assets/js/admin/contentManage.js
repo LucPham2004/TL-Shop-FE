@@ -9,7 +9,7 @@ async function changeBanner() {
         formData.append('files', files[i]);
     }
 
-    const response = await fetch(domain + '/admin/api/managehomepage/changeBanners', {
+    const response = await fetch(domain + '/api/v1/admin/managehomepage/changeBanners', {
         method: 'POST',
         body: formData
     });
@@ -53,7 +53,7 @@ async function changePoster() {
         formData.append('files', files[i]);
     }
 
-    const response = await fetch(domain + '/admin/api/managehomepage/changeposters', {
+    const response = await fetch(domain + '/api/v1/admin/managehomepage/changeposters', {
         method: 'POST',
         body: formData
     });
@@ -107,7 +107,7 @@ async function changeSampleImage(newImage, index) {
     const formData = new FormData();
     formData.append('files', newImage);
 
-    const response = await fetch(domain + `/admin/api/managehomepage/changesample${index}`, {
+    const response = await fetch(domain + `/api/v1/admin/managehomepage/changesample${index}`, {
         method: 'POST',
         body: formData
     });

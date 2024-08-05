@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log(data);
 
-            const user = data.user;
-			const token = data.jwt;
+            const user = data.result.user;
+			const token = data.result.jwt;
             
             if (user) {
                 localStorage.setItem('user', JSON.stringify(user));

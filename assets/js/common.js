@@ -118,8 +118,24 @@ document.addEventListener("DOMContentLoaded", function() {
 function changeLoginOrProfileHeaderPart() {
     const accountDiv = document.querySelector('.account');
     const isLoggedIn = checkLogin();
+    const roles = checkRoles();
 
-    if (isLoggedIn) {
+
+    
+    if(isLoggedIn && roles.includes("ADMIN")) {
+        accountDiv.innerHTML = `
+        <div class="dropdown">
+            <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle"></i> Profile
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../user/profile.html">Profile</a></li>
+                <li><a class="dropdown-item" href="../admin/admin.html">Quản lý Website</a></li>
+                <li><a class="dropdown-item" href="#" onclick="logout()">Đăng xuất<i class="fas fa-arrow-circle-right" style="margin-left: 15px;"></i></a></li>
+            </ul>
+        </div>
+    `;
+    } else if (isLoggedIn && roles.includes("USER")) {
         // Hiển thị phần dropdown
         accountDiv.innerHTML = `
             <div class="dropdown">
