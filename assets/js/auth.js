@@ -15,14 +15,28 @@ function getCookie(name) {
 }
 
 // Check if user logged in or not
-function checkLogin() {
-    const customerInfo = JSON.parse(localStorage.getItem('user')) || [];
+async function checkLogin() {
     const token = JSON.parse(localStorage.getItem('token')) || [];
-    
-    if(token != null && customerInfo != null) {
-        return true
-    } else {
-        return false
+
+    try {
+        const response = await fetch(domain + '/api/v1/auth/status', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+        console.log(data.message);
+
+        if(data.code == 200) {
+            return true
+        } else {
+            return false
+        }
+    } catch (error) {
+        console.error('Có lỗi xảy ra:', error);
     }
 }
 
@@ -68,7 +82,7 @@ window.addEventListener('load', () => {
 // Log out
 async function logout() {
     try {
-        const response = await fetch(domain + '/api/auth/logout', {
+        const response = await fetch(domain + '/api/v1/auth/logout', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json', 
