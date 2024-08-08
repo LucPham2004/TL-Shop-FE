@@ -41,30 +41,36 @@ async function displayOrders_Customers_Products_Summary() {
     const data = await fethSummary();
     console.log(data);
     
-    const listorders = document.querySelectorAll('#orders-summary li');
+    const listorders = document.querySelector('#orders-summary tbody');
+    listorders.innerHTML = ``;
+    listorders.innerHTML = `
+        <td style="text-align:center;">${data.totalOrders}</td>
+        <td style="text-align:center;">${data.processingOrdersCount}</td>
+        <td style="text-align:center;">${data.shippingOrdersCount}</td>
+        <td style="text-align:center;">${data.deliveredOrdersCount}</td>
+        <td style="text-align:center;">${data.cancelledOrdersCount}</td>
+    `
 
-    listorders[0].innerText = `Tổng đơn hàng: ${data.totalOrders}`;
-    listorders[1].innerText = `Đơn hàng đang xử lý: ${data.processingOrdersCount}`;
-    listorders[2].innerText = `Đơn hàng đang vận chuyển: ${data.shippingOrdersCount}`;
-    listorders[3].innerText = `Đơn hàng hoàn thành: ${data.deliveredOrdersCount}`;
-    listorders[4].innerText = `Đơn hàng đã hủy: ${data.cancelledOrdersCount}`;
+    const listcustomers = document.querySelector('#customers-summary tbody');
+    listcustomers.innerHTML = ``;
+    listcustomers.innerHTML = `
+        <td style="text-align:center;">${data.totalCustomers}</td>
+        <td style="text-align:center;">${data.enabledCustomersCount}</td>
+        <td style="text-align:center;">${data.nonLockedCustomersCount}</td>
+        <td style="text-align:center;">${data.disabledCustomersCount}</td>
+        <td style="text-align:center;">${data.lockedCustomersCount}</td>
+    `
 
-    const listcustomers = document.querySelectorAll('#customers-summary li');
-
-    listcustomers[0].innerText = `Tổng khách hàng: ${data.totalCustomers}`;
-    listcustomers[1].innerText = `Tài khoản được kích khoạt: ${data.enabledCustomersCount}`;
-    listcustomers[2].innerText = `Tài khoản không bị khóa: ${data.nonLockedCustomersCount}`;
-    listcustomers[3].innerText = `Tài khoản bị vô hiệu hóa: ${data.disabledCustomersCount}`;
-    listcustomers[4].innerText = `Tài khoản bị khóa: ${data.lockedCustomersCount}`;
-
-    const listproducts = document.querySelectorAll('#products-summary li');
-
-    listproducts[0].innerText = `Tổng sản phẩm: ${data.totalProducts}`;
-    listproducts[1].innerText = `Tổng Thương hiệu: ${data.totalBrands}`;
-    listproducts[2].innerText = `Tổng Danh mục sản phẩm: ${data.totalCategories}`;
-    listproducts[3].innerText = `Sản phẩm được kích khoạt: ${data.enabledProductsCount}`;
-    listproducts[4].innerText = `Sản phẩm đã được đánh giá: ${data.reviewedProductsCount}`;
-    listproducts[5].innerText = `Sản phẩm bị vô hiệu hóa: ${data.disabledProductsCount}`;
+    const listproducts = document.querySelector('#products-summary tbody');
+    listproducts.innerHTML = ``;
+    listproducts.innerHTML = `
+        <td style="text-align:center;">${data.totalProducts}</td>
+        <td style="text-align:center;">${data.totalBrands}</td>
+        <td style="text-align:center;">${data.totalCategories}</td>
+        <td style="text-align:center;">${data.reviewedProductsCount}</td>
+        <td style="text-align:center;">${data.enabledProductsCount}</td>
+        <td style="text-align:center;">${data.disabledProductsCount}</td>
+    `
 
 }
 
@@ -78,10 +84,10 @@ async function displaySummaryData() {
     data.new_customers.forEach(customer => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${customer.id}</td>
-            <td>${customer.name}</td>
-            <td>${customer.address || 'N/A'}</td>
-            <td><span class="tag tag-success">${customer.phone}</span></td>
+            <td style="text-align:center;">${customer.id}</td>
+            <td style="text-align:center;">${customer.name}</td>
+            <td style="text-align:center;">${customer.address || 'N/A'}</td>
+            <td style="text-align:center;"><span class="tag tag-success">${customer.phone}</span></td>
         `;
         newCustomersTable.appendChild(row);
     });
@@ -103,10 +109,10 @@ async function displaySummaryData() {
         }
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${order.id}</td>
-            <td>Sample Customer</td> <!-- Replace with actual customer data if available -->
-            <td>${formatNumber(order.total)} đ</td>
-            <td><span class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
+            <td style="text-align:center;">${order.id}</td>
+            <td style="text-align:center;">Sample Customer</td> <!-- Replace with actual customer data if available -->
+            <td style="text-align:center;">${formatNumber(order.total)} đ</td>
+            <td style="text-align:center;"><span class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
         `;
         orderListTable.appendChild(row);
         index++;

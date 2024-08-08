@@ -33,6 +33,8 @@ async function checkLogin() {
         if(data.code == 200) {
             return true
         } else {
+            confirm("Phiên làm việc đã hết. Bạn có muốn mở rộng buổi làm việc?");
+            logout();
             return false
         }
     } catch (error) {

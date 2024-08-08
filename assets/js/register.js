@@ -36,9 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(window.location.href ==  '/admin/admin.html'){
                 const customers = await fetchCustomers();
                 showCustomersInAdminPage(customers);
-            }
-
-            if(window.location.href ==  '/public/register.html'){
+            } else {
                 window.location.href = '/public/login.html';
             }
 

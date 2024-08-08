@@ -394,10 +394,6 @@ th {
     width: 98%;
     margin-left: 1%;
 }
-#orders-container {
-    display: flex;
-    flex-direction: column;
-}
 .orders h2 {
     margin-top: 0;
 }
@@ -433,6 +429,233 @@ th {
     height: 150px;
     object-fit: cover;
 }
+
+#filterForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px; /* Khoảng cách giữa các phần tử */
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Khoảng cách dưới form */
+}
+
+#filterForm label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+#filterForm input,
+#filterForm select {
+  flex: 1;
+  min-width: 150px; /* Đặt chiều rộng tối thiểu cho các phần tử */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#filterForm button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#filterForm button:hover {
+  background-color: #0056b3;
+}
+
+#filterForm button[type="button"]:nth-child(2) {
+  background-color: #dc3545; /* Màu cho nút "Hủy" */
+}
+
+#filterForm button[type="button"]:nth-child(2):hover {
+  background-color: #c82333;
+}
+
+#filterForm input[type="date"],
+#filterForm input[type="number"],
+#filterForm select {
+  max-width: 200px; /* Đặt chiều rộng tối đa cho các trường input và select */
+}
+
+@media (max-width: 768px) {
+  #filterForm {
+      flex-direction: column; /* Xếp chồng các phần tử khi trên màn hình nhỏ */
+      align-items: stretch;
+  }
+
+  #filterForm input,
+  #filterForm select,
+  #filterForm button {
+      width: 100%;
+  }
+}
+
+.SetOrderStatusBtn {
+  color: white;
+  background-color: rgb(54, 54, 250);
+}
+.showOrderProductsBtn {
+  color: white;
+  background-color: rgb(0, 181, 0);
+}
+.deleteOrderBtn {
+  color: white;
+  background-color: red;
+}
+
+/* Container for the select and buttons */
+#statusContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Ensure it appears above other elements */
+  background-color: #fff; /* White background */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+}
+
+/* Select field styling */
+#statusSelect {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Submit button styling */
+#submitButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for submit button */
+#submitButton:hover {
+  background-color: #218838;
+}
+
+/* Cancel button styling */
+#cancelButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for cancel button */
+#cancelButton:hover {
+  background-color: #c82333;
+}
+
+
+
+/* Customers Tab */
+
+/* Style for modal */
+#editModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: max-content;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#editModal h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+#editCustomerForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#editCustomerForm label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+#editCustomerForm input[type="text"],
+#editCustomerForm input[type="email"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#editCustomerForm button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+#editCustomerForm button[type="submit"] {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#editCustomerForm button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+#editCustomerForm button[type="button"] {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+#editCustomerForm button[type="button"]:hover {
+  background-color: #c82333;
+}
+
 
 /* products info */
 
@@ -486,10 +709,32 @@ th {
 
 
 
-.funtionsAndSearch{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.funtionsAndSearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-funtions {
+  display: flex;
+  gap: 10px;
+}
+
+.product-funtions .btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-funtions .btn:hover {
+  background-color: #0056b3;
 }
 .search-container{
     width: 30%;
@@ -499,11 +744,6 @@ th {
 .customer-funtions{
     width: 70%;
 }
-.product-funtions{
-    width: 70%;
-    display: flex;
-    flex-direction: row;
-}
 .addProduct{
     width: max-content;
 }
@@ -511,7 +751,73 @@ th {
     width: max-content;
 }
 
+.product-forms .card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.product-forms form {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-forms label {
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: #333;
+}
+
+.product-forms input[type="text"],
+.product-forms input[type="number"],
+.product-forms textarea {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.product-forms input[type="file"] {
+  margin-bottom: 15px;
+}
+
+.product-forms button[type="submit"],
+.product-forms button[type="button"] {
+  padding: 10px 15px;
+  font-size: 14px;
+  width: 200px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-forms button[type="submit"]:hover,
+.product-forms button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.product-forms .card h5 {
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+
+.horizontal-table .header {
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px 4px 0 0;
+}
 
 
 .horizontal-table {
@@ -523,11 +829,13 @@ th {
     display: flex;
     flex-direction: row;
     margin: 0 10px;
+    padding: 10px;
+    text-align: center;
     border-bottom: 1px solid black;
 }
 .horizontal-table .column div {
     border-right: 1px solid black;
-    width: 80px;
+    width: 90px;
     padding: 5px;
 }
 .horizontal-table .column .header {
@@ -632,4 +940,56 @@ th {
 }
 .changeBtn:hover{
     transform: scale(1.02)
+}
+
+
+
+/* Style cho các ô input */
+.sample-content input[type="text"] {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Style cho ô input file */
+.sample-content input[type="file"] {
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  font-size: 14px;
+}
+
+/* Style cho các nút button */
+.sample-content button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Nút Áp dụng */
+.sample-content button:first-of-type {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.sample-content button:first-of-type:hover {
+  background-color: #218838;
+}
+
+/* Nút Hủy */
+.sample-content button:last-of-type {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.sample-content button:last-of-type:hover {
+  background-color: #c82333;
 }

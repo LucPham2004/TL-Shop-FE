@@ -179,14 +179,22 @@ function addDetail() {
     newDetail.classList.add('productDetail');
     newDetail.innerHTML = `
         <label for="detailColor${detailCount}">Màu Sắc:</label>
-        <input type="text" id="detailColor${detailCount}" name="details[${detailCount}].color"><br>
+        <input type="text" id="detailColor${detailCount}" name="details[${detailCount}].color" required>
 
         <label for="detailSize${detailCount}">Kích Thước:</label>
-        <input type="number" id="detailSize${detailCount}" name="details[${detailCount}].size"><br>
+        <input type="number" id="detailSize${detailCount}" name="details[${detailCount}].size" required>
 
         <label for="detailQuantity${detailCount}">Số Lượng:</label>
-        <input type="number" id="detailQuantity${detailCount}" name="details[${detailCount}].quantity"><br>
+        <input type="number" id="detailQuantity${detailCount}" name="details[${detailCount}].quantity" required> 
+
+        <button type="button" onclick="cancelAddDetail(this)">Hủy</button>
     `;
     detailsDiv.appendChild(newDetail);
     detailCount++;
+}
+
+function cancelAddDetail(button) {
+    const detailDiv = button.parentElement;
+    detailDiv.remove();
+    detailCount--;
 }

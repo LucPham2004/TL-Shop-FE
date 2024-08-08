@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 // Fetch Orders Data
 async function fetchOrders() {
     try {
-        const orderResponse = await fetch(domain + '/api/v1/orders');
+        const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus');
         return orderResponse.json();
     } catch (error) {
         console.error('Error fetching customer orders: ', error);
@@ -16,19 +16,32 @@ async function fetchOrders() {
 
 // Show Order in Admin Page
 function showOrders(orders) {
-    const ordersContainer = document.getElementById("orders-container");
-    ordersContainer.innerHTML = '';
+    const ordersList = document.getElementById('ordersList');
+    ordersList.innerHTML = '';
 
     orders.forEach(order => {
-        const orderItem = document.createElement('div');
-        orderItem.classList.add('order');
+        const orderItem = document.createElement('tr');
 
+        orderItem.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customerName}</td>
+            <td>${formatNumber(parseInt(order.total))} VNĐ</td>
+            <td>${extractDate(order.date)}</td>
+            <td>${order.status}</td>
+            <td>
+                <button type="button" class="SetOrderStatusBtn" onclick="setOrderStatus(${order.id})">Đổi trạng thái</button>
+                <button type="button" class="showOrderProductsBtn" data-bs-toggle="collapse" data-bs-target="#order-id-${order.id}" aria-expanded="false" aria-controls="order-id-${order.id}">Xem sản phẩm</button>
+                <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa</button>
+            </td>
+        `;
+
+        // Hàng chứa chi tiết sản phẩm
+        const orderProductsRow = document.createElement('tr');
+        const orderProductsCell = document.createElement('td');
+        orderProductsCell.colSpan = 6;
         const orderProducts = document.createElement('div');
-        orderProducts.classList.add('orderProducts');
         orderProducts.classList.add('collapse');
         orderProducts.id = `order-id-${order.id}`;
-        
-        let totalQuantity = 0;
 
         order.orderDetails.forEach(orderDetails => {
             const orderProduct = document.createElement('div');
@@ -47,29 +60,17 @@ function showOrders(orders) {
                         <p class="total">Tổng: ${formatNumber(orderDetails.subtotal)} đ</p>
                     </div>
                 </div>
-            `
+            `;
             orderProducts.appendChild(orderProduct);
-
-            totalQuantity += orderDetails.quantity;
-
         });
 
-        orderItem.innerHTML = `
-            <div class="orderInfo" >
-                <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
-                <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
-                <p style="color:red;"><strong>Tổng tiền:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
-                <p><strong>Trạng thái:</strong> ${order.status}</p>
-                <p><strong>Số lượng:</strong> ${totalQuantity}</p>
-                <button type="button" class="SetOrderStatusBtn" onclick="setOrderStatus(${order.id})">Đổi trạng thái</button>
-                <button type="button" class="showOrderProductsBtn" data-bs-toggle="collapse" data-bs-target="#order-id-${order.id}" aria-expanded="false" aria-controls="order-id-${order.id}">Xem sản phẩm</button>
-                <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa</button>
-            </div>
-        `
-        orderItem.appendChild(orderProducts);
+        orderProductsCell.appendChild(orderProducts);
+        orderProductsRow.appendChild(orderProductsCell);
 
-        ordersContainer.appendChild(orderItem);
-    })
+        // Thêm hàng đơn hàng và hàng sản phẩm vào bảng
+        ordersList.appendChild(orderItem);
+        ordersList.appendChild(orderProductsRow);
+    });
 }
 
 async function filterOrders() {
@@ -107,17 +108,27 @@ async function nonfilterOrders() {
 
 function setOrderStatus(orderId) {
     console.log(orderId);
-    // Create a new input element
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = 'Nhập trạng thái đơn hàng mới';
-    input.id = 'statusInput';
 
-    // Create a new button element
+    // Create the container div
+    const container = document.createElement('div');
+    container.id = 'statusContainer';
+
+    // Create a new select element
+    const select = document.createElement('select');
+    select.id = 'statusSelect';
+    select.innerHTML = `
+        <option value="Processing">Processing</option>
+        <option value="Delivering">Delivering</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+    `;
+
+    // Create a new button element for submit
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Xác nhận';
+    submitButton.id = 'submitButton';
     submitButton.onclick = function() {
-        const status = document.getElementById('statusInput').value;
+        const status = document.getElementById('statusSelect').value;
         // Send the new status to the server
         if (orderId > 0 && status) {
             fetch(domain + '/api/v1/orders', {
@@ -134,17 +145,13 @@ function setOrderStatus(orderId) {
                     console.error('Cập nhật trạng thái thất bại');
                     alert('Cập nhật trạng thái thất bại');
                 }
-                // Remove the input and buttons after submission
-                document.body.removeChild(input);
-                document.body.removeChild(submitButton);
-                document.body.removeChild(cancelButton);
+                // Remove the container after submission
+                document.body.removeChild(container);
             }).catch(error => {
                 console.error('Error:', error);
                 alert('Có lỗi xảy ra');
-                // Remove the input and buttons after submission
-                document.body.removeChild(input);
-                document.body.removeChild(submitButton);
-                document.body.removeChild(cancelButton);
+                // Remove the container after error
+                document.body.removeChild(container);
             });
         }
     };
@@ -152,37 +159,22 @@ function setOrderStatus(orderId) {
     // Create a new button element for cancel
     const cancelButton = document.createElement('button');
     cancelButton.innerText = 'Hủy';
+    cancelButton.id = 'cancelButton';
     cancelButton.onclick = function() {
-        // Remove the input and buttons when cancelled
-        document.body.removeChild(input);
-        document.body.removeChild(submitButton);
-        document.body.removeChild(cancelButton);
+        // Remove the container when cancelled
+        document.body.removeChild(container);
     };
 
-    // Style the input and buttons to appear in the center of the screen
-    input.style.position = 'fixed';
-    input.style.top = '50%';
-    input.style.left = '50%';
-    input.style.transform = 'translate(-50%, -50%)';
-    input.style.zIndex = '1000'; // Ensure it appears above other elements
+    // Append the select and buttons to the container
+    container.appendChild(select);
+    container.appendChild(submitButton);
+    container.appendChild(cancelButton);
 
-    submitButton.style.position = 'fixed';
-    submitButton.style.top = '55%';
-    submitButton.style.left = '45%';
-    submitButton.style.transform = 'translate(-50%, -50%)';
-    submitButton.style.zIndex = '1000'; // Ensure it appears above other elements
-
-    cancelButton.style.position = 'fixed';
-    cancelButton.style.top = '55%';
-    cancelButton.style.left = '55%';
-    cancelButton.style.transform = 'translate(-50%, -50%)';
-    cancelButton.style.zIndex = '1000'; // Ensure it appears above other elements
-
-    // Append the input and buttons to the body
-    document.body.appendChild(input);
-    document.body.appendChild(submitButton);
-    document.body.appendChild(cancelButton);
+    // Append the container to the body
+    document.body.appendChild(container);
 }
+
+
 
 // Delete Order By Id
 async function deleteOrder(id) {

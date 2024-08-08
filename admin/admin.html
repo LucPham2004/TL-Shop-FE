@@ -265,16 +265,23 @@
 					</div>
 					<div class="tab-pane fade" id="tabContent-orders" role="tabpanel" aria-labelledby="tabContent-orders-tab">
 						<div class="orders">
-							<h4>Đơn hàng</h4>
+							<h3>Tổng quan các đơn hàng</h3>
 
-							<ul id="orders-summary">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
+							<table class="table table-bordered" id="orders-summary">
+								<thead>
+									<tr>
+										<th style="width: 20%;">Tổng đơn hàng</th>
+										<th style="width: 20%;">Đơn hàng đang xử lý</th>
+										<th style="width: 20%;">Đơn hàng đang vận chuyển</th>
+										<th style="width: 20%;">Đơn hàng hoàn thành</th>
+										<th style="width: 20%;">Đơn hàng đã hủy</th>
+									</tr>
+									</thead>
+								<tbody>
+								</tbody>
+							</table>
 							
+							<h5>Lọc đơn hàng</h5>
 							<form id="filterForm">
 								<label for="startDate">Ngày đầu:</label>
 								<input type="date" id="startDate" name="startDate">
@@ -305,20 +312,43 @@
 								<button type="button" onclick="filterOrders()">Lọc</button>
 								<button type="button" onclick="nonfilterOrders()">Hủy</button>
 							</form>
-							<div id="orders-container"></div>
+
+							<div>
+								<h5 class="tile-title">Các đơn hàng</h5>
+								<table class="table table-bordered">
+									<thead>
+									<tr>
+										<th style="width: 10%;">ID đơn hàng</th>
+										<th style="width: 15%;">Tên khách hàng</th>
+										<th style="width: 15%;">Tổng tiền</th>
+										<th style="width: 15%;">Ngày đặt hàng</th>
+										<th style="width: 15%;">Trạng thái</th>
+										<th style="width: 30%;">Chức năng</th>
+									</tr>
+									</thead>
+									<tbody id="ordersList">
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="tabContent-customer" role="tabpanel" aria-labelledby="tabContent-customer-tab">
 						<div class="customer-tab">
 							<h3>Khách hàng</h3>
 
-							<ul id="customers-summary">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
+							<table class="table table-bordered" id="customers-summary">
+								<thead>
+									<tr>
+										<th style="width: 20%;">Tổng khách hàng</th>
+										<th style="width: 20%;">Tài khoản được kích khoạt</th>
+										<th style="width: 20%;">Tài khoản không bị khóa</th>
+										<th style="width: 20%;">Tài khoản bị vô hiệu hóa</th>
+										<th style="width: 20%;">Tài khoản bị khóa</th>
+									</tr>
+									</thead>
+								<tbody>
+								</tbody>
+							</table>
 							<div class="funtionsAndSearch">
 								<div class="customer-funtions">
 									<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#registerForm" aria-expanded="false" aria-controls="registerForm">
@@ -360,7 +390,7 @@
 								</div>
 							</div>
 							<div class="customer-content">
-								<table id="customer-table">
+								<table class="table table-bordered" id="customer-table">
 									<thead>
 									<tr>
 										<th>ID</th>
@@ -381,16 +411,16 @@
 									<input type="hidden" id="editCustomerId" name="id">
 									<label for="editCustomerName">Tên:</label>
 									<input type="text" id="editCustomerName" name="name">
-									<br>
+
 									<label for="editCustomerEmail">Email:</label>
 									<input type="email" id="editCustomerEmail" name="email">
-									<br>
+									
 									<label for="editCustomerPhone">Số điện thoại:</label>
 									<input type="text" id="editCustomerPhone" name="phone">
-									<br>
+									
 									<label for="editCustomerAddress">Địa chỉ:</label>
 									<input type="text" id="editCustomerAddress" name="address">
-									<br>
+									
 									<button type="submit">Lưu</button>
 									<button type="button" onclick="closeEditModal()">Hủy</button>
 								</form>
@@ -401,14 +431,20 @@
 						<div class="product-tab">
 							<h3>Sản phẩm</h3>
 							
-							<ul id="products-summary">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
+							<table class="table table-bordered" id="products-summary">
+								<thead>
+									<tr>
+										<th style="width: 15%;">Tổng sản phẩm</th>
+										<th style="width: 15%;">Tổng thương hiệu</th>
+										<th style="width: 15%;">Tổng danh mục sản phẩm</th>
+										<th style="width: 15%;">Đã có đánh giá</th>
+										<th style="width: 15%;">Được kích hoạt</th>
+										<th style="width: 15%;">Bị vô hiệu hóa</th>
+									</tr>
+									</thead>
+								<tbody>
+								</tbody>
+							</table>
 							<div class="funtionsAndSearch">
 								<div class="product-funtions">
 									<div class="addProduct">
@@ -442,42 +478,33 @@
 										<h5>Thông tin sản phẩm</h5>
 										<form method="POST" enctype="multipart/form-data" id="addproductForm">
 											<label for="productName">Tên Sản Phẩm:</label>
-											<input type="text" id="productName" name="productName" required><br>
+											<input type="text" id="productName" name="productName" required>
 									
 											<label for="productDescription">Mô Tả Sản Phẩm:</label>
-											<textarea id="productDescription" name="productDescription" required></textarea><br>
+											<textarea id="productDescription" name="productDescription" required></textarea>
 									
 											<label for="productPrice">Giá Sản Phẩm:</label>
-											<input type="number" step="0.01" id="productPrice" name="productPrice" required><br>
+											<input type="number" step="0.01" id="productPrice" name="productPrice" required>
 									
 											<label for="discountPercent">Phần Trăm Giảm Giá:</label>
-											<input type="number" step="0.01" id="discountPercent" name="discountPercent"><br>
+											<input type="number" step="0.01" id="discountPercent" name="discountPercent">
 									
 											<label for="productBrandName">Thương Hiệu:</label>
-											<input type="text" id="productBrandName" name="productBrandName" required><br>
+											<input type="text" id="productBrandName" name="productBrandName" required>
 									
 											<label for="categories">Danh Mục (dấu phẩy ngăn cách):</label>
-											<input type="text" id="categories" name="categories"><br>
+											<input type="text" id="categories" name="categories">
 									
-											<h5>Chi Tiết Sản Phẩm</h5>
+											<h5>Mẫu mã Sản Phẩm</h5>
 											<div id="productDetails">
-												<div class="productDetail">
-													<label for="detailColor0">Màu Sắc:</label>
-													<input type="text" id="detailColor0" name="details[0].color"><br>
-									
-													<label for="detailSize0">Kích Thước:</label>
-													<input type="number" id="detailSize0" name="details[0].size"><br>
-									
-													<label for="detailQuantity0">Số Lượng:</label>
-													<input type="number" id="detailQuantity0" name="details[0].quantity" required><br>
-												</div>
+												
 											</div>
-											<button type="button" onclick="addDetail()">Thêm Chi Tiết Khác</button><br><br>
+											<button type="button" onclick="addDetail()">Thêm Mẫu</button>
 
 											<label for="productImages">Tải Lên Hình Ảnh:</label>
-											<input type="file" id="productImages" name="productImages" multiple><br><br>
+											<input type="file" id="productImages" name="productImages" multiple>
 									
-											<button type="submit">Tạo Sản Phẩm</button>
+											<button type="submit">Tạo Sản Phẩm</button><br>
 										</form>
 									</div>
 								</div>
@@ -550,8 +577,10 @@
 									</div>
 								</div>
 							</div>
+
+							<h5>Các sản phẩm</h5>
 							<div class="product-content">
-								<table id="product-table">
+								<table class="table table-bordered" id="product-table">
 									<thead>
 									<tr>
 										<th>ID</th>
