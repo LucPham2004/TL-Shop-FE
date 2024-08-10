@@ -2,6 +2,56 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     const orders = await fetchOrders();
     showOrders(orders);
+
+    // Searching orders
+    const searchBtn = document.getElementById('OrderSearchBtn');
+    if(searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            this.parentElement.classList.toggle('open');
+            this.previousElementSibling.focus();
+
+            const OrderSearchInput = document.getElementById('OrderSearchInput');
+
+            const keyword = document.getElementById('OrderSearchInput').value.trim();
+
+            if (keyword) {
+                console.log(keyword);
+                
+                // Chuyển đổi keyword thành số nếu có thể
+                const parsedKeyword = parseInt(keyword, 10);
+                
+                if (!isNaN(parsedKeyword)) {
+                    // Nếu parsedKeyword là số hợp lệ
+                    fetch(domain + `/api/v1/orders/search/${parsedKeyword}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showOrders(data);
+                        OrderSearchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Orders:', error);
+                    });
+
+                } else {
+                    // Nếu keyword không phải là số
+                    fetch(domain + `/api/v1/orders/search?keyword=${encodeURIComponent(keyword)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showOrders(data);
+                        OrderSearchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Orders:', error);
+                    });
+                }
+            }
+
+        })
+    } else {
+        console.log("not found search button")
+    }
 });
 
 // Fetch Orders Data
@@ -10,7 +60,7 @@ async function fetchOrders() {
         const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus');
         return orderResponse.json();
     } catch (error) {
-        console.error('Error fetching customer orders: ', error);
+        console.error('Error fetching Order orders: ', error);
     }
 }
 
@@ -27,7 +77,7 @@ function showOrders(orders) {
             <td>${order.customerName}</td>
             <td>${formatNumber(parseInt(order.total))} VNĐ</td>
             <td>${extractDate(order.date)}</td>
-            <td>${order.status}</td>
+            <td style="text-align:center;"><span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
             <td>
                 <button type="button" class="SetOrderStatusBtn" onclick="setOrderStatus(${order.id})">Đổi trạng thái</button>
                 <button type="button" class="showOrderProductsBtn" data-bs-toggle="collapse" data-bs-target="#order-id-${order.id}" aria-expanded="false" aria-controls="order-id-${order.id}">Xem sản phẩm</button>
@@ -38,7 +88,9 @@ function showOrders(orders) {
         // Hàng chứa chi tiết sản phẩm
         const orderProductsRow = document.createElement('tr');
         const orderProductsCell = document.createElement('td');
+        
         orderProductsCell.colSpan = 6;
+
         const orderProducts = document.createElement('div');
         orderProducts.classList.add('collapse');
         orderProducts.id = `order-id-${order.id}`;
@@ -145,12 +197,12 @@ function setOrderStatus(orderId) {
                     console.error('Cập nhật trạng thái thất bại');
                     alert('Cập nhật trạng thái thất bại');
                 }
-                // Remove the container after submission
+
                 document.body.removeChild(container);
             }).catch(error => {
                 console.error('Error:', error);
                 alert('Có lỗi xảy ra');
-                // Remove the container after error
+
                 document.body.removeChild(container);
             });
         }
@@ -193,30 +245,4 @@ async function deleteOrder(id) {
     } else {
         return;
     }
-}
-
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
-}
-
-function removeVietnameseTones(str) {
-    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
-    return str;
-}
-
-function convertProductName(productName) {
-    // Bỏ dấu tiếng Việt
-    let noToneName = removeVietnameseTones(productName);
-    
-    // Thay thế khoảng trắng bằng dấu gạch ngang
-    let convertedName = noToneName.replace(/\s+/g, '-');
-    
-    return convertedName;
-}
-
-function extractDate(datetimeString) {
-    let datePart = datetimeString.split('T')[0];
-    
-    return datePart;
 }

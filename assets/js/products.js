@@ -74,14 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateSizeOptions(event.target.value);
             });
 
-            // const picsContainer = document.querySelector(".pics");
-            // picsContainer.innerHTML = ''; 
-            // product.images.forEach(image => {
-            //     const imgElement = document.createElement("img");
-            //     imgElement.src = image;
-            //     imgElement.alt = "products pictures";
-            //     picsContainer.appendChild(imgElement);
-            // });
+            addProductImages(product.productImage);
         })
         .catch(error => {
             document.querySelector(".main-container").textContent = "Product not found. Error: " + error;
@@ -144,7 +137,21 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching products:', error));
 });
 
-
+function addProductImages(productImage) {
+    const picsDiv = document.querySelector('.pics');
+    
+    const underscoreIndex = productImage.lastIndexOf('_');
+    const baseImagePath = productImage.substring(0, underscoreIndex + 1);
+    const extensionIndex = productImage.lastIndexOf('.');
+    const imageExtension = productImage.substring(extensionIndex);
+    
+    for (let i = 1; i <= 8; i++) {
+        const img = document.createElement('img');
+        img.src = `${imageBaseURL + baseImagePath}${i}${imageExtension}`;
+        img.alt = `product image`
+        picsDiv.appendChild(img);
+    }
+}
 
 // New Review Form
 document.addEventListener('DOMContentLoaded', () => {

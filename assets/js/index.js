@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function() {
 async function displayProducts() {
     const products = await fetchTopProducts();
 
-    const topSellerProducts = products.slice(0, 4);
-    const favoriteProducts = products.slice(4, 8);
-    const onSaleProducts = products.slice(8, 16);
-    const featureProducts = products.slice(16, 20);
+    const topSellerProducts = products.slice(0, 12);
+    const favoriteProducts = products.slice(12, 24);
+    const onSaleProducts = products.slice(24, 36);
+    const featureProducts = products.slice(36, 48);
 
     function createProductHTML(product) {
         return `

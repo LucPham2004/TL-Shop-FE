@@ -50,10 +50,10 @@
 							<div class="row">
 							  <div class="col-md-12">
 								<div class="app-title">
-								  <ul class="app-breadcrumb breadcrumb">
-									<li class="breadcrumb-item"><b>Bảng điều khiển</b><a href="/public/index.html"><b style="margin-left: 20px;">Trang chủ TL-Shop</b></a></li>
-								  </ul>
-								  <div id="clock"></div>
+									<h5 class="breadcrumb-item">
+										<b>Bảng điều khiển</b>
+										<a href="/public/index.html"><b style="margin-left: 20px;font-size:medium;">Trang chủ TL-Shop</b></a>
+									</h5>
 								</div>
 							  </div>
 							</div>
@@ -166,100 +166,102 @@
 						  </main>
 					</div>
 					<div class="tab-pane fade" id="tabContent-content" role="tabpanel" aria-labelledby="tabContent-content-tab">
-						<div class="banner">
-							<div class="container-fluid" style="padding: 0;">
-								<div id="carouselExampleIndicators" class="carousel slide">
-									<div class="carousel-indicators">
-										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-										<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+						<div class="content-tab">
+							<div class="banner">
+								<div class="container-fluid" style="padding: 0;">
+									<div id="carouselExampleIndicators" class="carousel slide">
+										<div class="carousel-indicators">
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+										</div>
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+												<img id="banner1" src="../assets/img/homepage/banner/banner1.png" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img id="banner2" src="../assets/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
+											</div>
+											<div class="carousel-item">
+												<img id="banner3" src="../assets/img/homepage/banner/banner3.jpg" class="d-block w-100" alt="...">
+											</div>
+										</div>
+										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Next</span>
+										</button>
 									</div>
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img id="banner1" src="../assets/img/homepage/banner/banner1.png" class="d-block w-100" alt="...">
-										</div>
-										<div class="carousel-item">
-											<img id="banner2" src="../assets/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
-										</div>
-										<div class="carousel-item">
-											<img id="banner3" src="../assets/img/homepage/banner/banner3.jpg" class="d-block w-100" alt="...">
-										</div>
+									<div class="changeBanner">
+										<h3>Thay đổi banner</h3>
+										<label for="#selectBanner">Lựa chọn tấm banner</label>
+										<input type="file" id="selectBanner" accept="image/*" multiple>
+										<button class="changeBtn" onclick="updateBannerImages()">Update Banners</button>
 									</div>
-									<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-										<span class="visually-hidden">Previous</span>
-									</button>
-									<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-										<span class="carousel-control-next-icon" aria-hidden="true"></span>
-										<span class="visually-hidden">Next</span>
-									</button>
-								</div>
-								<div class="changeBanner">
-									<h3>Thay đổi banner</h3>
-									<label for="#selectBanner">Lựa chọn tấm banner</label>
-									<input type="file" id="selectBanner" accept="image/*" multiple>
-									<button class="changeBtn" onclick="updateBannerImages()">Update Banners</button>
 								</div>
 							</div>
-						</div>
-						
-						<div class="poster">
-							<div class="container-fluid">
-								<div class="poster-main">
-									<div class="poster-main-left">
-										<a href="#" style="text-decoration: none; color: black">
-											<img id="poster-main" src="../assets/img/homepage/poster/poster-main.jpg" class="card-img-top" alt="...">
-										</a>
-									</div>
-									<div class="poster-main-right">
-										<div class="poster-main-right-div" style="margin-bottom: 10px;">
+							
+							<div class="poster">
+								<div class="container-fluid">
+									<div class="poster-main">
+										<div class="poster-main-left">
 											<a href="#" style="text-decoration: none; color: black">
-												<img id="poster2" src="../assets/img/homepage/poster/poster2.webp" alt="...">
+												<img id="poster-main" src="../assets/img/homepage/poster/poster-main.jpg" class="card-img-top" alt="...">
 											</a>
 										</div>
-										<div class="poster-main-right-div">
-											<a href="#" style="text-decoration: none; color: black">
-												<img id="poster3" src="../assets/img/homepage/poster/poster3jpg.jpg" alt="...">
-											</a>
+										<div class="poster-main-right">
+											<div class="poster-main-right-div" style="margin-bottom: 10px;">
+												<a href="#" style="text-decoration: none; color: black">
+													<img id="poster2" src="../assets/img/homepage/poster/poster2.webp" alt="...">
+												</a>
+											</div>
+											<div class="poster-main-right-div">
+												<a href="#" style="text-decoration: none; color: black">
+													<img id="poster3" src="../assets/img/homepage/poster/poster3jpg.jpg" alt="...">
+												</a>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="changePoster">
-									<h3>Thay đổi Poster</h3>
-									<label for="#selectPoster">Lựa chọn tấm Poster</label>
-									<input type="file" id="selectPoster" accept="image/*" multiple>
-									<button class="changeBtn" onclick="updatePosterImages()">Update Poster</button>
-								</div>
-							</div>
-						</div>
-						
-						<div class="sample">
-							<div class="container">
-								<div class="sample-product" id="sample-product-1">
-									<div class="sample-content">
-										<h3 id="sampleTitle1">Modern And Creative Poster Design</h3>
-										<i></i>
-										<p id="sampleDescription1" class="description">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
-										<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
-									</div>
-									<img id="sample1" alt="Sample Shoe" src="../assets/img/homepage/sample/sample1.jpg">
-								</div>
-								<button class="changeBtn" type="button" onclick="changeSample1()">Thay đổi Mẫu 1</button>
-							</div>
-						</div>
-						
-						<div class="sample">
-							<div class="container">
-								<div class="sample-product" id="sample-product-2">
-									<img id="sample2" alt="Sample Shoe" src="../assets/img/homepage/sample/sample2.jpg">
-									<div class="sample-content">
-										<h3 id="sampleTitle2">Modern And Creative Poster Design</h3>
-										<i></i>
-										<p id="sampleDescription2" class="description">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
-										<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
+									<div class="changePoster">
+										<h3>Thay đổi Poster</h3>
+										<label for="#selectPoster">Lựa chọn tấm Poster</label>
+										<input type="file" id="selectPoster" accept="image/*" multiple>
+										<button class="changeBtn" onclick="updatePosterImages()">Update Poster</button>
 									</div>
 								</div>
-								<button class="changeBtn" type="button" onclick="changeSample2()">Thay đổi Mẫu 2</button>
+							</div>
+							
+							<div class="sample">
+								<div class="container">
+									<div class="sample-product" id="sample-product-1">
+										<div class="sample-content">
+											<h3 id="sampleTitle1">Modern And Creative Poster Design</h3>
+											<i></i>
+											<p id="sampleDescription1" class="description">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
+											<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
+										</div>
+										<img id="sample1" alt="Sample Shoe" src="../assets/img/homepage/sample/sample1.jpg">
+									</div>
+									<button class="changeBtn" type="button" onclick="changeSample1()">Thay đổi Mẫu 1</button>
+								</div>
+							</div>
+							
+							<div class="sample">
+								<div class="container">
+									<div class="sample-product" id="sample-product-2">
+										<img id="sample2" alt="Sample Shoe" src="../assets/img/homepage/sample/sample2.jpg">
+										<div class="sample-content">
+											<h3 id="sampleTitle2">Modern And Creative Poster Design</h3>
+											<i></i>
+											<p id="sampleDescription2" class="description">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
+											<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
+										</div>
+									</div>
+									<button class="changeBtn" type="button" onclick="changeSample2()">Thay đổi Mẫu 2</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -280,24 +282,29 @@
 								<tbody>
 								</tbody>
 							</table>
+
+							<div style="display: flex; justify-content:right;" class="search-container">
+								<div class="search-box">
+									<input type="text" id="OrderSearchInput" placeholder="seach..."/>
+									<button id="OrderSearchBtn" title="search" type="button">
+										<i class="fas fa-search"></i>
+									</button>
+								</div>
+							</div>
 							
 							<h5>Lọc đơn hàng</h5>
 							<form id="filterForm">
 								<label for="startDate">Ngày đầu:</label>
 								<input type="date" id="startDate" name="startDate">
-								<br>
 								
 								<label for="endDate">Ngày cuối:</label>
 								<input type="date" id="endDate" name="endDate">
-								<br>
 
 								<label for="minAmount">Tối thiểu:</label>
 								<input type="number" id="minAmount" name="minAmount" step="0.01">
-								<br>
 								
 								<label for="maxAmount">Tối đa:</label>
 								<input type="number" id="maxAmount" name="maxAmount" step="0.01">
-								<br>
 						
 								<label for="orderStatus">Trạng thái đơn hàng:</label>
 								<select id="orderStatus" name="orderStatus">
@@ -307,10 +314,9 @@
 									<option value="Đã giao hàng!">Đã giao hàng</option>
 									<option value="Bị hủy bỏ!">Bị hủy bỏ</option>
 								</select>
-								<br>
 						
 								<button type="button" onclick="filterOrders()">Lọc</button>
-								<button type="button" onclick="nonfilterOrders()">Hủy</button>
+								<button type="button" onclick="nonfilterOrders()">Hủy lọc</button>
 							</form>
 
 							<div>
@@ -354,6 +360,9 @@
 									<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#registerForm" aria-expanded="false" aria-controls="registerForm">
 										Thêm tài khoản
 									</button>
+
+									<button class="btn btn-primary" type="button" onclick="nonfilterCustomers()">Hủy tìm kiếm</button>
+									
 									<div class="collapse" id="registerForm">
 										<div class="card card-body">
 											<form id="signup_form">
@@ -462,6 +471,9 @@
 											Danh mục sản phẩm
 										</button>
 									</div>
+									<div>
+										<button class="btn btn-primary" type="button" onclick="nonfilterProducts()">Hủy tìm kiếm</button>
+									</div>
 								</div>
 								<div class="search-container">
 									<div class="search-box">
@@ -476,7 +488,7 @@
 								<div class="collapse" id="addProductForm-container">
 									<div class="card card-body">
 										<h5>Thông tin sản phẩm</h5>
-										<form method="POST" enctype="multipart/form-data" id="addproductForm">
+										<form id="addproductForm">
 											<label for="productName">Tên Sản Phẩm:</label>
 											<input type="text" id="productName" name="productName" required>
 									
@@ -508,12 +520,21 @@
 										</form>
 									</div>
 								</div>
+
+								<div id="addProductImage-container">
+									<label for="addProductImages">Tải Lên Hình Ảnh:</label>
+									<input type="file" id="addProductImages" name="productImages" multiple>
+
+									<button type="submit" id="addImage_submit">Tải ảnh lên</button><br>
+									<button type="button" onclick="cancelAddImages()">Hủy</button><br>
+								</div>
+
 								<div class="collapse" id="brand-container">
 									<div class="brandForms">
 										<div id="addBrand">
 											<div class="card card-body">
 												<h5>Tạo Thương Hiệu Mới</h5>
-												<form  method="POST" enctype="application/json" id="addBrandForm">
+												<form id="addBrandForm">
 													<label for="brandName">Tên Thương Hiệu:</label>
 													<input type="text" id="brandName" name="brandName" required><br><br>
 													<button type="submit">Tạo Thương Hiệu</button>
@@ -523,7 +544,7 @@
 										<div id="deleteBrand">
 											<div class="card card-body">
 												<h5>Xóa Thương Hiệu</h5>
-												<form method="DELETE" enctype="application/json" id="deleteBrandForm">
+												<form id="deleteBrandForm">
 													<label for="brandId">ID Thương Hiệu:</label>
 													<input type="text" id="brandId" name="brandId" required><br><br>
 													<button type="submit">Xóa Thương Hiệu</button>
@@ -547,7 +568,7 @@
 										<div id="addCategory">
 											<div class="card card-body">
 												<h5>Tạo Danh Mục Mới</h5>
-												<form action="/api/v1/category" method="POST" enctype="application/json" id="addCategoryForm">
+												<form id="addCategoryForm">
 													<label for="categoryName">Tên Danh Mục:</label>
 													<input type="text" id="categoryName" name="categoryName" required><br><br>
 													<button type="submit">Tạo Danh Mục</button>
@@ -557,7 +578,7 @@
 										<div id="deleteCategory">
 											<div class="card card-body">
 												<h5>Xóa Danh mục sản phẩm</h5>
-												<form method="DELETE" enctype="application/json" id="deleteCategoryForm">
+												<form id="deleteCategoryForm">
 													<label for="categoryId">ID Danh mục sản phẩm:</label>
 													<input type="text" id="categoryId" name="categoryId" required><br><br>
 													<button type="submit">Xóa Danh mục sản phẩm</button>

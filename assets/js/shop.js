@@ -41,15 +41,38 @@ document.addEventListener("DOMContentLoaded", async function() {
     const params = new URLSearchParams(window.location.search);
     const keyword = params.get('keyword');
 
-    if(keyword) {
-        fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-        .then(response => response.json())
-        .then(data => {
-            showProductsInShopPage(data);
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
+    if (keyword) {
+        console.log(keyword);
+        
+        // Chuyển đổi keyword thành số nếu có thể
+        const parsedKeyword = parseInt(keyword, 10);
+        
+        if (!isNaN(parsedKeyword)) {
+            // Nếu parsedKeyword là số hợp lệ
+            fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                showProductsInShopPage(data);
+                searchInput.value = ``;
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+
+        } else {
+            // Nếu keyword không phải là số
+            fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                showProductsInShopPage(data);
+                searchInput.value = ``;
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+            });
+        }
     }
 
     const searchBtn = document.getElementById('searchButton');
@@ -60,15 +83,38 @@ document.addEventListener("DOMContentLoaded", async function() {
 
             const keyword = document.getElementById('searchInput').value;
 
-            if(keyword) {
-                fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-                .then(response => response.json())
-                .then(data => {
-                    showProductsInShopPage(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching products:', error);
-                });
+            if (keyword) {
+                console.log(keyword);
+                
+                // Chuyển đổi keyword thành số nếu có thể
+                const parsedKeyword = parseInt(keyword, 10);
+                
+                if (!isNaN(parsedKeyword)) {
+                    // Nếu parsedKeyword là số hợp lệ
+                    fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showProductsInShopPage(data);
+                        searchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                    });
+
+                } else {
+                    // Nếu keyword không phải là số
+                    fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showProductsInShopPage(data);
+                        searchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                    });
+                }
             }
         })
     } else {
@@ -121,7 +167,34 @@ function sortProducts(products, sortBy) {
     }
 }
 
+async function filterProducts() {
+    const products = await fetchProducts();
+
+    const minAmount = document.getElementById('minAmount').value;
+    const maxAmount = document.getElementById('maxAmount').value;
+
+
+    const filteredProducts = products.filter(product => {
+        price = product.productPrice * (100 - product.discountPercent) / 100;
+
+        const min = minAmount ? parseFloat(minAmount) : null;
+        const max = maxAmount ? parseFloat(maxAmount) : null;
+
+        return (!min || price >= min) &&
+               (!max || price <= max);
+    });
+
+    showProductsInShopPage(filteredProducts);
+}
+
 async function showAllProducts() {
     const products = await fetchProducts();
+
+    const minAmount = document.getElementById('minAmount');
+    const maxAmount = document.getElementById('maxAmount');
+
+    minAmount.value = ``;
+    maxAmount.value = ``;
+
     showProductsInShopPage(products);
 }

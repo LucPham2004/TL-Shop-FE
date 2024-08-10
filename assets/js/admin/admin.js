@@ -81,7 +81,11 @@ async function displaySummaryData() {
 
     // Populate new customers
     const newCustomersTable = document.getElementById('newCustomers');
+    let i = 1;
     data.new_customers.forEach(customer => {
+        if(i > 5) {
+            return;
+        }
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="text-align:center;">${customer.id}</td>
@@ -90,6 +94,7 @@ async function displaySummaryData() {
             <td style="text-align:center;"><span class="tag tag-success">${customer.phone}</span></td>
         `;
         newCustomersTable.appendChild(row);
+        i++;
     });
 
     document.getElementById('totalCustomers').innerHTML = `<b>${data.totalCustomers} khách hàng</b>`;
@@ -102,19 +107,46 @@ async function displaySummaryData() {
 
     // Populate order list
     const orderListTable = document.getElementById('orderList');
-    let index = 1;
+    let j = 1;
     data.orderList.forEach(order => {
-        if(index > 8) {
+        if(j > 9) {
             return;
         }
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="text-align:center;">${order.id}</td>
-            <td style="text-align:center;">Sample Customer</td> <!-- Replace with actual customer data if available -->
+            <td style="text-align:center;">${order.customerName}</td>
             <td style="text-align:center;">${formatNumber(order.total)} đ</td>
             <td style="text-align:center;"><span class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
         `;
         orderListTable.appendChild(row);
-        index++;
+        j++;
     });
+}
+
+
+function formatNumber(number) {
+    return number.toLocaleString('vi-VN');
+}
+
+function removeVietnameseTones(str) {
+    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    return str;
+}
+
+function convertProductName(productName) {
+    // Bỏ dấu tiếng Việt
+    let noToneName = removeVietnameseTones(productName);
+    
+    // Thay thế khoảng trắng bằng dấu gạch ngang
+    let convertedName = noToneName.replace(/\s+/g, '-');
+    
+    return convertedName;
+}
+
+function extractDate(datetimeString) {
+    let datePart = datetimeString.split('T')[0];
+    
+    return datePart;
 }

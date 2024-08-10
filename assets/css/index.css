@@ -1,17 +1,20 @@
 /* Common styles */
-.product-name,
-.price {
-    font-size: 20px;
+.product-name {
+    font-size: 18px;
     margin-bottom: 0;
     text-align: center;
 }
 
 .product-name {
     color: rgb(90, 90, 90);
+    margin: 0 15px;
 }
 
 .price {
     color: black;
+    font-size: 15px;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 .description {
@@ -24,6 +27,7 @@
     color: gray;
     margin-bottom: 0;
     text-align: center;
+    font-size: 14px;
 }
 
 /* Hover effects */
@@ -52,21 +56,23 @@
 }
 
 /* Top-Seller Section */
-.top-seller {
+.top-seller, .favorite, .onSale, .feature ,.sample{
     width: 100%;
     height: fit-content;
-    margin-top: 5%;
+    padding: 0;
+    margin-top: 3%;
 }
 
-.top-seller-products {
+.top-seller-products , .favorite-products, .onSale-products, .feature-products{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 .product-item {
     margin-top: 2%;
-    width: 25%;
+    width: 16.666667%;
 }
 
 .product-item img {
@@ -156,30 +162,12 @@
     }
 }
 
-/* Favorite Section */
-.favorite {
-    width: 100%;
-    height: fit-content;
-    margin-top: 5%;
-}
-
-.favorite-products {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
 
 .fade-out {
     opacity: 0;
 }
 
 /* Sample Product */
-.sample {
-    width: 100%;
-    height: fit-content;
-    padding: 0;
-    margin-top: 5%;
-}
 
 .sample-product {
     width: 100%;
@@ -245,36 +233,6 @@
     background-color: rgb(210, 0, 0);
     margin-bottom: 30px;
 }
-
-/* On Sale */
-.onSale {
-    width: 100%;
-    height: fit-content;
-    padding: 0;
-    margin-top: 5%;
-}
-
-.onSale-products {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* Feature */
-.feature {
-    width: 100%;
-    height: fit-content;
-    padding: 0;
-    margin-top: 5%;
-}
-
-.feature-products {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
 
 /* Keyframes */
 @keyframes fade {

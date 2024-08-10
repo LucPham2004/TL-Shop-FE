@@ -1,6 +1,55 @@
 
 // Products Methods
+// Search products
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBtn = document.getElementById('searchButton');
+    if(searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            this.parentElement.classList.toggle('open');
+            this.previousElementSibling.focus();
 
+            const searchInput = document.getElementById('searchInput');
+
+            const keyword = document.getElementById('searchInput').value.trim();
+
+            if (keyword) {
+                console.log(keyword);
+                
+                // Chuyển đổi keyword thành số nếu có thể
+                const parsedKeyword = parseInt(keyword, 10);
+                
+                if (!isNaN(parsedKeyword)) {
+                    // Nếu parsedKeyword là số hợp lệ
+                    fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showProductsInAdminPage(data);
+                        searchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                    });
+
+                } else {
+                    // Nếu keyword không phải là số
+                    fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showProductsInAdminPage(data);
+                        searchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                    });
+                }
+            }
+        })
+    } else {
+        console.log("not found search button")
+    }
+})
 // Show Products In Admin Page
 function showProductsInAdminPage(products){
     const tbody = document.querySelector('#product-table tbody');
@@ -19,6 +68,7 @@ function showProductsInAdminPage(products){
             <td>${product.averageRating}</td>
             <td>
                 <button class="productBtn-edit" onclick="editProduct(${product})">Sửa</button>
+                <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
                 <button class="productBtn-delete" onclick="deleteProduct(${product.id})">Xóa</button>
                 <button class="productBtn-details">Chi tiết</button>
             </td>
@@ -42,10 +92,10 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         }
     }
     const productImages = document.getElementById('productImages').files;
-    const FfirstImageFile = productImages[0];
+    const FirstImageFile = productImages[0];
 
     formData.set('productImage', '/img/products/' + convertProductName(formData.get('productName'))
-                                    + "/" + `${convertProductName(formData.get('productName'))}_1.${FfirstImageFile.name.split('.').pop()}`);
+                                    + "/" + `${convertProductName(formData.get('productName'))}_1.${FirstImageFile.name.split('.').pop()}`);
     formData.set('productQuantity', productQuantity);
     formData.set('reviewCount', 0);
     formData.set('averageRating', 0);
@@ -54,9 +104,10 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         productName: formData.get('productName'),
         productDescription: formData.get('productDescription'),
         productImage: formData.get('productImage'),
-        productPrice: formData.get('productPrice'),
-        productQuantity: productQuantity,
-        discountPercent: formData.get('discountPercent'),
+        productPrice: parseFloat(formData.get('productPrice')),
+        productQuantity: parseInt(productQuantity),
+        productQuantitySold: 0,
+        discountPercent: parseFloat(formData.get('discountPercent')),
         reviewCount: 0,
         averageRating: 0,
         brandName: formData.get('productBrandName'),
@@ -64,14 +115,16 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         details: []
     };
 
-    for (let i = 0; i < detailCount; i++) {
+    for (let i = 1; i < detailCount; i++) {
         const detail = {
             color: formData.get(`details[${i}].color`),
-            size: formData.get(`details[${i}].size`),
-            quantity: formData.get(`details[${i}].quantity`)
+            size: parseInt(formData.get(`details[${i}].size`)),
+            quantity: parseInt(formData.get(`details[${i}].quantity`)),
+            quantitySold: 0,
         };
         productDTO.details.push(detail);
     }
+    console.log(productDTO)
 
     fetch(domain + '/api/v1/products', {
         method: 'POST',
@@ -84,41 +137,11 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
+        alert("Tạo sản phẩm thành công!")
         return response.json();
     })
     .then(data => {
-        if (productImages.length > 0) {
-            const imageFormData = new FormData();
-            imageFormData.append('productName', convertProductName(productDTO.productName));
-            for (let i = 0; i < productImages.length; i++) {
-                const originalFile = productImages[i];
-                const newFileName = `${convertProductName(productDTO.productName)}_${i + 1}.${originalFile.name.split('.').pop()}`;
-                const renamedFile = new File([originalFile], newFileName, { type: originalFile.type });
-                imageFormData.append('productImages', renamedFile);
-            }
-
-            fetch(domain + '/api/v1/products/uploadImages', {
-                method: 'POST',
-                body: imageFormData
-            })
-            .then(imageResponse => {
-                if (!imageResponse.ok) {
-                    throw new Error('Network response was not ok ' + imageResponse.statusText);
-                }
-                return imageResponse.text();
-            })
-            .then(imageData => {
-                alert('Sản phẩm và hình ảnh đã được tạo thành công');
-                form.reset();
-            })
-            .catch(imageError => {
-                console.error('There was a problem with your image upload operation:', imageError);
-                alert('Đã xảy ra lỗi khi tải lên hình ảnh: ' + imageError.message);
-            });
-        } else {
-            alert('Sản phẩm đã được tạo thành công');
-            form.reset();
-        }
+        uploadProductImages(productDTO.productName, "productImages");
     })
     .catch(error => {
         console.error('There was a problem with your fetch operation:', error);
@@ -126,32 +149,68 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
     });
 });
 
+async function uploadProductImages (productName, imageInputId) {
+    const productImages = document.getElementById(imageInputId).files;
 
-// Search products
-document.addEventListener("DOMContentLoaded", function() {
-    const searchBtn = document.getElementById('searchButton');
-    if(searchBtn) {
-        document.getElementById('searchButton').addEventListener('click', function() {
-            this.parentElement.classList.toggle('open');
-            this.previousElementSibling.focus();
+    if (productImages.length > 0) {
+        const imageFormData = new FormData();
+        imageFormData.append('productName', convertProductName(productName));
+        for (let i = 0; i < productImages.length; i++) {
+            const originalFile = productImages[i];
+            const newFileName = `${convertProductName(productName)}_${i + 1}.${originalFile.name.split('.').pop()}`;
+            const renamedFile = new File([originalFile], newFileName, { type: originalFile.type });
+            console.log(newFileName)
+            imageFormData.append('productImages', renamedFile);
+        }
 
-            const keyword = document.getElementById('searchInput').value;
-
-            if(keyword) {
-                fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-                .then(response => response.json())
-                .then(data => {
-                    showProductsInAdminPage(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching products:', error);
-                });
-            }
+        fetch(domain + '/api/v1/products/uploadImages', {
+            method: 'POST',
+            body: imageFormData
         })
+        .then(imageResponse => {
+            if (!imageResponse.ok) {
+                throw new Error('Network response was not ok ' + imageResponse.statusText);
+            }
+            alert("Tải ảnh sản phẩm thành công!")
+            return imageResponse.text();
+        })
+        .then(imageData => {
+            document.getElementById(imageInputId).value = '';
+        })
+        .catch(imageError => {
+            console.error('There was a problem with your image upload operation:', imageError);
+            alert('Đã xảy ra lỗi khi tải lên hình ảnh: ' + imageError.message);
+        });
     } else {
-        console.log("not found search button")
+        console.log("Không có hình ảnh nào được tải lên!");
+        alert("Không có hình ảnh nào được tải lên!")
     }
-})
+}
+
+async function addProductImageBtn(productName) {
+    console.log(productName);
+    const addProductImageContainer = document.getElementById('addProductImage-container');
+    addProductImageContainer.style.display = "flex";
+
+    document.getElementById('addImage_submit').addEventListener('click', function() {
+        uploadProductImages (productName, "addProductImages");
+    })
+}
+
+function cancelAddImages() {
+    const addProductImageContainer = document.getElementById('addProductImage-container');
+    addProductImageContainer.style.display = "none";
+}
+
+function editProduct() {
+
+}
+
+async function nonfilterProducts() {
+    const products = await fetchProducts();
+    showProductsInAdminPage(products);
+
+} 
 
 // Delete product
 async function deleteProduct(id) {

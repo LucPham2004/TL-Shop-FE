@@ -4,13 +4,17 @@
     left: 0;
     width: 13%;
     height: 100%;
-    background-color: #f8f9fa;
     padding-top: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 #content-tab {
     margin-left: 13%;
     width: 87%;
     padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
 }
 
 
@@ -18,7 +22,6 @@
 .app-content {
     min-height: calc(100vh - 50px);
     padding: 10px;
-    background-color: #f5f5f5;
     -webkit-transition: margin-left 0.3s ease;
     -o-transition: margin-left 0.3s ease;
     transition: margin-left 0.3s ease;
@@ -384,7 +387,13 @@ th {
     border: 1px solid;
 }
 
-
+/* Homepage content tab*/
+.content-tab {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 /* Orders Tab */
 .orders {
     background-color: #fff;
@@ -430,11 +439,11 @@ th {
     object-fit: cover;
 }
 
-#filterForm {
+#filterForm:not(.search-container){
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
   gap: 15px; /* Khoảng cách giữa các phần tử */
   background-color: #f9f9f9;
   padding: 10px;
@@ -476,7 +485,7 @@ th {
 }
 
 #filterForm button[type="button"]:nth-child(2) {
-  background-color: #dc3545; /* Màu cho nút "Hủy" */
+  background-color: #dc3545; 
 }
 
 #filterForm button[type="button"]:nth-child(2):hover {
@@ -504,14 +513,20 @@ th {
 
 .SetOrderStatusBtn {
   color: white;
+  border: none;
+  border-radius: 5px;
   background-color: rgb(54, 54, 250);
 }
 .showOrderProductsBtn {
   color: white;
+  border: none;
+  border-radius: 5px;
   background-color: rgb(0, 181, 0);
 }
 .deleteOrderBtn {
   color: white;
+  border: none;
+  border-radius: 5px;
   background-color: red;
 }
 
@@ -580,7 +595,12 @@ th {
 
 
 /* Customers Tab */
-
+.customer-tab {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 /* Style for modal */
 #editModal {
   display: none;
@@ -658,7 +678,12 @@ th {
 
 
 /* products info */
-
+.product-tab {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .product-item {
     display: flex;
     width: 100%;
@@ -735,11 +760,6 @@ th {
 
 .product-funtions .btn:hover {
   background-color: #0056b3;
-}
-.search-container{
-    width: 30%;
-    display: flex;
-    justify-content: end;
 }
 .customer-funtions{
     width: 70%;
@@ -855,15 +875,29 @@ th {
     width: 50%;
 }
 
+#addProductImage-container {
+  display: none;
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Ensure it appears above other elements */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
 /* Search button */
 
 .search-box {
-    display: flex;
+  display: flex;
 	width: 40px;
 	height: 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
 	background-color: #f3f3f3;
 	position: relative;
 	overflow: hidden;
@@ -875,7 +909,7 @@ th {
 	width: 350px;
 }
 
-#CustomerSearchInput, #searchInput {
+#CustomerSearchInput, #searchInput , #OrderSearchInput{
 	width: 100%;
     height: 40px;
 	border: none;
@@ -888,7 +922,7 @@ th {
     margin-left: -5px;
 }
 
-#CustomerSearchBtn, #searchButton {
+#CustomerSearchBtn, #searchButton , #OrderSearchBtn{
 	color: #000000;
 	outline: none;
 	border: none;
@@ -900,7 +934,7 @@ th {
 	cursor: pointer;
 	font-size: 15px;
 }
-#CustomerSearchBtn:hover, #searchButton:hover{
+#CustomerSearchBtn:hover, #searchButton:hover, #OrderSearchBtn:hover{
     color: red;
 }
 

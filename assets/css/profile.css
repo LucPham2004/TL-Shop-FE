@@ -95,7 +95,7 @@
 .orderInfo{
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    justify-content: space-between;
 }
 .orderProducts{
     display: flex;

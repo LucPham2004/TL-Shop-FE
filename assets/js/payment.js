@@ -50,7 +50,7 @@ document.getElementById("placeOrderBtn").addEventListener("click", function() {
     let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
     if(customerInfo.address == null) {
         confirm("Quý khách vui lòng nhập địa chỉ trước khi đặt hàng");
-        window.location.href = "/user/account.html";
+        window.location.href = "/user/profile.html";
         return;
     }
 

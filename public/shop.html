@@ -44,8 +44,17 @@
                         <option value="high-to-low">Sắp xếp theo giá: Cao đến Thấp</option>
                         <option value="popularity">Sắp xếp theo độ ưa thích</option>
                     </select>
+                        <label for="minAmount">Tối thiểu:</label>
+                        <input type="number" id="minAmount" name="minAmount" step="0.01">
+                        
+                        <label for="maxAmount">Tối đa:</label>
+                        <input type="number" id="maxAmount" name="maxAmount" step="0.01">
+                
+                        <button type="button" onclick="filterProducts()">Lọc</button>
+                        <button type="button" onclick="showAllProducts()">Hủy lọc</button>
+                    
                 </div>
-                <p id="productsCount" style="margin-left: 30px;margin-bottom:0;color:gray;font-size:14px;"></p>
+                <p id="productsCount" style="margin-left: 30px;margin-bottom:0;color:gray;font-size:14px;margin-top:10px"></p>
             </div>
             <div class="Products">
                 <div id="products-container"></div>

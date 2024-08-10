@@ -3,21 +3,46 @@ document.addEventListener("DOMContentLoaded", function() {
     // Searching customers
     const searchBtn = document.getElementById('CustomerSearchBtn');
     if(searchBtn) {
-        document.getElementById('CustomerSearchBtn').addEventListener('click', function() {
+        searchBtn.addEventListener('click', function() {
             this.parentElement.classList.toggle('open');
             this.previousElementSibling.focus();
 
-            const keyword = document.getElementById('CustomerSearchInput').value;
+            const CustomerSearchInput = document.getElementById('CustomerSearchInput');
 
-            if(keyword) {
-                fetch(domain + `/api/v1/customers/search?keyword=${encodeURIComponent(keyword)}`)
-                .then(response => response.json())
-                .then(data => {
-                    showCustomersInAdminPage(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching customers:', error);
-                });
+            const keyword = document.getElementById('CustomerSearchInput').value.trim();
+
+            if (keyword) {
+                console.log(keyword);
+                
+                // Chuyển đổi keyword thành số nếu có thể
+                const parsedKeyword = parseInt(keyword, 10);
+                
+                if (!isNaN(parsedKeyword)) {
+                    // Nếu parsedKeyword là số hợp lệ
+                    fetch(domain + `/api/v1/customers/search/${parsedKeyword}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showCustomersInAdminPage(data);
+                        CustomerSearchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching customers:', error);
+                    });
+
+                } else {
+                    // Nếu keyword không phải là số
+                    fetch(domain + `/api/v1/customers/search?keyword=${encodeURIComponent(keyword)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        showCustomersInAdminPage(data);
+                        CustomerSearchInput.value = ``;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching customers:', error);
+                    });
+                }
             }
         })
     } else {
@@ -52,6 +77,11 @@ function showCustomersInAdminPage(customers) {
     })
 };
 
+async function nonfilterCustomers() {
+    const customers = await fetchCustomers();
+    showCustomersInAdminPage(customers);
+
+} 
 
 // Delete Customer
 async function deleteCustomer(id, email) {

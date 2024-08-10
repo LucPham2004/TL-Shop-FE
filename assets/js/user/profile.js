@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchCustomerInfo();
+    displayCustomerInfo();
     fetchCustomerOrders();
 
     const changeInfo = document.querySelector('.user-info');
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             // Update info
-            let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
+            let customerInfo = fetchCustomerInfo();
             nameSpan.textContent = customerInfo.name;
             emailSpan.textContent = customerInfo.email;
             phoneSpan.textContent = customerInfo.phone;
@@ -76,21 +76,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchCustomerInfo() {
     try {
-        let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
-
-        const nameSpan = document.getElementById('name');
-        const emailSpan = document.getElementById('email');
-        const phoneSpan = document.getElementById('phone');
-        const addressSpan = document.getElementById('address');
-
-        nameSpan.innerHTML = `${customerInfo.name}`;
-        emailSpan.innerHTML = `${customerInfo.email}`;
-        phoneSpan.innerHTML = `${customerInfo.phone}`;
-        addressSpan.innerHTML = `${customerInfo.address}`;
+        const token = JSON.parse(localStorage.getItem('token')) || [];
+        
+        const response = await fetch(domain + '/api/v1/customers/' + parseInt(getCustomerId()), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+        }})
+        
+        return await response.json();
 
     } catch (error) {
         console.error('Error fetching customer infomation:', error);
     }
+}
+
+async function displayCustomerInfo () {
+
+    const customerInfo = await fetchCustomerInfo();
+
+    const nameSpan = document.getElementById('name');
+    const emailSpan = document.getElementById('email');
+    const phoneSpan = document.getElementById('phone');
+    const addressSpan = document.getElementById('address');
+
+    nameSpan.innerHTML = `${customerInfo.name}`;
+    emailSpan.innerHTML = `${customerInfo.email}`;
+    phoneSpan.innerHTML = `${customerInfo.phone}`;
+    addressSpan.innerHTML = `${customerInfo.address}`;
 }
 
 async function fetchCustomerOrders() {
@@ -130,15 +144,28 @@ async function fetchCustomerOrders() {
 
             });
 
-            orderItem.innerHTML = `
+            if(order.status !== "Completed" && order.status !== "Cancelled") {
+                orderItem.innerHTML = `
                 <div class="orderInfo">
                     <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
                     <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
                     <p style="color:red;"><strong>Tổng tiền:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
                     <p><strong>Trạng thái:</strong> ${order.status}</p>
-                    <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa</button>
+                    <button type="button" class="deleteOrderBtn" onclick="cancelOrder(${order.id})">Hủy đơn</button>
                 </div>
             `
+            } else {
+                orderItem.innerHTML = `
+                <div class="orderInfo">
+                    <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
+                    <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
+                    <p style="color:red;"><strong>Tổng tiền:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
+                    <p><strong>Trạng thái:</strong> ${order.status}</p>
+                    <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa đơn</button>
+                </div>
+            `
+            }
+            
             orderItem.appendChild(orderProducts);
 
             ordersContainer.appendChild(orderItem);
@@ -146,6 +173,31 @@ async function fetchCustomerOrders() {
 
     } catch (error) {
         console.error('Error fetching customer orders: ', error);
+    }
+}
+
+async function cancelOrder(orderId) {
+    if(confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
+        await fetch(domain + '/api/v1/orders', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: parseInt(orderId), status: "Cancelled" })
+        }).then(response => {
+            if (response.ok) {
+                console.log(`Order ID: ${orderId}, New Status: Cancelled`);
+                alert('Trạng thái đã được cập nhật!');
+            } else {
+                console.error('Hủy đơn hàng thất bại, hãy thử lại sau');
+                alert('Hủy đơn hàng thất bại, hãy thử lại sau');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra');
+        });
+    } else {
+        return;
     }
 }
 
