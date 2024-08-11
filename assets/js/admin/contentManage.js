@@ -1,5 +1,50 @@
 
 // Change banners
+async function showHomepageImages() {
+    try {
+        const response = await fetch(domain + '/api/v1/admin/managehomepage/getfilenames');
+        const data = await response.text();  // Lấy dữ liệu dưới dạng chuỗi
+        const parsedData = JSON.parse(data); // Phân tích cú pháp JSON
+
+        // Lấy tên file từ các mục 'banner', 'poster', và 'sample'
+        const bannerFiles = parsedData.banner.split(" ").slice(0, 3);
+        const posterFiles = parsedData.poster.split(" ").slice(0, 3);
+        const sampleFiles = parsedData.sample.split(" ").slice(0, 2);
+
+        // Cập nhật các banner
+        const bannerCarousel = document.querySelector('.banner .carousel-inner');
+        bannerCarousel.innerHTML = `
+            <div class="carousel-item active">
+                <img id="banner1" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[0]}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img id="banner2" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[1]}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[2]}" class="d-block w-100" alt="...">
+            </div>
+        `;
+
+        // Cập nhật các poster
+        const posterMainLeft = document.querySelector('.poster-main-left img');
+        posterMainLeft.src = `${imageBaseURL}/img/homepage/poster/${posterFiles[0]}`;
+
+        const posterMainRightDivs = document.querySelectorAll('.poster-main-right-div img');
+        posterMainRightDivs[0].src = `${imageBaseURL}/img/homepage/poster/${posterFiles[1]}`;
+        posterMainRightDivs[1].src = `${imageBaseURL}/img/homepage/poster/${posterFiles[2]}`;
+
+        // Cập nhật các sample
+        const sampleImages = document.querySelectorAll('.sample img');
+        sampleImages[0].src = `${imageBaseURL}/img/homepage/sample/${sampleFiles[0]}`;
+        sampleImages[1].src = `${imageBaseURL}/img/homepage/sample/${sampleFiles[1]}`;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
 async function changeBanner() {
     const input = document.getElementById('selectBanner');
     const files = input.files;
@@ -26,6 +71,8 @@ async function updateBannerImages() {
         const fileNamesResponse = await changeBanner();
         const fileList = fileNamesResponse.split(" ");
         const bannerCarousel = document.querySelector('.banner .carousel-inner');
+
+        console.log(fileList);
         
         bannerCarousel.innerHTML = `
             <div class="carousel-item active">

@@ -59,6 +59,11 @@ document.getElementById("placeOrderBtn").addEventListener("click", function() {
     let orderDetails = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+    if(cart.length === 0) {
+        alert("Bạn chưa có mặt hàng nào trong giỏ. Hãy thêm vào giỏ vài món nhé!");
+        return;
+    }
+
     cart.forEach(product => {
         let orderDetail = {
             productId: product.id,
@@ -79,6 +84,10 @@ document.getElementById("placeOrderBtn").addEventListener("click", function() {
 });
 
 async function createOrder(customerId, orderDetails) {
+    if(orderDetails.length === 0) {
+        alert("Bạn chưa có mặt hàng nào trong giỏ. Hãy thêm vào giở vài món nhé!");
+        return;
+    }
     const url = domain + '/api/v1/orders/placeOrder';
     const orderData = {
         customerId: customerId,

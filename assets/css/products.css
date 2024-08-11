@@ -1,16 +1,28 @@
 body{
     scroll-behavior: smooth;
 }
-.product-name{
+
+.products-info .product-name{
     font-size: 25px;
+}
+.products-info .price{
+    font-size: 20px;
+    color: #ff0000;
+}
+.products-info .description{
+    font-size: 17px;
+}
+
+.product-name{
+    font-size: 20px;
     margin-bottom: 5px;
 }
 .price{
-    font-size: 20px;
+    font-size: 17px;
     margin-bottom: 0;
-    color: #ff0000;
 }
 .description{
+    font-size: 12px;
     margin-bottom: 5px;
 }
 @media screen and (max-width: 768px) {
@@ -145,8 +157,60 @@ body{
     width: 80%;
     margin-left: 10%;
 }
+
+.reviewForm-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.reviewForm-container label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.reviewForm-container input[type="text"],
+.reviewForm-container select,
+.reviewForm-container textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    margin-right: 20px;
+}
+
+.reviewForm-container input[type="text"] {
+    width: 300px;
+}
+.reviewForm-container select {
+    width: 50px;
+}
+
+.reviewForm-container textarea {
+    width: 300px;
+    resize: none;
+    height: 80px;
+}
+.reviewForm-container button[type="submit"] {
+   height: 50px;
+   width: 150px;
+   margin-top: 17px;
+}
+
+#reviewForm{
+    display: flex;
+    flex-direction: column;
+}
+
 .review button{
-    width: 200px;
     padding: 10px;
     background-color: #ffffff;
     color: #000000;
@@ -161,6 +225,9 @@ body{
 .review-item{
     margin: 20px 0;
 }
+
+
+
 .review-info{
     display: flex;
     flex-direction: row;
@@ -181,6 +248,76 @@ body{
     color: rgb(255, 255, 0);
     font-size: 20px;
 }
+
+.customer-name {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.review-date {
+    color: #888;
+}
+
+.review-title {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.review-content {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    min-height: 100px;
+}
+
+.saveReview, .cancelEditReview {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.saveReview {
+    background-color: #4CAF50;
+    color: white;
+    width: 100px;
+}
+
+.cancelEditReview {
+    background-color: #f44336;
+    color: white;
+    width: 50px;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-container input {
+    display: none;
+}
+
+.rating-container label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ddd;
+}
+
+.rating-container input:checked ~ label,
+.rating-container label:hover,
+.rating-container label:hover ~ label {
+    color: #f5b301;
+}
+
+
+
+
+
 /* Similar products */
 .similar{
     width: 100%;
@@ -218,4 +355,8 @@ body{
 .carousel-item-innerContainer{
     display: flex;
     flex-direction: row;
+}
+.similar-item a {
+    text-decoration: none;
+    color: black;
 }

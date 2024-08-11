@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const headerHTML = `
     <header>
         <div class="header-container">
-            <a href="../public/index.html"><div id="logo"><img src="../assets/img/logo/TL.png">TL SHOP</div></a>
+            <a href="../public/index.html"><div id="logo"><img src="../assets/img/logo/Logo.png"></div></a>
             <div class="header-menu">
                 <a href="../public/index.html"><div class="header-item">Home</div></a>
-                <a href="../public/shop.html"><div class="header-item">Cửa Hàng</div></a>
-                <h5 style="margin-bottom: 15px;align-self:center; color:rgb(89, 89, 89);">|</h5>
+                <a href="../public/shop.html"><div class="header-item" style="width:150px;">Tất cả sản phẩm</div></a>
+                <h5 style="margin-bottom: 15px;margin-left:10px;align-self:center; color:rgb(89, 89, 89);">|</h5>
                 <a href="../public/shop.html?category=Adidas"><div class="header-item">Adidas</div></a>
                 <a href="../public/shop.html?category=Nike"><div class="header-item">Nike</div></a>
                 <a href="../public/shop.html?category=Thể Thao"><div class="header-item">Thể Thao</div></a>
@@ -75,24 +75,31 @@ document.addEventListener("DOMContentLoaded", function() {
                         <a href="">Find a Store</a>
                     </div>
                     <div class="footer-links">
-                        <a href="">Shop</a>
-                        <a href="">Order Status</a>
-                        <a href="">Shipping Information</a>
+                        <a href="../public/shop.html">Shop</a>
+                        <a href="../user/profile.html">Order Status</a>
+                        <a href="../user/profile.html">Shipping Information</a>
                         <a href="">Returns</a>
                     </div>
                     <div class="footer-links">
                         <a href="">About Us</a>
-                        <a href="">For You</a>
-                        <a href="">My Account</a>
+                        <a href="../public/shop.html">For You</a>
+                        <a href="../user/profile.html">My Account</a>
                     </div>
                 </div>
-                <p>We stand for something bigger than sneakers. We champion those who are fearlessly driven by their passions. We elevate sport. We do right by people and the planet. Together, we drive meaningful change in communities around the world. We Got Now.</p>
+                <div>
+                    <p> We stand for something bigger than sneakers.</p>
+                    <p> We champion those who are fearlessly driven by their passions.</p>
+                    <p> We elevate sport.</p>
+                    <p> We do right by people and the planet.</p>
+                    <p> Together, we drive meaningful change in communities around the world.</p>
+                    <p> We Got Now.</p>
+                </div>
             </div>
             <div class="footer-bottom">
                 <a href="">MY</a>
                 <a href="">Pivacy Policy</a>
                 <a href="">Website Terms & Conditions</a>
-                <p>Pham Tien Luc - No: 0383132114 - Copyright - 2024</p>
+                <p>Pham Tien Luc - No: 9999999999 - Copyright - 2024</p>
             </div>
         </div>
     </footer>

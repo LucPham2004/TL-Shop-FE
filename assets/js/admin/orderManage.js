@@ -5,54 +5,70 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     // Searching orders
     const searchBtn = document.getElementById('OrderSearchBtn');
+    const searchInput = document.getElementById('OrderSearchInput');
     if(searchBtn) {
         searchBtn.addEventListener('click', function() {
             this.parentElement.classList.toggle('open');
             this.previousElementSibling.focus();
 
-            const OrderSearchInput = document.getElementById('OrderSearchInput');
-
             const keyword = document.getElementById('OrderSearchInput').value.trim();
 
             if (keyword) {
-                console.log(keyword);
-                
-                // Chuyển đổi keyword thành số nếu có thể
-                const parsedKeyword = parseInt(keyword, 10);
-                
-                if (!isNaN(parsedKeyword)) {
-                    // Nếu parsedKeyword là số hợp lệ
-                    fetch(domain + `/api/v1/orders/search/${parsedKeyword}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showOrders(data);
-                        OrderSearchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching Orders:', error);
-                    });
-
-                } else {
-                    // Nếu keyword không phải là số
-                    fetch(domain + `/api/v1/orders/search?keyword=${encodeURIComponent(keyword)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showOrders(data);
-                        OrderSearchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching Orders:', error);
-                    });
-                }
+                searchOrdersAndDisplay(keyword);
             }
 
-        })
+    })
+
+    searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const keyword = searchInput.value;
+            if (keyword) {
+                searchOrdersAndDisplay(keyword);
+            }
+        }
+    });
+
     } else {
         console.log("not found search button")
     }
 });
+
+function searchOrdersAndDisplay(keyword) {
+    console.log(keyword);
+                
+    const OrderSearchInput = document.getElementById('OrderSearchInput');
+
+    // Chuyển đổi keyword thành số nếu có thể
+    const parsedKeyword = parseInt(keyword, 10);
+    
+    if (!isNaN(parsedKeyword)) {
+        // Nếu parsedKeyword là số hợp lệ
+        fetch(domain + `/api/v1/orders/search/${parsedKeyword}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showOrders(data);
+            OrderSearchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching Orders:', error);
+        });
+
+    } else {
+        // Nếu keyword không phải là số
+        fetch(domain + `/api/v1/orders/search?keyword=${encodeURIComponent(keyword)}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showOrders(data);
+            OrderSearchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching Orders:', error);
+        });
+    }
+}
 
 // Fetch Orders Data
 async function fetchOrders() {

@@ -1,6 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     displayProducts();
+    showHomepageImages();
 
     
     const productImages = document.querySelectorAll('.product-item img');
@@ -21,14 +22,19 @@ async function displayProducts() {
     const onSaleProducts = products.slice(24, 36);
     const featureProducts = products.slice(36, 48);
 
+    
+
     function createProductHTML(product) {
+        price = product.productPrice * (100 - product.discountPercent) / 100;
         return `
             <div class="product-item">
                 <a href="/public/products.html?${convertProductName(product.productName)}&id=${product.id}">
                     <img alt="${product.productName}" src="${imageBaseURL + product.productImage}">
                     <p class="product-name">${product.productName}</p>
                     <p class="description">${product.categories}</p>
-                    <p class="price">${formatNumber(product.productPrice)} đ</p>
+                    <p class="price">${formatNumber(price)} đ
+                        <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
+                    </p>
                 </a>
             </div>
         `;

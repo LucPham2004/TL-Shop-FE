@@ -187,7 +187,7 @@ async function cancelOrder(orderId) {
         }).then(response => {
             if (response.ok) {
                 console.log(`Order ID: ${orderId}, New Status: Cancelled`);
-                alert('Trạng thái đã được cập nhật!');
+                alert('Hủy đơn hàng thành công!');
             } else {
                 console.error('Hủy đơn hàng thất bại, hãy thử lại sau');
                 alert('Hủy đơn hàng thất bại, hãy thử lại sau');

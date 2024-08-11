@@ -3,53 +3,71 @@
 // Search products
 document.addEventListener("DOMContentLoaded", function() {
     const searchBtn = document.getElementById('searchButton');
+    const searchInput = document.getElementById('searchInput');
     if(searchBtn) {
         searchBtn.addEventListener('click', function() {
             this.parentElement.classList.toggle('open');
             this.previousElementSibling.focus();
 
-            const searchInput = document.getElementById('searchInput');
 
             const keyword = document.getElementById('searchInput').value.trim();
 
             if (keyword) {
-                console.log(keyword);
-                
-                // Chuyển đổi keyword thành số nếu có thể
-                const parsedKeyword = parseInt(keyword, 10);
-                
-                if (!isNaN(parsedKeyword)) {
-                    // Nếu parsedKeyword là số hợp lệ
-                    fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showProductsInAdminPage(data);
-                        searchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching products:', error);
-                    });
-
-                } else {
-                    // Nếu keyword không phải là số
-                    fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showProductsInAdminPage(data);
-                        searchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching products:', error);
-                    });
-                }
+                searchProductAndDisplay(keyword);
             }
-        })
+    })
+
+    searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const keyword = searchInput.value;
+            if (keyword) {
+                searchProductAndDisplay(keyword);
+            }
+        }
+    });
+
     } else {
         console.log("not found search button")
     }
 })
+
+function searchProductAndDisplay(keyword) {
+    console.log(keyword);
+
+    const searchInput = document.getElementById('searchInput');
+                
+    // Chuyển đổi keyword thành số nếu có thể
+    const parsedKeyword = parseInt(keyword, 10);
+    
+    if (!isNaN(parsedKeyword)) {
+        // Nếu parsedKeyword là số hợp lệ
+        fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showProductsInAdminPage(data);
+            searchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+
+    } else {
+        // Nếu keyword không phải là số
+        fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showProductsInAdminPage(data);
+            searchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+    }
+}
+
 // Show Products In Admin Page
 function showProductsInAdminPage(products){
     const tbody = document.querySelector('#product-table tbody');
@@ -70,7 +88,6 @@ function showProductsInAdminPage(products){
                 <button class="productBtn-edit" onclick="editProduct(${product})">Sửa</button>
                 <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
                 <button class="productBtn-delete" onclick="deleteProduct(${product.id})">Xóa</button>
-                <button class="productBtn-details">Chi tiết</button>
             </td>
         `;
 

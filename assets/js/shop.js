@@ -42,40 +42,11 @@ document.addEventListener("DOMContentLoaded", async function() {
     const keyword = params.get('keyword');
 
     if (keyword) {
-        console.log(keyword);
-        
-        // Chuyển đổi keyword thành số nếu có thể
-        const parsedKeyword = parseInt(keyword, 10);
-        
-        if (!isNaN(parsedKeyword)) {
-            // Nếu parsedKeyword là số hợp lệ
-            fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                showProductsInShopPage(data);
-                searchInput.value = ``;
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-            });
-
-        } else {
-            // Nếu keyword không phải là số
-            fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                showProductsInShopPage(data);
-                searchInput.value = ``;
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-            });
-        }
+        seachProductsAndShow(keyword);
     }
 
     const searchBtn = document.getElementById('searchButton');
+    const searchInput = document.getElementById('searchInput');
     if(searchBtn) {
         searchBtn.addEventListener('click', function() {
             this.parentElement.classList.toggle('open');
@@ -85,42 +56,55 @@ document.addEventListener("DOMContentLoaded", async function() {
 
             if (keyword) {
                 console.log(keyword);
-                
-                // Chuyển đổi keyword thành số nếu có thể
-                const parsedKeyword = parseInt(keyword, 10);
-                
-                if (!isNaN(parsedKeyword)) {
-                    // Nếu parsedKeyword là số hợp lệ
-                    fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showProductsInShopPage(data);
-                        searchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching products:', error);
-                    });
-
-                } else {
-                    // Nếu keyword không phải là số
-                    fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showProductsInShopPage(data);
-                        searchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching products:', error);
-                    });
-                }
+                seachProductsAndShow(keyword);
             }
-        })
+    })
+
+    searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') { 
+            event.preventDefault(); 
+            const keyword = searchInput.value;
+            if (keyword) {
+                seachProductsAndShow(keyword);
+            }
+        }
+    });
+
     } else {
         console.log("not found search button")
     }
 });
+
+function seachProductsAndShow(keyword) {
+    const parsedKeyword = parseInt(keyword, 10);
+                
+    if (!isNaN(parsedKeyword)) {
+        // Nếu parsedKeyword là số hợp lệ
+        fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showProductsInShopPage(data);
+            searchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+
+    } else {
+        // Nếu keyword không phải là số
+        fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showProductsInShopPage(data);
+            searchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching products:', error);
+        });
+    }
+}
 
 // Show Products In Shop Page
 async function showProductsInShopPage(products){
@@ -138,6 +122,7 @@ async function showProductsInShopPage(products){
             <a href="/public/products.html?${convertProductName(product.productName)}&id=${product.id}">
                 <img alt="${product.productName}" src="${imageBaseURL + product.productImage}">
                 <p class="product-name">${product.productName}</p>
+                <p class="description">${product.categories}</p>
                 <p class="price">${formatNumber(price)} đ 
                     <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
                 </p>

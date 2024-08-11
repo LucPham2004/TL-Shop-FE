@@ -60,6 +60,7 @@
 /* Định dạng các trường nhập liệu */
 .form-group input[type="number"] {
     width: 150px;
+    height: 35px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -68,8 +69,10 @@
 
 /* Định dạng các nút */
 .form-group button {
-    width: 100px;
-    padding: 10px 15px;
+    width: 80px;
+    height: 35px;
+    padding: 5px 5px;
+    margin-left: 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -134,4 +137,11 @@
 }
 .product-item:hover *{
     color: red;
+}
+.description{
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.originPrice {
+    font-size: 14px;
 }

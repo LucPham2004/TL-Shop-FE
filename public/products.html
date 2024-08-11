@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoping</title>
-    <link rel="icon" href="../assets/img/logo/TL.png">
+    <link rel="icon" href="../assets/img/logo/Logo.png">
     <link rel="stylesheet" href="../assets/css/header-footer.css">
     <link rel="stylesheet" href="../assets/css/products.css">
     <link rel="stylesheet" href="../assets/css/cart.css">
@@ -85,30 +85,34 @@
         <div class="review-container">
             <div class="reviewForm-container">
                 <form id="reviewForm">
-                    <div>
-                        <label for="reviewTitle">Tiêu đề:</label>
-                        <input type="text" id="reviewTitle" required>
+                    <div class="d-flex flex-row mb-2">
+                        <div>
+                            <label for="reviewTitle">Tiêu đề:</label>
+                            <input type="text" id="reviewTitle" required>
+                        </div>
+                        <div>
+                            <label for="rating">Đánh giá:</label>
+                            <select id="rating" required>
+                                <option value="5">5★</option>
+                                <option value="4">4★</option>
+                                <option value="3">3★</option>
+                                <option value="2">2★</option>
+                                <option value="1">1★</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label for="rating">Đánh giá:</label>
-                        <select id="rating" required>
-                            <option value="5">5★</option>
-                            <option value="4">4★</option>
-                            <option value="3">3★</option>
-                            <option value="2">2★</option>
-                            <option value="1">1★</option>
-                        </select>
+                    <div class="d-flex flex-row">
+                        <div>
+                            <label for="comment">Bình luận:</label>
+                            <textarea id="comment" required></textarea>
+                        </div>
+                        <button type="submit">Thêm Đánh giá</button>
                     </div>
-                    <div>
-                        <label for="comment">Bình luận:</label>
-                        <textarea id="comment" required></textarea>
-                    </div>
-                    <button type="submit">Thêm Đánh giá</button>
                 </form>
                 <div style="display: flex;justify-content:center;"><hr style="width:80%;"></div>
             </div>
             <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
-                    Đánh Giá Sản Phẩm
+                    Các đánh giá, bình luận
             </button>
             <div class="collapse show" id="collapseReview">
                 <div class="card card-body"></div>

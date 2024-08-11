@@ -112,12 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Thiết lập nội dung cho sản phẩm
                 productContainer.innerHTML = `
-                    <img alt="Giày similar" src="${imageBaseURL + product.productImage}">
-                    <p class="product-name">${product.productName}</p>
-                    <p class="description">${product.productDescription}</p>
-                    <p class="price">${formatNumber(price)} đ
-                        <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
-                    </p>
+                    <a href="/public/products.html?${convertProductName(product.productName)}&id=${product.id}">
+                        <img alt="Giày similar" src="${imageBaseURL + product.productImage}">
+                        <p class="product-name">${product.productName}</p>
+                        <p class="description">${product.productDescription}</p>
+                        <p class="price">${formatNumber(price)} đ
+                            <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
+                        </p>
+                    </a>
                 `;
 
                 if (index < 4) {
@@ -240,6 +242,8 @@ async function displayReviews(productId) {
     }
 }
 
+let originalReviewContent = {};
+
 // Edit Review
 function editReview(reviewId) {
     const reviewItem = document.querySelector(`.review-item-${reviewId}`);
@@ -248,6 +252,8 @@ function editReview(reviewId) {
         console.error(`Review item with ID ${reviewId} not found`);
         return;
     }
+    
+    originalReviewContent[reviewId] = reviewItem.innerHTML;
 
     const reviewTitle = reviewItem.querySelector('.review-title').innerText;
     const reviewContent = reviewItem.querySelector('.review-content').innerText;
@@ -258,15 +264,34 @@ function editReview(reviewId) {
             <img class="user-icon" alt="user-icon" src="../assets/img/logo/user.png">
             <p class="customer-name">${reviewItem.querySelector('.customer-name').innerText}</p>
             <p class="review-date">${reviewItem.querySelector('.review-date').innerText}</p>
-            <input type="number" class="star" value="${reviewRating}" min="1" max="5">
+            <select id="rating" required>
+                <option value="5">5★</option>
+                <option value="4">4★</option>
+                <option value="3">3★</option>
+                <option value="2">2★</option>
+                <option value="1">1★</option>
+            </select>
         </div>
         <div>
             <input type="text" class="review-title" value="${reviewTitle}">
             <textarea class="review-content">${reviewContent}</textarea>
             <button class="saveReview" onclick="saveReview(${reviewId})">Lưu</button>
+            <button class="cancelEditReview" onclick="cancelEditReview(${reviewId})">Hủy</button>
         </div>
         <div style="display: flex;justify-content:center;"><hr style="width:80%;"></div>
     `;
+}
+
+function cancelEditReview(reviewId) {
+    const reviewItem = document.querySelector(`.review-item-${reviewId}`);
+    
+    if (!reviewItem) {
+        console.error(`Review item with ID ${reviewId} not found`);
+        return;
+    }
+
+    // Restore the original content
+    reviewItem.innerHTML = originalReviewContent[reviewId];
 }
 
 // Save edited review
@@ -288,7 +313,7 @@ function saveReview(reviewId) {
             body: JSON.stringify(updatedReview)
         })
             alert('Cập nhật đánh giá thành công!');
-            location.reload();
+            window.location.reload();
             
     } catch(error) {
         console.error('Error:', error);
@@ -348,6 +373,27 @@ function displayStars(rating) {
     return stars;
 }
 
+function removeVietnameseTones(str) {
+    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    return str;
+}
+
+function convertProductName(productName) {
+    // Bỏ dấu tiếng Việt
+    let noToneName = removeVietnameseTones(productName);
+    
+    // Thay thế khoảng trắng bằng dấu gạch ngang
+    let convertedName = noToneName.replace(/\s+/g, '-');
+    
+    return convertedName;
+}
+
+function extractDate(datetimeString) {
+    let datePart = datetimeString.split('T')[0];
+    
+    return datePart;
+}
 function formatNumber(number) {
     return number.toLocaleString('vi-VN');
 }

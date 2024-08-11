@@ -61,13 +61,13 @@ header a:hover{
     color: red;
 }
 #logo{
-    width: 120px;
-    margin-left: 50px;
-    margin-top: 10px;
+    width: 100px;
+    margin-left: 70px;
 }
 #logo img{
     width: 50px;
-    height: 40px;
+    height: 100%;
+    border-radius: 100%;
 }
 
 .search-box {
@@ -159,13 +159,13 @@ footer{
 .footer-top{
     display: flex;
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 .footer-links{
     display: flex;
     flex-direction: column;
     width: 30%;
-    gap: 10px 0;
+    gap: 20px 0;
 }
 .footer-links a, .footer-bottom a{
     text-decoration: none;
@@ -190,10 +190,6 @@ footer{
     }
     .footer-bottom{
         width: 100%;
-    }
-    .footer-top p{
-        text-align: justify;
-        width: 40%;
     }
 }
 @media screen and (max-width:768px) {

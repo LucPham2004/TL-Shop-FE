@@ -18,6 +18,11 @@ function getCookie(name) {
 async function checkLogin() {
     const token = JSON.parse(localStorage.getItem('token')) || [];
 
+    if (!token) {
+        console.error('Token không tồn tại!');
+        return false;
+    }
+
     try {
         const response = await fetch(domain + '/api/v1/auth/status', {
             method: 'GET', 
@@ -26,6 +31,13 @@ async function checkLogin() {
                 'Authorization': `Bearer ${token}`
             }
         });
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                console.error('Unauthorized: Token không hợp lệ hoặc đã hết hạn.');
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const data = await response.json();
         console.log(data.message);
@@ -67,7 +79,7 @@ function resetIdleTime() {
 
 function checkIdleTime() {
     idleTime += 600;
-    if (idleTime >= idleLimit && checkLogin()) {
+    if (idleTime >= idleLimit) {
         logout();
     }
 }

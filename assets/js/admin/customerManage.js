@@ -2,55 +2,66 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Searching customers
     const searchBtn = document.getElementById('CustomerSearchBtn');
+    const searchInput = document.getElementById('CustomerSearchInput');
     if(searchBtn) {
         searchBtn.addEventListener('click', function() {
             this.parentElement.classList.toggle('open');
             this.previousElementSibling.focus();
 
-            const CustomerSearchInput = document.getElementById('CustomerSearchInput');
-
             const keyword = document.getElementById('CustomerSearchInput').value.trim();
 
             if (keyword) {
                 console.log(keyword);
-                
-                // Chuyển đổi keyword thành số nếu có thể
-                const parsedKeyword = parseInt(keyword, 10);
-                
-                if (!isNaN(parsedKeyword)) {
-                    // Nếu parsedKeyword là số hợp lệ
-                    fetch(domain + `/api/v1/customers/search/${parsedKeyword}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showCustomersInAdminPage(data);
-                        CustomerSearchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching customers:', error);
-                    });
-
-                } else {
-                    // Nếu keyword không phải là số
-                    fetch(domain + `/api/v1/customers/search?keyword=${encodeURIComponent(keyword)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        showCustomersInAdminPage(data);
-                        CustomerSearchInput.value = ``;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching customers:', error);
-                    });
-                }
+                searchCustomersAndDisplay(keyword);
             }
-        })
+    }) 
+
+    searchInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') { 
+            event.preventDefault(); 
+            const keyword = searchInput.value;
+            if (keyword) {
+                searchCustomersAndDisplay(keyword);
+            }
+        }
+    });
+
     } else {
         console.log("not found search button")
     }
 })
 
+function searchCustomersAndDisplay(keyword) {
+    const CustomerSearchInput = document.getElementById('CustomerSearchInput');
+    const parsedKeyword = parseInt(keyword, 10);
+                
+    if (!isNaN(parsedKeyword)) {
+        // Nếu parsedKeyword là số hợp lệ
+        fetch(domain + `/api/v1/customers/search/${parsedKeyword}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showCustomersInAdminPage(data);
+            CustomerSearchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching customers:', error);
+        });
 
+    } else {
+        // Nếu keyword không phải là số
+        fetch(domain + `/api/v1/customers/search?keyword=${encodeURIComponent(keyword)}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            showCustomersInAdminPage(data);
+            CustomerSearchInput.value = ``;
+        })
+        .catch(error => {
+            console.error('Error fetching customers:', error);
+        });
+    }
+}
 
 // Show customers data in admin page
 function showCustomersInAdminPage(customers) {
