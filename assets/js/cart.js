@@ -21,7 +21,7 @@ async function AddProductToCart() {
     const productId = params.get("id");
     
     if (productId) {
-        fetch(domain + "/api/v1/products/" + productId)
+        await fetch(domain + "/api/v1/products/" + productId)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Product not found');
@@ -117,6 +117,10 @@ function removeFromCart(productId) {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
 
     loadCart();
+    const cartItem = document.querySelector(`.product-item button[onclick="removeFromCart(${productId})"]`).closest('.product-item');
+    if (cartItem) {
+        cartItem.remove();
+    }
 }
 
 // Count items in Cart

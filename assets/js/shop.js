@@ -73,6 +73,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     } else {
         console.log("not found search button")
     }
+
+    changeCategoryMenu()
 });
 
 function seachProductsAndShow(keyword) {
@@ -182,4 +184,49 @@ async function showAllProducts() {
     maxAmount.value = ``;
 
     showProductsInShopPage(products);
+}
+
+function changeCategoryMenu() {
+    const userAgent = navigator.userAgent;
+        
+    if (/mobile/i.test(userAgent)) {
+        const categoryMenu = document.querySelector('.main .brand-category');
+        categoryMenu.innerHTML = ``;
+
+        categoryMenu.innerHTML = `
+            <div class="d-lg-none">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCategoryMenu" aria-controls="offcanvasCategoryMenu">
+                    <img class="navbar-toggler-icon" src="../assets/img/logo/menu-bar.png">
+                    Danh mục sản phẩm
+                </button>
+            </div>
+
+            <!-- Offcanvas menu for mobile -->
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategoryMenu" aria-labelledby="offcanvasCategoryMenuLabel">
+                <div class="offcanvas-header" style="margin-top:15%;">
+                    <h5 class="offcanvas-title" id="offcanvasCategoryMenuLabel">Danh mục sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <ul>
+                <li class="category-item" onclick="showAllProducts()" style="cursor: pointer;">Tất Cả</li>
+                <li class="category-item"><a href="#" data-category="Adidas">Adidas</a></li>
+                <li class="category-item"><a href="#" data-category="Nike">Nike</a></li>
+                <li class="category-item"><a href="#" data-category="Biti's">Biti's</a></li>
+                <li class="category-item"><a href="#" data-category="Puma">Puma</a></li>
+                <li class="category-item"><a href="#" data-category="Vans">Vans</a></li>
+                <li class="category-item"><a href="#" data-category="Converse">Converse</a></li>
+                <li class="category-item"><a href="#" data-category="Louis Vuitton">Louis Vuitton</a></li>
+                <li class="category-item"><a href="#" data-category="New Balance">New Balance</a></li>
+                <li class="category-item"><a href="#" data-category="Thể Thao">Thể Thao</a></li>
+                <li class="category-item"><a href="#" data-category="Giày Nam">Giày Nam</a></li>
+                <li class="category-item"><a href="#" data-category="Giày Nữ">Giày Nữ</a></li>
+                <li class="category-item"><a href="#" data-category="Giày Cao Gót">Giày Cao Gót</a></li>
+                <li class="category-item"><a href="#" data-category="Giày Da">Giày Da</a></li>
+                <li class="category-item"><a href="#" data-category="Dép">Dép</a></li>
+                <li class="category-item"><a href="#" data-category="HangKhac">Hãng khác</a></li>
+            </ul>
+            </div>
+        `;
+
+    }
 }

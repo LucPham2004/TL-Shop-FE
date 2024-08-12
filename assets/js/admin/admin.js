@@ -1,4 +1,8 @@
-
+const userAgent = navigator.userAgent;
+if (/mobile/i.test(userAgent)) {
+    alert("Vui lòng sử dụng bằng máy tính!");
+    window.location.href = "/public/index.html";
+}
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {

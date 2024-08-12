@@ -114,6 +114,7 @@ async function fetchCustomerOrders() {
 
         const ordersContainer = document.getElementById("orders-container");
         ordersContainer.innerHTML = '';
+        const userAgent = navigator.userAgent;
 
         orders.forEach(order => {
             const orderItem = document.createElement('div');
@@ -125,45 +126,79 @@ async function fetchCustomerOrders() {
             order.orderDetails.forEach(orderDetails => {
                 const orderProduct = document.createElement('div');
                 orderProduct.classList.add('orderProduct');
-    
-                orderProduct.innerHTML = `
+                
+
+                if (/mobile/i.test(userAgent)) {
+                    orderProduct.innerHTML = `
                     <img alt="Giày ${orderDetails.productName}" src="${imageBaseURL + orderDetails.productImage}">
                     <div class="productItem-info">
                         <div class="productInfo">
                             <p class="product-name">${orderDetails.productName}</p>
-                            <p class="description">${orderDetails.categories}</p>
-                            <p class="price">Đơn giá: ${formatNumber(parseInt(orderDetails.unitPrice))} đ</p>
-                            <p class="color">Màu: ${orderDetails.color}</p>
-                            <p class="size">Size: ${orderDetails.size}</p>
-                            <p class="quantity">SL: ${orderDetails.quantity}</p>
-                            <p class="total">Tổng: ${formatNumber(orderDetails.subtotal)} đ</p>
                         </div>
                     </div>
                 `
+                } else {
+    
+                    orderProduct.innerHTML = `
+                        <img alt="Giày ${orderDetails.productName}" src="${imageBaseURL + orderDetails.productImage}">
+                        <div class="productItem-info">
+                            <div class="productInfo">
+                                <p class="product-name">${orderDetails.productName}</p>
+                                <p class="description">${orderDetails.categories}</p>
+                                <p class="price">Đơn giá: ${formatNumber(parseInt(orderDetails.unitPrice))} đ</p>
+                                <p class="color">Màu: ${orderDetails.color}</p>
+                                <p class="size">Size: ${orderDetails.size}</p>
+                                <p class="quantity">SL: ${orderDetails.quantity}</p>
+                                <p class="total"><strong>Tổng:</strong> ${formatNumber(orderDetails.subtotal)} đ</p>
+                            </div>
+                        </div>
+                    `
+                }
                 orderProducts.appendChild(orderProduct);
 
             });
 
-            if(order.status !== "Completed" && order.status !== "Cancelled") {
-                orderItem.innerHTML = `
-                <div class="orderInfo">
-                    <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
-                    <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
-                    <p style="color:red;"><strong>Tổng tiền:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
-                    <p><strong>Trạng thái:</strong> ${order.status}</p>
-                    <button type="button" class="deleteOrderBtn" onclick="cancelOrder(${order.id})">Hủy đơn</button>
-                </div>
-            `
+            if (/mobile/i.test(userAgent)) {
+                if(order.status !== "Completed" && order.status !== "Cancelled") {
+                    orderItem.innerHTML = `
+                    <div class="orderInfo">
+                        <p style="color:red;"><strong>Tổng đơn:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
+                        <p><strong>Trạng thái:</strong> <span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></p>
+                        <button type="button" class="deleteOrderBtn" onclick="cancelOrder(${order.id})">Hủy đơn</button>
+                    </div>
+                `
+                } else {
+                    orderItem.innerHTML = `
+                    <div class="orderInfo">
+                        <p style="color:red;"><strong>Tổng đơn:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
+                        <p><strong>Trạng thái:</strong> <span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></p>
+                        <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa đơn</button>
+                    </div>
+                `
+                }
             } else {
-                orderItem.innerHTML = `
-                <div class="orderInfo">
-                    <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
-                    <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
-                    <p style="color:red;"><strong>Tổng tiền:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
-                    <p><strong>Trạng thái:</strong> ${order.status}</p>
-                    <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa đơn</button>
-                </div>
-            `
+
+                if(order.status !== "Completed" && order.status !== "Cancelled") {
+                    orderItem.innerHTML = `
+                    <div class="orderInfo">
+                        <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
+                        <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
+                        <p style="color:red;"><strong>Tổng đơn:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
+                        <p><strong>Trạng thái:</strong> <span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></p>
+                        <button type="button" class="deleteOrderBtn" onclick="cancelOrder(${order.id})">Hủy đơn</button>
+                    </div>
+                `
+                } else {
+                    orderItem.innerHTML = `
+                    <div class="orderInfo">
+                        <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
+                        <p><strong>Ngày đặt hàng:</strong> ${extractDate(order.date)}</p>
+                        <p style="color:red;"><strong>Tổng đơn:</strong> ${formatNumber(parseInt(order.total))} VNĐ</p>
+                        <p><strong>Trạng thái:</strong> <span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></p>
+                        <button type="button" class="deleteOrderBtn" onclick="deleteOrder(${order.id})">Xóa đơn</button>
+                    </div>
+                `
+                }
             }
             
             orderItem.appendChild(orderProducts);

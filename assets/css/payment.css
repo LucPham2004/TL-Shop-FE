@@ -65,17 +65,17 @@
     gap: 10px;
 }
 
-.productInfo p {
-    display: flexbox;
-    width: 12%;
-    text-align: center; 
-    margin: 0; 
-}
-
 .productInfo p:first-child {
-    font-weight: bold;
     width: 28%; 
     gap: 20px;
+    font-weight: bold;
+    margin: 0px 10px;
+}
+.productInfo p {
+    display: flexbox;
+    width: 11%;
+    text-align: center; 
+    margin: 0 5px;
 }
 .total {
     color: red;

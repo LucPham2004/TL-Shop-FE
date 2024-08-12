@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const headerHTML = `
     <header>
         <div class="header-container">
-            <a href="../public/index.html"><div id="logo"><img src="../assets/img/logo/Logo.png"></div></a>
-            <div class="header-menu">
+            <a href="../public/index.html">
+                <div id="logo"><img src="../assets/img/logo/Logo.png"></div>
+            </a>
+            <div class="header-menu d-none d-lg-flex">
                 <a href="../public/index.html"><div class="header-item">Home</div></a>
                 <a href="../public/shop.html"><div class="header-item" style="width:150px;">Tất cả sản phẩm</div></a>
-                <h5 style="margin-bottom: 15px;margin-left:10px;align-self:center; color:rgb(89, 89, 89);">|</h5>
+                <h5 style="margin-bottom: 15px; margin-left:10px; align-self:center; color:rgb(89, 89, 89);">|</h5>
                 <a href="../public/shop.html?category=Adidas"><div class="header-item">Adidas</div></a>
                 <a href="../public/shop.html?category=Nike"><div class="header-item">Nike</div></a>
                 <a href="../public/shop.html?category=Thể Thao"><div class="header-item">Thể Thao</div></a>
@@ -22,25 +24,47 @@ document.addEventListener("DOMContentLoaded", function() {
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-
-                <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" class="cart" style="text-align: center;">
-                    <i class="fas fa-cart-plus" style="font-size: 30px;"></i>
+                <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" class="cart" style="text-align: center;">
+                    <i class="fas fa-cart-plus" style="font-size: 30px;text-align:center;"></i>
                 </div>
-
                 <div class="account">
-                    <a href="../public/login.html"><div id="login" style="width:max-content">
-                        <i class="fas fa-user" style="margin-right: 10px"></i>
-                        Log in | Sign up</div>
+                    <a href="../public/login.html">
+                        <div id="login" style="width:max-content">
+                            <i class="fas fa-user" style="margin-right: 10px"></i>
+                            Sign up
+                        </div>
                     </a>
                 </div>
+            </div>
+            <!-- Hamburger icon for mobile -->
+            <div class="d-lg-none">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                    <img class="navbar-toggler-icon" src="../assets/img/logo/menu-bar.png">
+                </button>
+            </div>
+        </div>
+
+        <!-- Offcanvas menu for mobile -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="../public/index.html"><div class="header-item">Home</div></a>
+                <a href="../public/shop.html"><div class="header-item" style="width:150px;">Tất cả sản phẩm</div></a>
+                <a href="../public/shop.html?category=Adidas"><div class="header-item">Adidas</div></a>
+                <a href="../public/shop.html?category=Nike"><div class="header-item">Nike</div></a>
+                <a href="../public/shop.html?category=Thể Thao"><div class="header-item">Thể Thao</div></a>
+                <a href="../public/shop.html?category=Giày Da"><div class="header-item">Giày Da</div></a>
             </div>
         </div>
     </header>
     
     <!-- Cart -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Giỏ Hàng</h5>
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">Giỏ Hàng</h5>
             <a href="../public/payment.html"><div class="orderBtn">Đặt hàng</div></a>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -86,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <a href="../user/profile.html">My Account</a>
                     </div>
                 </div>
-                <div>
+                <div class="para">
                     <p> We stand for something bigger than sneakers.</p>
                     <p> We champion those who are fearlessly driven by their passions.</p>
                     <p> We elevate sport.</p>
@@ -161,7 +185,7 @@ function changeLoginOrProfileHeaderPart() {
             <a href="../public/login.html">
                 <div id="login" style="width:max-content">
                     <i class="fas fa-user" style="margin-right: 10px"></i>
-                    Log in | Sign up
+                    Sign up
                 </div>
             </a>
         `;

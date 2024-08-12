@@ -1,39 +1,98 @@
 .container{
-    display: flex;
-    flex-direction: row;
     margin-top: 5%;
 }
-.user-info , #editForms{
+
+.hidden {
+    display: none;
+}
+#editForms{
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 25%;
     height: max-content;
-    margin-right: 5%;
+    margin-bottom: 3%;
+    width: 70%;
+    max-width: 800px;
+    margin-left: 15%;
+}
+.user-info {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3%;
 }
 
-.user-info h2 {
-    margin-top: 0;
+.user-info h4 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
 }
+
 .user-info p {
-    margin: 5px 0;
+    margin: 10px 0;
+    font-size: 1em;
+    color: #666;
 }
 
 .info-label {
-    display: inline-block;
-    width: 40%;
-}
-.info-text {
-    width: 60%;
+    font-weight: bold;
+    color: #333;
 }
 
-#userInfoForm input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    box-sizing: border-box;
-    border: 1px solid black;
+.info-text {
+    margin-left: 10px;
+    color: #555;
+}
+
+@media screen and(max-width:1024px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        column-gap: 40px;
+    }
+}
+@media screen and(min-width:1023px) {
+    
+}
+@media (max-width: 768px) {
+    .user-info {
+        padding: 15px;
+    }
+
+    .user-info h4 {
+        font-size: 1.2em;
+    }
+
+    .user-info p {
+        font-size: 0.9em;
+    }
+
+    .changeInfo-btn {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-info {
+        padding: 10px;
+    }
+
+    .user-info h4 {
+        font-size: 1em;
+    }
+
+    .user-info p {
+        font-size: 0.8em;
+    }
+
+    .changeInfo-btn {
+        font-size: 0.8em;
+        padding: 8px;
+    }
 }
 
 .changeInfo-btn, #submitBtn, .deleteOrderBtn, #cancelBtn{
@@ -43,6 +102,7 @@
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
     transition: transform 0.3s ease;
+    margin-bottom: 10px;
 }
 .changeInfo-btn:hover, #submitBtn:hover, #cancelBtn:hover, .deleteOrderBtn:hover{
     color: white;
@@ -56,27 +116,29 @@
     margin-bottom: 20px;
 }
 .changeInfo-btn {
-    margin-left: 50px;
+    margin-left: 30%;
 }
-#cancelBtn {
+.deleteOrderBtn, #cancelBtn {
     width: 80px;
     height: 40px;
-    margin-top: 20px;
     margin-left: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.hidden {
-    display: none;
+@media screen and(min-width:1024px) {
+    
 }
+@media screen and(max-width:1024px) {
+
+}
+
+
 
 .orders {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 900px;
 }
 #orders-container {
     display: flex;
@@ -85,26 +147,22 @@
 .orders h2 {
     margin-top: 0;
 }
-
-
 .order {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid #ddd;
     padding: 10px 0;
 }
 .orderInfo{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 10px;
-    padding-left: 5px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 .orderProducts{
-    display: flex;
-    flex-direction: column;
     width: 100%;
     align-items: center;
     gap: 10px;
@@ -120,6 +178,25 @@
 .orderProduct img {
     flex: 0 0 150px; 
     height: 150px;
+    border-radius: 10px;
     object-fit: cover;
+    border-bottom: 1px solid #ddd;
 }
-
+@media screen and(min-width:1024px) {
+    .orders {
+        max-width: 900px;
+    }
+    .orderProducts{
+        display: flex;
+        flex-direction: column;
+    }
+    .orderProduct {
+        display: flex;
+        flex-direction: row;
+    }
+}
+@media screen and(max-width:1023px) {
+    .orders {
+        width: 95%;
+    }
+}
