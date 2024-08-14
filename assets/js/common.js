@@ -1,4 +1,4 @@
-const domain = "https://tlshop.ap-southeast-1.elasticbeanstalk.com";
+const domain = "http://tlshop.ap-southeast-1.elasticbeanstalk.com";
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
 document.addEventListener("DOMContentLoaded", function() {
     
