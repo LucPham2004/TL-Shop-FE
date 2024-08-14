@@ -108,7 +108,7 @@ async function logout() {
         }
         localStorage.removeItem('user');
         localStorage.removeItem('token');
-        window.location.href = '/public/index.html';
+        window.location.href = '/index.html';
 
     } catch (error) {
         console.error('Có lỗi xảy ra:', error);

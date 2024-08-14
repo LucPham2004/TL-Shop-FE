@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user) {
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('token', JSON.stringify(token));
-                window.location.href = '/public/index.html';
+                window.location.href = '/index.html';
             } else {
                 throw new Error('Không có thông tin người dùng');
             }
