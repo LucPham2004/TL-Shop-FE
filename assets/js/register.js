@@ -1,4 +1,4 @@
-const domain = "http://tlshop.ap-southeast-1.elasticbeanstalk.com";
+const domain = "https://tlshop.ap-southeast-1.elasticbeanstalk.com";
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.querySelector('#signup_form');
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const customers = await fetchCustomers();
                 showCustomersInAdminPage(customers);
             } else {
-                window.location.href = '/public/login.html';
+                window.location.href = 'login.html';
             }
 
         } catch (error) {
