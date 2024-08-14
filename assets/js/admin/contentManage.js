@@ -15,28 +15,28 @@ async function showHomepageImages() {
         const bannerCarousel = document.querySelector('.banner .carousel-inner');
         bannerCarousel.innerHTML = `
             <div class="carousel-item active">
-                <img id="banner1" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[0]}" class="d-block w-100" alt="...">
+                <img id="banner1" src="${imageBaseURL}/img/homepage/banner/banner1.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img id="banner2" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[1]}" class="d-block w-100" alt="...">
+                <img id="banner2" src="${imageBaseURL}/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/${bannerFiles[2]}" class="d-block w-100" alt="...">
+                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
             </div>
         `;
 
         // Cập nhật các poster
         const posterMainLeft = document.querySelector('.poster-main-left img');
-        posterMainLeft.src = `${imageBaseURL}/img/homepage/poster/${posterFiles[0]}`;
+        posterMainLeft.src = `${imageBaseURL}/img/homepage/poster/poster-main.jpg`;
 
         const posterMainRightDivs = document.querySelectorAll('.poster-main-right-div img');
-        posterMainRightDivs[0].src = `${imageBaseURL}/img/homepage/poster/${posterFiles[1]}`;
-        posterMainRightDivs[1].src = `${imageBaseURL}/img/homepage/poster/${posterFiles[2]}`;
+        posterMainRightDivs[0].src = `${imageBaseURL}/img/homepage/poster/poster2.webp`;
+        posterMainRightDivs[1].src = `${imageBaseURL}/img/homepage/poster/poster3.jpg`;
 
         // Cập nhật các sample
         const sampleImages = document.querySelectorAll('.sample img');
-        sampleImages[0].src = `${imageBaseURL}/img/homepage/sample/${sampleFiles[0]}`;
-        sampleImages[1].src = `${imageBaseURL}/img/homepage/sample/${sampleFiles[1]}`;
+        sampleImages[0].src = `${imageBaseURL}/img/homepage/sample/sample1.jpg`;
+        sampleImages[1].src = `${imageBaseURL}/img/homepage/sample/sample2.jpg`;
     } catch (error) {
         console.error(error);
     }

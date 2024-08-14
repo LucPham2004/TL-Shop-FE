@@ -1,4 +1,4 @@
-const domain = "http://127.0.0.1:8080";
+const domain = "http://tlshop.ap-southeast-1.elasticbeanstalk.com";
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <a href="../public/login.html">
                         <div id="login" style="width:max-content">
                             <i class="fas fa-user" style="margin-right: 10px"></i>
-                            Sign up
+                            Sign in
                         </div>
                     </a>
                 </div>
@@ -185,7 +185,7 @@ function changeLoginOrProfileHeaderPart() {
             <a href="../public/login.html">
                 <div id="login" style="width:max-content">
                     <i class="fas fa-user" style="margin-right: 10px"></i>
-                    Sign up
+                    Sign in
                 </div>
             </a>
         `;
