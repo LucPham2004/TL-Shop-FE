@@ -28,7 +28,7 @@ async function displayProducts() {
         price = product.productPrice * (100 - product.discountPercent) / 100;
         return `
             <div class="product-item">
-                <a href="/public/products.html?${convertProductName(product.productName)}&id=${product.id}">
+                <a href="/products.html?${convertProductName(product.productName)}&id=${product.id}">
                     <img alt="${product.productName}" src="${imageBaseURL + product.productImage}">
                     <p class="product-name">${product.productName}</p>
                     <p class="description">${product.categories}</p>

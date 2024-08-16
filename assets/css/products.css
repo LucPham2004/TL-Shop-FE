@@ -364,8 +364,17 @@ body{
     justify-content: center;
     flex-wrap: wrap;
 }
+@media screen and (max-width:1024px) {
+    .similar-item{
+        width: 49%;
+    }
+}
+@media screen and (min-width:1024px) {
+    .similar-item{
+        width: 25%;
+    }
+}
 .similar-item{
-    width: 49%;
     margin-bottom: 20px;
     transition: opacity 0.2s ease;
 }

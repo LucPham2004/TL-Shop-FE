@@ -121,7 +121,7 @@ async function showProductsInShopPage(products){
 
         // Link ảnh tượng trưng
         productItem.innerHTML = `
-            <a href="/public/products.html?${convertProductName(product.productName)}&id=${product.id}">
+            <a href="/products.html?${convertProductName(product.productName)}&id=${product.id}">
                 <img alt="${product.productName}" src="${imageBaseURL + product.productImage}">
                 <p class="product-name">${product.productName}</p>
                 <p class="description">${product.categories}</p>

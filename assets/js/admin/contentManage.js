@@ -21,7 +21,7 @@ async function showHomepageImages() {
                 <img id="banner2" src="${imageBaseURL}/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/banner2.jpg" class="d-block w-100" alt="...">
+                <img id="banner3" src="${imageBaseURL}/img/homepage/banner/banner3.jpg" class="d-block w-100" alt="...">
             </div>
         `;
 

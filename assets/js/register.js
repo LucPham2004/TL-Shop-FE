@@ -1,4 +1,4 @@
-const domain = "https://tlshop.ap-southeast-1.elasticbeanstalk.com";
+const domain = "https://main.di3mp6sg251v5.amplifyapp.com";
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.querySelector('#signup_form');
 
