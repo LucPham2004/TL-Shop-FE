@@ -1,5 +1,5 @@
-const domain = "https://main.di3mp6sg251v5.amplifyapp.com";
-const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/Shoe_Store/src/main/resources/static";
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";
+const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 document.addEventListener("DOMContentLoaded", function() {
     
     const headerHTML = `

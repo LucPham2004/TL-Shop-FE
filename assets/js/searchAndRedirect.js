@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const keyword = searchInput.value;
             if (keyword) {
-                window.location.href = `/public/shop.html?keyword=${encodeURIComponent(keyword)}`;
+                window.location.href = `/shop.html?keyword=${encodeURIComponent(keyword)}`;
             }
         });
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 event.preventDefault();
                 const keyword = searchInput.value;
                 if (keyword) {
-                    window.location.href = `/public/shop.html?keyword=${encodeURIComponent(keyword)}`;
+                    window.location.href = `/shop.html?keyword=${encodeURIComponent(keyword)}`;
                 }
             }
         });

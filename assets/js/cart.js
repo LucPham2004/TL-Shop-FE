@@ -12,7 +12,7 @@ const buyNowBtn = document.getElementById('buyNow');
 if(buyNowBtn) {
     buyNowBtn.addEventListener("click", async function() {
         await AddProductToCart();
-        window.location.href = "/public/payment.html";
+        window.location.href = "/payment.html";
     });
 };
 

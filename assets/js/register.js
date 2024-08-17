@@ -1,4 +1,4 @@
-const domain = "https://main.di3mp6sg251v5.amplifyapp.com";
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.querySelector('#signup_form');
 
