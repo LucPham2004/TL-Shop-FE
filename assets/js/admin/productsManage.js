@@ -247,6 +247,47 @@ async function deleteProduct(id) {
     }
 }
 
+function validateAddProductForm() {
+    const productName = document.getElementById('productName').value;
+    const productDescription = document.getElementById('productDescription').value;
+    const productPrice = document.getElementById('productPrice').value;
+    const productBrandName = document.getElementById('productBrandName').value;
+    const categories = document.getElementById('categories').value;
+    const productImages = document.getElementById('productImages').files;
+
+    if (productName.trim() === "") {
+        alert("Vui lòng nhập tên sản phẩm.");
+        return false;
+    }
+
+    if (productDescription.trim() === "") {
+        alert("Vui lòng nhập mô tả sản phẩm.");
+        return false;
+    }
+
+    if (productPrice.trim() === "" || parseFloat(productPrice) <= 0) {
+        alert("Vui lòng nhập giá sản phẩm hợp lệ.");
+        return false;
+    }
+
+    if (productBrandName.trim() === "") {
+        alert("Vui lòng nhập thương hiệu sản phẩm.");
+        return false;
+    }
+
+    if (categories.trim() !== "" && !categories.split(',').every(cat => cat.trim() !== "")) {
+        alert("Vui lòng nhập các danh mục hợp lệ (không để trống giữa các dấu phẩy).");
+        return false;
+    }
+
+    if (productImages.length === 0) {
+        alert("Vui lòng tải lên ít nhất một hình ảnh cho sản phẩm.");
+        return false;
+    }
+
+    return true; // Allow form submission
+}
+
 let detailCount = 1;
 
 function addDetail() {

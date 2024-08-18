@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.querySelector('#email').value;
         const password = document.querySelector('#password').value;
 
+        if(!validateForm()) {
+            return;
+        };
+
         const loginRequest = {
             email: email,
             password: password
@@ -49,3 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function validateForm() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (!emailPattern.test(email)) {
+        alert("Vui lòng nhập địa chỉ email hợp lệ.");
+        return false;
+    }
+
+    if (password.trim() === "") {
+        alert("Vui lòng nhập mật khẩu.");
+        return false;
+    }
+
+    return true;
+}

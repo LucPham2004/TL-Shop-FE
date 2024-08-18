@@ -292,7 +292,6 @@
 
 .notification {
     position: fixed;
-    width: 420px;
     bottom: 10px;
     right: 120px;
     background-color: #ffffff;
@@ -318,4 +317,14 @@
 }
 .notification button:hover {
     color: #ff6f61;
+}
+@media screen and (min-width: 1024px) {
+    .notification {
+        width: 420px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .notification {
+        width: 260px;
+    }
 }

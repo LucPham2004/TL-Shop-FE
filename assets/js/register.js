@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone = document.querySelector('#phone').value;
         const password = document.querySelector('#password').value;
 
+        if(!validateSignupForm()) {
+            return;
+        }
+
         const signupData = {
             name: fullName,
             email: email,
@@ -46,3 +50,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+function validateSignupForm() {
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('password').value;
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/; // Basic pattern for a 10-digit phone number
+
+    if (fullName.trim() === "") {
+        alert("Vui lòng nhập họ và tên.");
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert("Vui lòng nhập địa chỉ email hợp lệ.");
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (10 chữ số).");
+        return false;
+    }
+
+    if (password.trim() === "") {
+        alert("Vui lòng nhập mật khẩu.");
+        return false;
+    }
+
+    return true;
+}

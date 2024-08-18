@@ -170,6 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const rating = document.getElementById('rating').value;
         const comment = document.getElementById('comment').value;
 
+        if(!validateReviewForm()) {
+            return;
+        }
+
         const reviewData = {
             reviewTitle: reviewTitle,
             reviewContent: comment,
@@ -336,6 +340,29 @@ async function deleteReview(id) {
     } else {
         return
     }
+}
+
+function validateReviewForm() {
+    const reviewTitle = document.getElementById('reviewTitle').value;
+    const rating = document.getElementById('rating').value;
+    const comment = document.getElementById('comment').value;
+
+    if (reviewTitle.trim() === "") {
+        alert("Vui lòng nhập tiêu đề đánh giá.");
+        return false;
+    }
+
+    if (!rating) {
+        alert("Vui lòng chọn đánh giá.");
+        return false;
+    }
+
+    if (comment.trim() === "") {
+        alert("Vui lòng nhập bình luận.");
+        return false;
+    }
+
+    return true; // Allow form submission
 }
 
 // Small helping functions

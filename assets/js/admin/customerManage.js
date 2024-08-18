@@ -110,3 +110,35 @@ async function deleteCustomer(id, email) {
         return
     }
 }
+
+function validateEditCustomerForm() {
+    const name = document.getElementById('editCustomerName').value;
+    const email = document.getElementById('editCustomerEmail').value;
+    const phone = document.getElementById('editCustomerPhone').value;
+    const address = document.getElementById('editCustomerAddress').value;
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const phonePattern = /^[0-9]{10}$/; // Pattern for a 10-digit phone number
+
+    if (name.trim() === "") {
+        alert("Vui lòng nhập tên khách hàng.");
+        return false;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert("Vui lòng nhập địa chỉ email hợp lệ.");
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (10 chữ số).");
+        return false;
+    }
+
+    if (address.trim() === "") {
+        alert("Vui lòng nhập địa chỉ.");
+        return false;
+    }
+
+    return true; // Allow form submission
+}
