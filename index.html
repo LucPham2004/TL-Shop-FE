@@ -118,6 +118,18 @@
         </div>
     </div>
 
+    <div class="notification" id="notification">
+        <p>Truyền tải dữ liệu có chút chậm vì server đặt bên Châu Âu. Mong quý khách thông cảm.</p>
+        <button onclick="closeNotification()">✕</button>
+    </div>
+    
+    <script>
+        function closeNotification() {
+            var notification = document.getElementById('notification');
+            notification.style.display = 'none';
+        }
+    </script>
+
     <!-- scroll to top button -->
     <script>
         window.onscroll = function () {

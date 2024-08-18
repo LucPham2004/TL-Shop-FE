@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Display products in homepage
 async function displayProducts() {
+    insertPlaceholders('.top-seller-products', 12);
+    insertPlaceholders('.favorite-products', 12);
+    insertPlaceholders('.onSale-products', 12);
+    insertPlaceholders('.feature-products', 12);
+
     const products = await fetchTopProducts();
 
     const topSellerProducts = products.slice(0, 12);
@@ -43,6 +48,14 @@ async function displayProducts() {
     function insertProducts(selector, products) {
         const container = document.querySelector(selector);
         container.innerHTML = products.map(createProductHTML).join('');
+    }
+
+    function insertPlaceholders(selector, count) {
+        const container = document.querySelector(selector);
+        container.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+            container.innerHTML += `<div class="product-item-placeholder"></div>`;
+        }
     }
 
     insertProducts('.top-seller-products', topSellerProducts);

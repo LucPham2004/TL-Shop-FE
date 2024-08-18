@@ -156,3 +156,24 @@
 .originPrice {
     font-size: 14px;
 }
+
+.product-item-placeholder {
+    background-color: #e0e0e0;
+    aspect-ratio: 1 / 1;
+    width: 22%;
+    margin: 10px 10px;
+    animation: pulse 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

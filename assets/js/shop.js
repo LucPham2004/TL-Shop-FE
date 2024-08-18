@@ -1,5 +1,15 @@
 
 document.addEventListener("DOMContentLoaded", async function() {
+    insertPlaceholders('#products-container', 12);
+
+    function insertPlaceholders(selector, count) {
+        const container = document.querySelector(selector);
+        container.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+            container.innerHTML += `<div class="product-item-placeholder"></div>`;
+        }
+    }
+
     const products = await fetchProducts();
 
     // Đọc tham số URL
