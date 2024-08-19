@@ -163,6 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerId = getCustomerId();
     const reviewForm = document.getElementById('reviewForm');
 
+    if(!customerId) {
+        alert("Quý khách vui lòng đăng nhập tài khoản!");
+        window.location.href = "/login.html";
+    }
+
     reviewForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
