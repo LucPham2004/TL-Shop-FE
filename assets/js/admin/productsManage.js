@@ -224,7 +224,7 @@ function editProduct() {
 }
 
 async function nonfilterProducts() {
-    const products = await fetchProducts();
+    const products = await fetchProductsWithDetails();
     showProductsInAdminPage(products);
 
 } 
@@ -237,7 +237,7 @@ async function deleteProduct(id) {
         });
 
         if (response.ok) {
-            const products = await fetchProducts();
+            const products = await fetchProductsWithDetails();
             showProductsInAdminPage(products);
         } else {
             console.error('Failed to delete product');

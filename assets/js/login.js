@@ -1,4 +1,4 @@
-const domain = "https://tl-shop-8b8514452c4e.herokuapp.com"; // https://tl-shop-8b8514452c4e.herokuapp.com
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.login-form');
 

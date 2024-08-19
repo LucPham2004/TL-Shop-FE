@@ -89,7 +89,7 @@ window.addEventListener('load', () => {
       document.addEventListener(event, resetIdleTime);
     });
   
-    setInterval(checkIdleTime, 600000); // Check every 10 minutes
+    setInterval(checkIdleTime, 3600000); // Check every 60 minutes
 });
 
 // Log out

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         console.log("loginCheck = false")
     }
 
-    const products = await fetchProducts();
+    const products = await fetchProductsWithDetails();
     showProductsInAdminPage(products);
 
     const brands = await fetchBrandData();
