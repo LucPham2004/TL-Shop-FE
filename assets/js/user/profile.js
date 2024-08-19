@@ -136,6 +136,11 @@ async function fetchCustomerOrders() {
         ordersContainer.innerHTML = '';
         const userAgent = navigator.userAgent;
 
+        if(orders.length == 0) {
+            ordersContainer.innerHTML = `Bạn chưa có đơn hàng nào cả. Hãy đi mua sắm vài món đi nào.`;
+            return;
+        }
+
         orders.forEach(order => {
             const orderItem = document.createElement('div');
             orderItem.classList.add('order');

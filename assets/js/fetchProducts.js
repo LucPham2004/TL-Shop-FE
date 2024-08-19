@@ -67,9 +67,9 @@ async function fetchTopProducts() {
 
 async function fetchProductsWithDetails() {
     try {
-        let productsInStorage = JSON.parse(localStorage.getItem('productsWithDetails')) || [];
-        if(productsInStorage.length != 0) {
-            return productsInStorage;
+        let productsWithDetailsInStorage = JSON.parse(localStorage.getItem('productsWithDetails')) || [];
+        if(productsWithDetailsInStorage.length != 0) {
+            return productsWithDetailsInStorage;
         } else {
             const loader = document.getElementById('loader');
             loader.style.display = 'block';
@@ -112,11 +112,11 @@ function addTopProductToLocalStorage(topProduct) {
 function addProductWithDetailToLocalStorage(product) {
     let products = JSON.parse(localStorage.getItem('productsWithDetails')) || [];
     products.push(product);
-    localStorage.setItem('topProducts', JSON.stringify(products));
+    localStorage.setItem('productsWithDetails', JSON.stringify(products));
 }
 
 function clearProductsWithDetailsInLocalStorage() {
-    localStorage.removeItem('products');
+    localStorage.removeItem('productsWithDetails');
 }
 
 function clearProductsInLocalStorage() {
