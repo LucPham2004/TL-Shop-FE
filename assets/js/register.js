@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+
             const signupResponse = await fetch(domain + '/api/v1/auth/register', {
                 method: 'POST',
                 headers: {
@@ -36,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             alert('Đăng ký thành công!');
+            loader.style.display = 'none';
 
             if(window.location.href ==  '/admin/admin.html'){
                 const customers = await fetchCustomers();

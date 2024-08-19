@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", async function() {
 
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block';
+
     const orders = await fetchOrders();
     showOrders(orders);
+    
+    loader.style.display = 'none';
 
     // Searching orders
     const searchBtn = document.getElementById('OrderSearchBtn');
@@ -43,6 +48,9 @@ function searchOrdersAndDisplay(keyword) {
     const parsedKeyword = parseInt(keyword, 10);
     
     if (!isNaN(parsedKeyword)) {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
+
         // Nếu parsedKeyword là số hợp lệ
         fetch(domain + `/api/v1/orders/search/${parsedKeyword}`)
         .then(response => response.json())
@@ -50,6 +58,7 @@ function searchOrdersAndDisplay(keyword) {
             console.log(data);
             showOrders(data);
             OrderSearchInput.value = ``;
+            loader.style.display = 'none';
         })
         .catch(error => {
             console.error('Error fetching Orders:', error);
@@ -57,12 +66,16 @@ function searchOrdersAndDisplay(keyword) {
 
     } else {
         // Nếu keyword không phải là số
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
+
         fetch(domain + `/api/v1/orders/search?keyword=${encodeURIComponent(keyword)}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
             showOrders(data);
             OrderSearchInput.value = ``;
+            loader.style.display = 'none';
         })
         .catch(error => {
             console.error('Error fetching Orders:', error);
@@ -199,6 +212,9 @@ function setOrderStatus(orderId) {
         const status = document.getElementById('statusSelect').value;
         // Send the new status to the server
         if (orderId > 0 && status) {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+
             fetch(domain + '/api/v1/orders', {
                 method: 'PUT',
                 headers: {
@@ -209,6 +225,7 @@ function setOrderStatus(orderId) {
                 if (response.ok) {
                     console.log(`Order ID: ${orderId}, New Status: ${status}`);
                     alert('Trạng thái đã được cập nhật!');
+                    loader.style.display = 'none';
                 } else {
                     console.error('Cập nhật trạng thái thất bại');
                     alert('Cập nhật trạng thái thất bại');

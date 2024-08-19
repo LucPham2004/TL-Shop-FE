@@ -1,4 +1,4 @@
-const domain = "https://tl-shop-8b8514452c4e.herokuapp.com"; //https://tlshop.ap-southeast-1.elasticbeanstalk.com
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com"; // https://tl-shop-8b8514452c4e.herokuapp.com
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.login-form');
 
@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+
             const response = await fetch(domain + '/api/v1/auth/login', {
                 method: 'POST',
                 headers: {
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const user = data.result.user;
 			const token = data.result.jwt;
+            loader.style.display = 'none';
             
             if (user) {
                 localStorage.setItem('user', JSON.stringify(user));

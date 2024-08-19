@@ -18,8 +18,7 @@ function getCookie(name) {
 async function checkLogin() {
     const token = JSON.parse(localStorage.getItem('token')) || [];
 
-    if (!token) {
-        console.error('Token không tồn tại!');
+    if (token.length == 0) {
         return false;
     }
 

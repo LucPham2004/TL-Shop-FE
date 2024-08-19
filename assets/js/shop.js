@@ -68,17 +68,17 @@ document.addEventListener("DOMContentLoaded", async function() {
                 console.log(keyword);
                 seachProductsAndShow(keyword);
             }
-    })
+        })
 
-    searchInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') { 
-            event.preventDefault(); 
-            const keyword = searchInput.value;
-            if (keyword) {
-                seachProductsAndShow(keyword);
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') { 
+                event.preventDefault(); 
+                const keyword = searchInput.value;
+                if (keyword) {
+                    seachProductsAndShow(keyword);
+                }
             }
-        }
-    });
+        });
 
     } else {
         console.log("not found search button")
@@ -88,40 +88,26 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 function seachProductsAndShow(keyword) {
-    const parsedKeyword = parseInt(keyword, 10);
-                
-    if (!isNaN(parsedKeyword)) {
-        // Nếu parsedKeyword là số hợp lệ
-        fetch(domain + `/api/v1/products/search/${parsedKeyword}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            showProductsInShopPage(data);
-            searchInput.value = ``;
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
-
-    } else {
-        // Nếu keyword không phải là số
-        fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            showProductsInShopPage(data);
-            searchInput.value = ``;
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-        });
-    }
+    fetch(domain + `/api/v1/products/search?keyword=${encodeURIComponent(keyword)}`)
+    .then(response => response.json())
+    .then(data => {
+        showProductsInShopPage(data);
+        searchInput.value = ``;
+    })
+    .catch(error => {
+        console.error('Error fetching products:', error);
+    });
+    
 }
 
 // Show Products In Shop Page
 async function showProductsInShopPage(products){
     const productsContainer = document.querySelector('.main #products-container');
     productsContainer.innerHTML = '';
+
+    if(products.length == 0) {
+        productsContainer.innerHTML = 'Không có sản phẩm nào liên quan mà bạn đang tìm kiếm';
+    }
 
     products.forEach(product => {
         const productItem = document.createElement('div');

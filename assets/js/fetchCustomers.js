@@ -32,6 +32,9 @@ async function updateCustomer(event) {
     const phone = document.getElementById('editCustomerPhone').value;
     const address = document.getElementById('editCustomerAddress').value;
 
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block';
+
     const response = await fetch(`/api/v1/customers`, {
         method: 'PUT',
         headers: {
@@ -42,6 +45,7 @@ async function updateCustomer(event) {
 
     if (response.ok) {
         closeEditModal();
+        loader.style.display = 'none';
     } else {
         console.error('Failed to update customer');
     }

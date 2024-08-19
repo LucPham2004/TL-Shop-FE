@@ -385,11 +385,6 @@ document.getElementById('decrease').addEventListener('click', function() {
     }
 });
 
-function extractDate(datetimeString) {
-    let datePart = datetimeString.split('T')[0];
-    
-    return datePart;
-}
 
 function displayStars(rating) {
     let stars = "";
@@ -422,7 +417,8 @@ function convertProductName(productName) {
 }
 
 function extractDate(datetimeString) {
-    let datePart = datetimeString.split('T')[0];
+    let modifiedString = datetimeString.replace('T', ' ');
+    let datePart = modifiedString.split('.')[0];
     
     return datePart;
 }

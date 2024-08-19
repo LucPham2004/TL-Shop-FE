@@ -1,10 +1,30 @@
 // Fetching products data
 async function fetchProducts() {
     try {
-        const response = await fetch(domain + '/api/v1/products');
-        const products = await response.json();
+        let productsInStorage = JSON.parse(localStorage.getItem('products')) || [];
+        if(productsInStorage.length != 0) {
+            return productsInStorage;
+        } else {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
 
-        return products;
+            const response = await fetch(domain + '/api/v1/products');
+            const products = await response.json();
+            
+
+            products.forEach(product => {
+                price = product.productPrice * (100 - product.discountPercent) / 100;
+
+                addProductToLocalStorage({ id: `${product.id}`, productName: `${product.productName}`, 
+                                            price: `${price}`, productPrice: `${product.productPrice}`,
+                                            discountPercent: `${product.discountPercent}`, 
+                                            categories: `${product.categories}`, brandName: `${product.brandName}`, 
+                                            productImage: `${product.productImage}`})
+            })
+            loader.style.display = 'none';
+
+            return products;
+        }
 
     } catch (error) {
         console.error('Error fetching products:', error);
@@ -14,14 +34,55 @@ async function fetchProducts() {
 // Fetching TOP products
 async function fetchTopProducts() {
     try {
-        const response = await fetch(domain + '/api/v1/products/topproducts');
-        const products = await response.json();
+        // clearProductsInLocalStorage() 
+        // clearTopProductsInLocalStorage()
+        let TopProductsInStorage = JSON.parse(localStorage.getItem('topProducts')) || [];
+        if(TopProductsInStorage.length != 0) {
+            return TopProductsInStorage;
+        } else {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
 
-        return products;
+            const response = await fetch(domain + '/api/v1/products/topproducts');
+            const products = await response.json();
+
+            products.forEach(product => {
+                price = product.productPrice * (100 - product.discountPercent) / 100;
+
+                addTopProductToLocalStorage({ id: `${product.id}`, productName: `${product.productName}`, 
+                                            price: `${price}`, productPrice: `${product.productPrice}`, 
+                                            discountPercent: `${product.discountPercent}`, 
+                                            categories: `${product.categories}`, brandName: `${product.brandName}`,
+                                            productImage: `${product.productImage}`})
+            })
+            loader.style.display = 'none';
+
+            return products;
+        }
 
     } catch (error) {
         console.error('Error fetching products:', error);
     }
+}
+
+function addProductToLocalStorage(product) {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    products.push(product);
+    localStorage.setItem('products', JSON.stringify(products));
+}
+
+function addTopProductToLocalStorage(topProduct) {
+    let products = JSON.parse(localStorage.getItem('topProducts')) || [];
+    products.push(topProduct);
+    localStorage.setItem('topProducts', JSON.stringify(products));
+}
+
+function clearProductsInLocalStorage() {
+    localStorage.removeItem('products');
+}
+
+function clearTopProductsInLocalStorage() {
+    localStorage.removeItem('topProducts');
 }
 
 // Minor functions

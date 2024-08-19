@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
             phone: phoneInput.value,
             address: addressInput.value
         };
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
 
         fetch(domain + '/api/v1/customers', {
             method: 'PUT',
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide form, show info
             editForms.classList.add('hidden');
             changeInfo.classList.remove('hidden');
+            loader.style.display = 'none';
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -80,16 +83,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchCustomerInfo() {
     try {
-        const token = JSON.parse(localStorage.getItem('token')) || [];
+        const userInfo = JSON.parse(localStorage.getItem('user')) || [];
+
+        if(userInfo.length != 0) {
+            return userInfo;
+        } else {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+
+            const token = JSON.parse(localStorage.getItem('token')) || [];
         
-        const response = await fetch(domain + '/api/v1/customers/' + parseInt(getCustomerId()), {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-        }})
-        
-        return await response.json();
+            const response = await fetch(domain + '/api/v1/customers/' + parseInt(getCustomerId()), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+            }})
+            loader.style.display = 'none';
+            
+            return await response.json();
+        }
 
     } catch (error) {
         console.error('Error fetching customer infomation:', error);
@@ -113,6 +126,9 @@ async function displayCustomerInfo () {
 
 async function fetchCustomerOrders() {
     try {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
+
         const orderResponse = await fetch(domain + '/api/v1/orders/customer/' + getCustomerId());
         const orders = await orderResponse.json();
 
@@ -208,6 +224,7 @@ async function fetchCustomerOrders() {
             orderItem.appendChild(orderProducts);
 
             ordersContainer.appendChild(orderItem);
+            loader.style.display = 'none';
         })
 
     } catch (error) {
@@ -217,6 +234,9 @@ async function fetchCustomerOrders() {
 
 async function cancelOrder(orderId) {
     if(confirm("Bạn có chắc muốn hủy đơn hàng này?")) {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
+
         await fetch(domain + '/api/v1/orders', {
             method: 'PUT',
             headers: {
@@ -227,6 +247,7 @@ async function cancelOrder(orderId) {
             if (response.ok) {
                 console.log(`Order ID: ${orderId}, New Status: Cancelled`);
                 alert('Hủy đơn hàng thành công!');
+                loader.style.display = 'none';
             } else {
                 console.error('Hủy đơn hàng thất bại, hãy thử lại sau');
                 alert('Hủy đơn hàng thất bại, hãy thử lại sau');
@@ -242,6 +263,9 @@ async function cancelOrder(orderId) {
 
 async function deleteOrder(id) {
     if(confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
+
         const response = await fetch(domain + `/api/v1/orders/${parseInt(id)}`, {
             method: 'DELETE',
         });
@@ -250,6 +274,7 @@ async function deleteOrder(id) {
             
             showNotification();
             fetchCustomerOrders();
+            loader.style.display = 'none';
         } else {
             console.error('Failed to delete order');
         }
