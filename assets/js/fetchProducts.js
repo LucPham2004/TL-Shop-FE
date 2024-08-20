@@ -1,8 +1,12 @@
 // Fetching products data
 async function fetchProducts() {
     try {
+        var notification = document.getElementById('notification');
+        notification.style.display = 'flex';
+
         let productsInStorage = JSON.parse(localStorage.getItem('products')) || [];
         if(productsInStorage.length != 0) {
+            notification.style.display = 'none';
             return productsInStorage;
         } else {
             const loader = document.getElementById('loader');
@@ -22,6 +26,7 @@ async function fetchProducts() {
                                             productImage: `${product.productImage}`})
             })
             loader.style.display = 'none';
+            notification.style.display = 'none';
 
             return products;
         }
@@ -36,8 +41,13 @@ async function fetchTopProducts() {
     try {
         // clearProductsInLocalStorage() 
         // clearTopProductsInLocalStorage()
+
+        var notification = document.getElementById('notification');
+        notification.style.display = 'flex';
+
         let TopProductsInStorage = JSON.parse(localStorage.getItem('topProducts')) || [];
         if(TopProductsInStorage.length != 0) {
+            notification.style.display = 'none';
             return TopProductsInStorage;
         } else {
             const loader = document.getElementById('loader');
@@ -56,6 +66,7 @@ async function fetchTopProducts() {
                                             productImage: `${product.productImage}`})
             })
             loader.style.display = 'none';
+            notification.style.display = 'none';
 
             return products;
         }
