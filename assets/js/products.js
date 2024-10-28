@@ -25,11 +25,19 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector(".main-container .price").textContent = formatNumber(price) + " đ";
             document.querySelector(".main-container .originPrice").textContent = formatNumber(product.productPrice) + " đ";
             document.querySelector(".main-container .description").innerHTML = `
-                <h6>Mô Tả Sản Phẩm:</h6>
-                <ul>
-                    <li>${product.productDescription}</li>
-                    <!-- Add more description if available -->
-                </ul>
+                <div class="col-md-12">
+            <h1 class="product-name">${product.productName}</h1>
+            <p class="product-description">
+                ${product.productName} là dòng giày chạy bộ cao cấp, nổi tiếng với sự thoải mái và hỗ trợ tối đa cho người dùng. Thiết kế của ${product.productName} không chỉ phù hợp cho việc chạy bộ mà còn rất phong cách, dễ dàng phối hợp với nhiều loại trang phục thường ngày.
+            </p>
+            <h3>Đặc điểm nổi bật</h3>
+            <ul>
+                <li>Công nghệ Boost: Đệm trả lại năng lượng tối ưu trong mỗi bước chạy.</li>
+                <li>Primeknit Upper: Chất liệu mềm mại, ôm sát bàn chân nhưng vẫn thoáng khí.</li>
+                <li>Thiết kế gót chân 3D: Giúp giữ chắc gót và tăng độ ổn định.</li>
+                <li>Tấm Torsion: Hỗ trợ chuyển động linh hoạt và tự nhiên hơn.</li>
+                <li>Đế cao su Continental™: Bám tốt ngay cả trên bề mặt ẩm ướt.</li>
+            </ul>
             <h3>Thông số kỹ thuật</h3>
             <ul>
                 <li>Trọng lượng: 333g (size US 9)</li>
