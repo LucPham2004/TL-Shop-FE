@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoping</title>
-    <link rel="icon" href="./assets/img/logo/Logo.png">
+    <link rel="icon" href="assets/img/logo/logo.webp">
     <link rel="stylesheet" href="./assets/css/header-footer.css">
     <link rel="stylesheet" href="./assets/css/products.css">
     <link rel="stylesheet" href="./assets/css/cart.css">
@@ -24,16 +24,19 @@
                         <span class="rating"></span>
                         <span class="star">★</span>
                     </span>
-                    <span class="reviewCount" style="color: black; font-size:15px;margin-left:10px"> </span>
+                    <span class="reviewCount" style="color: black;margin-left:10px"> </span>
                 </p>
-                <p class="price"></p>
-                <p class="originPrice" style="text-decoration: line-through;"></p>
+                <div style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
+                    <p class="price"></p>
+                    <p class="originPrice" style="text-decoration: line-through;"></p>
+                </div>
                 <div style="display: flex;margin:0;"><hr style="width:80%;"></div>
                 
                 <form id="shoe-form">
-                    <div class="form-group">
-                        <label for="color">Màu sắc:</label>
-                        <select id="color" name="color">
+                    <div style="display: flex; flex-direction: row; gap: 20px; align-items: center;">
+                        <div class="form-group">
+                            <label for="color">Màu sắc:</label>
+                            <select id="color" name="color">
                             
                         </select>
                     </div>
@@ -43,8 +46,9 @@
                         <select id="size" name="size">
                             
                         </select>
+                        </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="quantity">Số lượng:</label>
                         <div class="quantity-control">
@@ -85,12 +89,12 @@
         <div class="review-container">
             <div class="reviewForm-container">
                 <form id="reviewForm">
-                    <div class="row mb-2">
-                        <div class="col-12">
+                    <div class="d-flex mb-2">
+                        <div class="">
                             <label for="reviewTitle">Tiêu đề:</label>
                             <input type="text" id="reviewTitle" required>
                         </div>
-                        <div class="col-4">
+                        <div class="">
                             <label for="rating">Đánh giá:</label>
                             <select id="rating" required>
                                 <option value="5">5★</option>
@@ -104,15 +108,15 @@
                     <div class="row">
                         <div class="col-12">
                             <label for="comment">Bình luận:</label>
-                            <textarea id="comment" required></textarea>
+                            <textarea id="comment" class="w-100" required></textarea>
                         </div>
-                        <button class="col-12" type="submit">Thêm Đánh giá</button>
+                        <button class="col-12 ms-2" type="submit">Thêm Đánh giá</button>
                     </div>
                 </form>
                 <div style="display: flex;justify-content:center;"><hr style="width:80%;"></div>
             </div>
-            <button type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
-                    Các đánh giá, bình luận
+            <button class="mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+                    Xem đánh giá, bình luận
             </button>
             <div class="collapse show" id="collapseReview">
                 <div class="card card-body"></div>

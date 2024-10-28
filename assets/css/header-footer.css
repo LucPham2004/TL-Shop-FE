@@ -36,6 +36,9 @@ header a:hover{
     flex-direction: row;
     margin-left: 3%;
 }
+.header-menu a{
+    text-align: center;
+}
 .header-rightPart{
     display: flex;
     flex-direction: row;
@@ -55,8 +58,10 @@ header a:hover{
     color: red;
 }
 #logo{
-    width: 5%;
     margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 #logo img{
     width: 50px;
@@ -76,7 +81,7 @@ header a:hover{
 }
 
 .search-box.open {
-	width: 350px;
+	width: 300px;
 }
 
 #searchInput {
@@ -118,13 +123,13 @@ header a:hover{
 }
 @media screen and (min-width: 769px) {
     #logo{
-        width: 5%;
+        width: fit-content;
         margin-left: 50px;
     }
     .header-item, .cart{
-        width: 100px;
+        width: 85px;
         margin-left: 5%;
-        margin-top: 10px;
+        margin-top: 12px;
         text-align: center;
     }
 }
@@ -155,7 +160,6 @@ header a:hover{
 
 .shopNow-btn {
     text-align:center;
-    width: 180px;
     height: 45px;
     margin: 20px;
     border: none;
@@ -170,6 +174,31 @@ header a:hover{
     transform: scale(1.02)
 }
 
+@media screen and (max-width: 768px) {
+    .shopNow-btn {
+        width: max-content;
+    }
+}
+@media screen and (min-width: 768px) {
+    .shopNow-btn {
+        width: 180px;
+    }
+}
+
+.social-share button {
+    background-color: transparent;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+.social-share button img{
+    width: 40px;
+    height: 40px;
+}
+
+.social-share button:hover {
+    transform: scale(1.02);
+}
 /* footer */
 footer{
     width: 100%;
@@ -198,8 +227,9 @@ footer{
 .footer-bottom{
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    gap: 10%;
+    gap: 5%;
     padding: 20px 0;
     background-color: rgb(245, 245, 245);
 }

@@ -125,9 +125,32 @@ async function showProductsInShopPage(products){
                     <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
                 </p>
             </a>
+            <div class="product-tip" id="product-tip">
+                <a href="products.html?${convertProductName(product.productName)}&id=${product.id}">
+                    <button id="seeMoreBtn" type="button">
+                        <i class="fas fa-shopping-cart" style="font-size: 20px;"></i> Mua ngay
+                    </button>
+                </a>
+            </div>
+            <div class="discount-banner">${product.discountPercent}% OFF</div>
         `;
 
         productsContainer.appendChild(productItem);
+        
+        const items = document.querySelectorAll('.product-item');
+        const productTips = document.querySelectorAll('.product-tip');
+
+        items.forEach((item, index) => {
+            const productTip = productTips[index];
+            
+            item.addEventListener('mouseenter', (e) => {
+                productTip.style.display = 'block';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                productTip.style.display = 'none';
+            });
+        });
     });
     document.getElementById('productsCount').innerHTML = `Hiển thị ${products.length} sản phẩm`;
 }

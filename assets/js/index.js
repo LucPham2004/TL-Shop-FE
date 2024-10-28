@@ -41,6 +41,14 @@ async function displayProducts() {
                         <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
                     </p>
                 </a>
+                <div class="product-tip" id="product-tip">
+                    <a href="shop.html?category=${product.categories}">
+                        <button id="seeMoreBtn" type="button">
+                            <i class="fas fa-shopping-cart" style="font-size: 20px;"></i> Xem sản phẩm tương tự
+                        </button>
+                    </a>
+                </div>
+                <div class="discount-banner">${product.discountPercent}% OFF</div>
             </div>
         `;
     }
@@ -62,6 +70,21 @@ async function displayProducts() {
     insertProducts('.favorite-products', favoriteProducts);
     insertProducts('.onSale-products', onSaleProducts);
     insertProducts('.feature-products', featureProducts);
+    
+    const items = document.querySelectorAll('.product-item');
+    const productTips = document.querySelectorAll('.product-tip');
+
+    items.forEach((item, index) => {
+        const productTip = productTips[index];
+        
+        item.addEventListener('mouseenter', (e) => {
+            productTip.style.display = 'block';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            productTip.style.display = 'none';
+        });
+    });
 }
 
 // Effect for product images

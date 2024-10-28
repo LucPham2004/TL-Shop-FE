@@ -6,15 +6,14 @@ if (/mobile/i.test(userAgent)) {
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {
+    await displaySummaryData();
+    await displayOrders_Customers_Products_Summary();
     await showHomepageImages();
 
     const loginCheck = checkLogin();
     if(loginCheck == false) {
         console.log("loginCheck = false")
     }
-
-    const products = await fetchProductsWithDetails();
-    showProductsInAdminPage(products);
 
     const brands = await fetchBrandData();
     showBrandsInAdminPage(brands);
@@ -24,9 +23,9 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     const customers = await fetchCustomers();
     showCustomersInAdminPage(customers);
-
-    await displaySummaryData();
-    await displayOrders_Customers_Products_Summary();
+    
+    const products = await fetchProductsWithDetails();
+    showProductsInAdminPage(products);
 });
 
 async function fethSummary() {
@@ -115,7 +114,7 @@ async function displaySummaryData() {
     const orderListTable = document.getElementById('orderList');
     let j = 1;
     data.orderList.forEach(order => {
-        if(j > 9) {
+        if(j > 10) {
             return;
         }
         const row = document.createElement('tr');

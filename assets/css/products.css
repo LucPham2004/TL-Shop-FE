@@ -3,16 +3,18 @@ body{
 }
 
 .products-info .product-name{
-    font-size: 25px;
+    font-size: 28px;
 }
 .products-info .price{
     font-size: 20px;
     color: #ff0000;
 }
 .products-info .description{
-    font-size: 17px;
+    font-size: 18px;
 }
-
+.products-info .Type, .products-info .productReview{
+    font-size: 18px;
+}
 .product-name{
     font-size: 20px;
     margin-bottom: 5px;
@@ -20,6 +22,9 @@ body{
 .price{
     font-size: 17px;
     margin-bottom: 0;
+}
+.originPrice {
+    margin: 0;
 }
 .description{
     font-size: 12px;
@@ -105,7 +110,11 @@ body{
 .products-info .form-group {
     margin-bottom: 15px;
 }
-
+.form-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 .products-info label {
     display: block;
     margin-bottom: 5px;
@@ -113,8 +122,8 @@ body{
 }
 
 .products-info select, .products-info input[type="text"]  {
-    width: 20%;
-    padding: 8px;
+    padding: 5px;
+    text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
@@ -212,7 +221,7 @@ body{
     border-radius: 5px;
     font-size: 14px;
     color: #333;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .reviewForm-container input[type="text"] {
@@ -293,7 +302,7 @@ body{
 
 .review-title {
     width: 100%;
-    padding: 8px;
+    padding: 5px;
     margin-bottom: 10px;
     font-size: 16px;
 }
@@ -363,6 +372,7 @@ body{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
 }
 @media screen and (max-width:1024px) {
     .similar-item{
@@ -371,21 +381,23 @@ body{
 }
 @media screen and (min-width:1024px) {
     .similar-item{
-        width: 25%;
+        width: 24.2%;
     }
 }
 .similar-item{
     margin-bottom: 20px;
-    transition: opacity 0.2s ease;
+    padding: 5px;
+    position: relative;
+    transition: all 0.2s ease;
 }
 .similar-item .product-name{
-    text-align: center;
+    text-align: left;
 }
 .similar-item .description{
-    text-align: center;
+    text-align: left;
 }
 .similar-item .price{
-    text-align: center;
+    text-align: left;
 }
 .similar-item img{
     aspect-ratio: 1 / 1;
@@ -401,4 +413,39 @@ body{
 .similar-item a {
     text-decoration: none;
     color: black;
+}
+.similar-item:hover {
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.product-tip {
+    position: absolute;
+    display: none;
+    width: max-content;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    bottom: -10%;
+    left: 20%;
+    z-index: 50;
+    font-size: medium;
+}
+#similarBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+#similarBtn:hover {
+    background-color: #ffffff;
+    color: red;
+    border: 1px solid red;
+    transform: scale(1.02);
 }

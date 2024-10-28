@@ -30,6 +30,35 @@ document.addEventListener("DOMContentLoaded", function() {
                     <li>${product.productDescription}</li>
                     <!-- Add more description if available -->
                 </ul>
+            <h3>Thông số kỹ thuật</h3>
+            <ul>
+                <li>Trọng lượng: 333g (size US 9)</li>
+                <li>Chiều cao đệm gót: 32mm</li>
+                <li>Chiều cao đệm mũi: 22mm</li>
+                <li>Chênh lệch độ cao gót - mũi giày: 10mm</li>
+                <li>Chất liệu: Primeknit, Boost, cao su Continental™</li>
+            </ul>
+            <h3>Màu sắc</h3>
+            <ul>
+                <li>Trắng</li>
+                <li>Đen</li>
+                <li>Xanh dương</li>
+                <li>Đen và cam</li>
+            </ul>
+            <h3>Đánh giá</h3>
+            <p class="avgRating">4.8/5 từ hơn 400 đánh giá</p>
+            <ul>
+                <li>Rất thoải mái khi chạy bộ đường dài.</li>
+                <li>Thiết kế đẹp, thời trang, dễ dàng kết hợp với quần áo hàng ngày.</li>
+                <li>Chất liệu thân thiện với môi trường.</li>
+            </ul>
+            <h3>Kích cỡ</h3>
+            <ul>
+                <li>Size từ 36 đến 46</li>
+            </ul>
+            <h3>Sử dụng</h3>
+            <p>Phù hợp cho các hoạt động thể thao, đặc biệt là chạy bộ đường dài, cũng có thể sử dụng hàng ngày với phong cách năng động.</p>
+        </div>
             `;
 
             const colorSelect = document.getElementById('color');
@@ -120,6 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
                         </p>
                     </a>
+                    <div class="product-tip" id="product-tip">
+                        <a href="shop.html?category=${product.categories}">
+                            <button id="similarBtn" type="button">
+                                <i class="fas fa-shopping-cart" style="font-size: 20px;"></i> Xem sản phẩm tương tự
+                            </button>
+                        </a>
+                    </div>
                 `;
 
                 if (index < 4) {
@@ -134,6 +170,22 @@ document.addEventListener('DOMContentLoaded', () => {
             similarProductsTop.innerHTML = topProductsHTML;
             firstCarouselItem.appendChild(carouselItemInnerContainer1);
             secondCarouselItem.appendChild(carouselItemInnerContainer2);
+            
+            
+            const items = document.querySelectorAll('.similar-item');
+            const productTips = document.querySelectorAll('.product-tip');
+
+            items.forEach((item, index) => {
+                const productTip = productTips[index];
+                
+                item.addEventListener('mouseenter', (e) => {
+                    productTip.style.display = 'block';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    productTip.style.display = 'none';
+                });
+            });
 
         })
         .catch(error => console.error('Error fetching products:', error));
@@ -163,13 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const customerId = getCustomerId();
     const reviewForm = document.getElementById('reviewForm');
 
-    if(!customerId) {
-        alert("Quý khách vui lòng đăng nhập tài khoản!");
-        window.location.href = "/login.html";
-    }
-
     reviewForm.addEventListener('submit', function(event) {
         event.preventDefault();
+
+        if(!customerId) {
+            alert("Quý khách vui lòng đăng nhập tài khoản!");
+            window.location.href = "/login.html";
+        }
 
         const reviewTitle = document.getElementById('reviewTitle').value;
         const rating = document.getElementById('rating').value;
@@ -247,6 +299,9 @@ async function displayReviews(productId) {
         }
 
     } catch (error) {
+        const reviewContainer = document.querySelector('#collapseReview .card-body');
+        reviewContainer.innerHTML = '';
+        reviewContainer.innerHTML = 'Chưa có bình luận, đánh giá nào về sản phẩm này.'
         console.error('Error fetching reviews:', error);
     }
 }
@@ -398,6 +453,10 @@ function displayStars(rating) {
     }
 
     return stars;
+}
+
+function formatNumber(number) {
+    return number.toLocaleString('vi-VN');
 }
 
 function removeVietnameseTones(str) {
