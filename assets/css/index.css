@@ -361,7 +361,9 @@
     justify-content: center;
     
 }
-
+.intro-section p {
+    font-size: large;
+}
 .news-container {
     margin: 50px auto;
     max-width: 1200px;

@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", function() {
     <header>
         <div class="header-container">
             <a href="../index.html">
-                <div id="logo"><img src="../assets/img/logo/Logo.png"></div>
+                <div id="logo">
+                    <img src="../assets/img/logo/Logo.png">
+                    <span style="font-size:large;font-family: serif;">TL Shop</span>
+                </div>
             </a>
             <div class="header-menu d-none d-lg-flex">
                 <a href="../index.html"><div class="header-item">Home</div></a>
