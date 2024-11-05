@@ -16,16 +16,16 @@ document.addEventListener("DOMContentLoaded", function() {
 // Display products in homepage
 async function displayProducts() {
     insertPlaceholders('.top-seller-products', 12);
-    insertPlaceholders('.favorite-products', 12);
+    //insertPlaceholders('.favorite-products', 12);
     insertPlaceholders('.onSale-products', 12);
-    insertPlaceholders('.feature-products', 12);
+    //insertPlaceholders('.feature-products', 12);
 
     const products = await fetchTopProducts();
 
     const topSellerProducts = products.slice(0, 12);
-    const favoriteProducts = products.slice(12, 24);
+    //const favoriteProducts = products.slice(12, 24);
     const onSaleProducts = products.slice(24, 36);
-    const featureProducts = products.slice(36, 48);
+    //const featureProducts = products.slice(36, 48);
 
     
 
@@ -67,9 +67,9 @@ async function displayProducts() {
     }
 
     insertProducts('.top-seller-products', topSellerProducts);
-    insertProducts('.favorite-products', favoriteProducts);
+    //insertProducts('.favorite-products', favoriteProducts);
     insertProducts('.onSale-products', onSaleProducts);
-    insertProducts('.feature-products', featureProducts);
+    //insertProducts('.feature-products', featureProducts);
     
     const items = document.querySelectorAll('.product-item');
     const productTips = document.querySelectorAll('.product-tip');
