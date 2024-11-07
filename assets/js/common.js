@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <!-- Hamburger icon for mobile -->
             <div class="d-lg-none">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-                    <img class="navbar-toggler-icon" src="../assets/img/logo/menu-bar.png">
+                    <img class="navbar-toggler-icon" src="../assets/img/logo/menu-bar.png" alt="menu button for navigation">
                 </button>
             </div>
         </div>

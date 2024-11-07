@@ -4,12 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
     showHomepageImages();
 
     
-    const productImages = document.querySelectorAll('.product-item img');
-    productImages.forEach((img) => {
-        const originSrc = img.src;
-        const hoverSrc = createHoverSrc(originSrc);
-        applyFadeEffect(img, hoverSrc, originSrc);
-    });
 
 });
 
@@ -87,32 +81,4 @@ async function displayProducts() {
     });
 }
 
-// Effect for product images
-function applyFadeEffect(imgElement, hoverSrc, originSrc) {
-    imgElement.addEventListener('mouseover', function () {
-        imgElement.classList.add('fade-out');
-        setTimeout(() => {
-            imgElement.src = hoverSrc;
-            imgElement.classList.remove('fade-out');
-        }, 200); 
-    });
-
-    imgElement.addEventListener('mouseout', function () {
-        imgElement.classList.add('fade-out');
-        setTimeout(() => {
-            imgElement.src = originSrc;
-            imgElement.classList.remove('fade-out');
-        }, 200); 
-    });
-}
-
-function createHoverSrc(originSrc) {
-    const extensionIndex = originSrc.lastIndexOf('.');
-    if (extensionIndex !== -1) {
-        let fileName = originSrc.slice(0, extensionIndex);
-        fileName = fileName.replace(/_1$/, '_2');
-        return fileName + originSrc.slice(extensionIndex);
-    }
-    return originSrc;
-}
 

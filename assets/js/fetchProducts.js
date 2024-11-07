@@ -32,7 +32,7 @@ async function fetchProducts() {
         }
 
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.log('Error fetching products:', error);
     }
 }
 
@@ -72,7 +72,7 @@ async function fetchTopProducts() {
         }
 
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.log('Error fetching products:', error);
     }
 }
 
@@ -104,7 +104,7 @@ async function fetchProductsWithDetails() {
         }
 
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.log('Error fetching products:', error);
     }
 }
 

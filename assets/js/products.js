@@ -114,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function() {
             addProductImages(product.productImage);
         })
         .catch(error => {
-            document.querySelector(".main-container").textContent = "Product not found. Error: " + error;
-            console.error(error);
+            document.querySelector(".main-container").textContent = "Server có thể đã dừng hoạt động. Mong quý khách thông cảm";
+            console.log(error);
         });
     } else {
-        document.querySelector(".main-container").textContent = "No product selected";
+        document.querySelector(".main-container").textContent = "Không tìm thấy sản phẩm";
     }
 });
 
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         })
-        .catch(error => console.error('Error fetching products:', error));
+        .catch(error => console.log('Error fetching products:', error));
 });
 
 function addProductImages(productImage) {
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             displayReviews();
 
         } catch (error) {
-            console.error('Error while creating review: ' + error);
+            console.log('Error while creating review: ' + error);
         }
         
     });
@@ -310,7 +310,7 @@ async function displayReviews(productId) {
         const reviewContainer = document.querySelector('#collapseReview .card-body');
         reviewContainer.innerHTML = '';
         reviewContainer.innerHTML = 'Chưa có bình luận, đánh giá nào về sản phẩm này.'
-        console.error('Error fetching reviews:', error);
+        console.log('Error fetching reviews:', error);
     }
 }
 
@@ -321,7 +321,7 @@ function editReview(reviewId) {
     const reviewItem = document.querySelector(`.review-item-${reviewId}`);
 
     if (!reviewItem) {
-        console.error(`Review item with ID ${reviewId} not found`);
+        console.log(`Review item with ID ${reviewId} not found`);
         return;
     }
     
@@ -358,7 +358,7 @@ function cancelEditReview(reviewId) {
     const reviewItem = document.querySelector(`.review-item-${reviewId}`);
     
     if (!reviewItem) {
-        console.error(`Review item with ID ${reviewId} not found`);
+        console.log(`Review item with ID ${reviewId} not found`);
         return;
     }
 
@@ -388,7 +388,7 @@ function saveReview(reviewId) {
             window.location.reload();
             
     } catch(error) {
-        console.error('Error:', error);
+        console.log('Error:', error);
         alert('Có lỗi xảy ra. Vui lòng thử lại.');
     };
 }
@@ -403,7 +403,7 @@ async function deleteReview(id) {
         if (response.ok) {
             location.reload();
         } else {
-            console.error('Failed to delete product');
+            console.log('Failed to delete product');
         }
     } else {
         return
