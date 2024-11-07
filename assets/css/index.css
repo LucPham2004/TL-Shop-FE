@@ -22,7 +22,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: justify;
     color: gray;
     margin-bottom: 0;
     text-align: left;
@@ -46,11 +45,6 @@
     }
 }
 
-/* Hover effects */
-.product-item:hover .product-name,
-.product-item:hover .price {
-    color: red;
-}
 
 /* Banner styles */
 .banner img {
@@ -93,53 +87,13 @@
     transition: all 0.3s ease;
     max-width: 250px;
 }
-.product-tip {
-    position: absolute;
-    display: none;
-    width: max-content;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    bottom: -12%;
-    z-index: 50;
-    font-size: medium;
-}
-.discount-banner {
-    position: absolute;
-    top: 12px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    padding: 0px 40px 0px 60px;
-    font-weight: bold;
-    transform: rotate(25deg);
-    z-index: 50;
-    font-size: 16px;
-    text-align: center;
-    clip-path: polygon(35% 0%, 94% 0%, 100% 100%, 0% 100%);
-    transition: all ease-in-out 0.2s;
+.product-item:hover .product-name,
+.product-item:hover .price {
+    color: red;
 }
 .product-item:hover .discount-banner{
     clip-path: polygon(40% 5%, 92% 5%, 98% 95%, 10% 90%);
     font-size: 14px;
-}
-#seeMoreBtn {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff0000;
-    color: white;
-    border: 1px solid white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-#seeMoreBtn:hover {
-    background-color: #ffffff;
-    color: red;
-    border: 1px solid red;
-    transform: scale(1.02);
 }
 .product-item:hover {
     padding: 5px;
@@ -170,6 +124,51 @@
     }
 }
 
+#seeMoreBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+#seeMoreBtn:hover {
+    background-color: #ffffff;
+    color: red;
+    border: 1px solid red;
+    transform: scale(1.02);
+}
+
+.product-tip {
+    position: absolute;
+    display: none;
+    width: max-content;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    bottom: -12%;
+    z-index: 50;
+    font-size: medium;
+}
+.discount-banner {
+    position: absolute;
+    top: 12px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    padding: 0px 40px 0px 60px;
+    font-weight: bold;
+    transform: rotate(25deg);
+    z-index: 50;
+    font-size: 16px;
+    text-align: center;
+    clip-path: polygon(35% 0%, 94% 0%, 100% 100%, 0% 100%);
+    transition: all ease-in-out 0.2s;
+}
 .product-item-placeholder {
     background-color: #e0e0e0;
     aspect-ratio: 1 / 1;
@@ -393,7 +392,20 @@
 .news-item:hover {
     transform: translateY(-10px);
 }
-.news-item:hover h5{
+.card-title {
+    font-size: larger;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    height: 3em; 
+}
+
+.news-item:hover .card-title{
     color: red;
 }
 
