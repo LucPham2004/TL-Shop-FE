@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="header-container">
             <a href="../index.html">
                 <div id="logo">
-                    <img src="../assets/img/logo/Logo.png">
+                    <img src="../assets/img/logo/Logo.png" alt="TL Shop logo">
                     <span style="font-size:large;font-family: serif;">TL Shop</span>
                 </div>
             </a>
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <a href="">Returns</a>
                     </div>
                     <div class="footer-links">
-                        <a href="">About Us</a>
+                        <a href="../about.html">About Us</a>
                         <a href="../shop.html">For You</a>
                         <a href="../user/profile.html">My Account</a>
                     </div>
