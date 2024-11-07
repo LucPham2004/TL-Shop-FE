@@ -2,6 +2,7 @@
 .banner {
     position: relative;
     width: 100%;
+    max-width: 1560px;
     height: 95vh;
     background: url(../img/about/wallpaperflare.com_wallpaper1.jpg) no-repeat center center/cover;
     display: flex;
@@ -133,6 +134,7 @@ strong {
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 1560px;
     height: 300px;
     text-align: center;
     background: #333;

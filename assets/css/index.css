@@ -55,6 +55,7 @@
 /* Banner styles */
 .banner img {
     object-fit: cover;
+    max-width: 1560px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -90,6 +91,7 @@
 .product-item {
     position: relative;
     transition: all 0.3s ease;
+    max-width: 250px;
 }
 .product-tip {
     position: absolute;
@@ -217,7 +219,12 @@
     width: 100%;
     border-radius: 10px;
 }
-
+.poster-main-left, .poster-main-left img {
+    max-width: 650px;
+}
+.poster-main-right-div, .poster-main-right-div img {
+    max-width: 315px;
+}
 .card-body {
     margin: 2% 2% 2% 0;
 }
