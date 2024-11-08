@@ -213,6 +213,7 @@
     position: relative;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    min-height: 200px;
     background-color: white;
     transition: all 0.3s ease;
 }
