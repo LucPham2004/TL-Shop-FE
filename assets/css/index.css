@@ -69,6 +69,12 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+    .banner, .carousel-item {
+        display: none;
+    }
+}
+
 /* Top-Seller Section */
 .top-seller, .favorite, .onSale, .feature, .sample{
     width: 100%;
@@ -381,6 +387,11 @@
 }
 .intro-section p {
     font-size: large;
+}
+@media screen and (max-width: 768px) {
+    .intro-section {
+        display: none;
+    }
 }
 .news-container {
     margin: 50px auto;
