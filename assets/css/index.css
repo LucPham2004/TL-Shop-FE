@@ -49,7 +49,7 @@
 /* Banner styles */
 .banner img {
     object-fit: cover;
-    max-width: 1560px;
+    max-width: 1528px;
     height: auto;
 }
 
@@ -173,7 +173,7 @@
 .product-item-placeholder {
     background-color: #e0e0e0;
     aspect-ratio: 1 / 1;
-    margin: 10px 10px;
+    margin: 10px 0px;
     animation: pulse 1.5s infinite;
     border-radius: 8px;
 }
@@ -332,6 +332,7 @@
 .sample-product img {
     transition: transform 0.3s ease;
     border-radius: 10px;
+    min-height: 400px;
     object-fit: cover;
     margin-bottom: 5%;
 }
@@ -367,6 +368,7 @@
 }
 .intro-section {
     padding: 50px;
+    min-height: 240px;
     text-align: center;
     display: flex;
     justify-content: center;
