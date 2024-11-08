@@ -50,18 +50,19 @@
 .banner img {
     object-fit: cover;
     max-width: 1560px;
+    height: auto;
 }
 
 @media screen and (min-width: 1024px) {
     .banner, .carousel-item {
-        width: 100%;
+        width: 100vw;
         height: 82vh;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .banner, .carousel-item {
-        width: 100%;
+        width: 100vw;
         height: auto;
     }
 }
