@@ -57,6 +57,7 @@
     .banner, .carousel-item {
         width: 99vw;
         height: 82vh;
+        min-height: 600px;
     }
 }
 
@@ -64,6 +65,7 @@
     .banner, .carousel-item {
         width: 99vw;
         height: auto;
+        min-height: 400px;
     }
 }
 
@@ -203,6 +205,7 @@
 /* Poster */
 .poster {
     position: relative;
+    min-height: 640px;
 }
 .poster-main {
     display: flex;
@@ -290,7 +293,9 @@
 }
 
 /* Sample Product */
-
+.sample {
+    min-height: 420px;
+}
 .sample-product {
     width: 100%;
     height: fit-content;
