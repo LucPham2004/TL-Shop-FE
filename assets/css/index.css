@@ -55,14 +55,14 @@
 
 @media screen and (min-width: 1024px) {
     .banner, .carousel-item {
-        width: 100vw;
+        width: 99vw;
         height: 82vh;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .banner, .carousel-item {
-        width: 100vw;
+        width: 99vw;
         height: auto;
     }
 }
@@ -201,6 +201,9 @@
 }
 
 /* Poster */
+.poster {
+    position: relative;
+}
 .poster-main {
     display: flex;
     justify-content: space-around;
