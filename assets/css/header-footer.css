@@ -42,20 +42,20 @@ header a:hover{
 .header-rightPart{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
-    right: 50px;
+    right: 20px;
     height: 8vh;
 }
 .account{
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
     width: auto;
 }
-
-.cart:hover{
-    color: red;
+.account span {
+    margin-top: -5px;
 }
 #logo{
     margin-left: 10%;
@@ -72,7 +72,6 @@ header a:hover{
 .search-box {
 	width: 70px;
 	height: 70%;
-    margin-top: 10px;
 	background-color: #f3f3f3;
 	position: relative;
 	overflow: hidden;
@@ -80,10 +79,18 @@ header a:hover{
 	border-radius: 15px;
 }
 
-.search-box.open {
-	width: 300px;
+
+@media screen and (min-width: 769px) {
+    .search-box.open {
+        width: 300px;
+    }
 }
 
+@media screen and (max-width: 768px) {
+    .search-box.open {
+        width: 240px;
+    }
+}
 #searchInput {
 	width: 100%;
     height: 110%;
@@ -117,6 +124,9 @@ header a:hover{
     height: 40px;
     width: 40px;
 }
+.cart:hover{
+    color: red;
+}
 #shop-icon{
     height: 50px;
     width: 50px;
@@ -126,10 +136,15 @@ header a:hover{
         width: fit-content;
         margin-left: 50px;
     }
-    .header-item, .cart{
+    .header-item{
         width: 85px;
         margin-left: 5%;
         margin-top: 12px;
+        text-align: center;
+    }
+    .cart{
+        width: 85px;
+        margin-left: 5%;
         text-align: center;
     }
 }
@@ -139,9 +154,10 @@ header a:hover{
         display: flex;
     }
     .header-item, .cart{
-        width: 50px;
-        margin-top: 10px;
+        width: max-content;
         text-align: center;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .header-item{
         text-align: left;
@@ -153,9 +169,13 @@ header a:hover{
         width: 0;
     }
     #logo{
-        width: 5%;
+        width: max-content;
         margin-left: 10%;
     }
+}
+
+.offcanvas-body .header-item {
+    font-size: larger;
 }
 
 .shopNow-btn {

@@ -5,10 +5,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const headerHTML = `
     <header>
         <div class="header-container">
+            <!-- Hamburger icon for mobile -->
+            <div class="d-lg-none">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                    <img class="navbar-toggler-icon" style="width:40px;height:40px;" src="../assets/img/logo/menu-bar.png" alt="menu button for navigation">
+                </button>
+            </div>
             <a href="../index.html">
                 <div id="logo">
                     <img src="../assets/img/logo/Logo.png" alt="TL Shop logo">
-                    <span style="font-size:large;font-family: serif;">TL Shop</span>
+                    <span style="font-size:larger;font-family: serif;">TL Shop</span>
                 </div>
             </a>
             <div class="header-menu d-none d-lg-flex">
@@ -22,29 +28,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 <a href="../shop.html?category=Giày Da"><div class="header-item">Giày Da</div></a>
             </div>
             <div class="header-rightPart">
+
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="seach..."/>
                     <button id="searchButton" title="search" type="button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
+
                 <div type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart" class="cart" style="text-align: center;">
                     <i class="fas fa-cart-plus" style="font-size: 30px;text-align:center;"></i>
                 </div>
+
                 <div class="account">
-                    <a href="./login.html">
-                        <div id="login" style="width:max-content">
-                            <i class="fas fa-user" style="margin-right: 10px"></i>
-                            Sign in
-                        </div>
-                    </a>
+                    
                 </div>
-            </div>
-            <!-- Hamburger icon for mobile -->
-            <div class="d-lg-none">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-                    <img class="navbar-toggler-icon" src="../assets/img/logo/menu-bar.png" alt="menu button for navigation">
-                </button>
             </div>
         </div>
 
@@ -56,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
             <div class="offcanvas-body">
                 <a href="../index.html"><div class="header-item">Home</div></a>
+                <a href="../about.html"><div class="header-item">Giới thiệu</div></a>
                 <a href="../shop.html"><div class="header-item" style="width:150px;">Tất cả sản phẩm</div></a>
                 <a href="../shop.html?category=Adidas"><div class="header-item">Adidas</div></a>
                 <a href="../shop.html?category=Nike"><div class="header-item">Nike</div></a>
@@ -187,9 +186,9 @@ function changeLoginOrProfileHeaderPart() {
         // Hiển thị nút đăng nhập
         accountDiv.innerHTML = `
             <a href="./login.html">
-                <div id="login" style="width:max-content">
-                    <i class="fas fa-user" style="margin-right: 10px"></i>
-                    Sign in
+                <div id="login" style="width:max-content;display:flex; align-items:center; justify-content:center;">
+                    <i class="fas fa-user" style="margin-right: 10px;font-size:24px;"></i>
+                    <span class="d-none d-md-inline">Sign in</span>
                 </div>
             </a>
         `;

@@ -211,7 +211,7 @@
 /* Poster */
 .poster {
     position: relative;
-    min-height: 640px;
+    min-height: 540px;
 }
 .poster-main {
     display: flex;
@@ -222,7 +222,6 @@
     position: relative;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    min-height: 200px;
     background-color: white;
     transition: all 0.3s ease;
 }
@@ -272,6 +271,9 @@
         width: 30%;
         flex-direction: column;
     }
+    .poster-main-left, .poster-main-right-div {
+        min-height: 200px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -290,6 +292,9 @@
     .poster-main-left {
         width: 90%;
         margin-bottom: 5%;
+    }
+    .poster-main-left, .poster-main-right-div {
+        min-height: 100px;
     }
 }
 
@@ -366,6 +371,16 @@
     height: 5px;
     background-color: rgb(210, 0, 0);
     margin-bottom: 30px;
+}
+@media screen and (max-width: 768px) {
+    .sample-content p {
+        color: black;
+    }
+}
+@media screen and (min-width: 768px) {
+    .sample-content p, .sample-content h3 {
+        color: white;
+    }
 }
 
 /* Keyframes */
