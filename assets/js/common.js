@@ -185,7 +185,7 @@ function changeLoginOrProfileHeaderPart() {
     } else {
         // Hiển thị nút đăng nhập
         accountDiv.innerHTML = `
-            <a href="./login.html">
+            <a href="./login.html" aria-label="Sign in to your account">
                 <div id="login" style="width:max-content;display:flex; align-items:center; justify-content:center;">
                     <i class="fas fa-user" style="margin-right: 10px;font-size:24px;"></i>
                     <span class="d-none d-md-inline">Sign in</span>
