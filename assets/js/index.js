@@ -9,19 +9,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Display products in homepage
 async function displayProducts() {
+
+    function insertPlaceholders(selector, count) {
+        const container = document.querySelector(selector);
+        container.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+            container.innerHTML += `<div class="product-item-placeholder"></div>`;
+        }
+    }
+
     insertPlaceholders('.top-seller-products', 12);
-    //insertPlaceholders('.favorite-products', 12);
     insertPlaceholders('.onSale-products', 12);
-    //insertPlaceholders('.feature-products', 12);
 
     const products = await fetchTopProducts();
 
-    const topSellerProducts = products.slice(0, 12);
-    //const favoriteProducts = products.slice(12, 24);
-    const onSaleProducts = products.slice(24, 36);
-    //const featureProducts = products.slice(36, 48);
-
-    
+    if(products) {
+        const topSellerProducts = products.slice(0, 12);
+        const onSaleProducts = products.slice(24, 36);
 
     function createProductHTML(product) {
         price = product.productPrice * (100 - product.discountPercent) / 100;
@@ -52,18 +56,8 @@ async function displayProducts() {
         container.innerHTML = products.map(createProductHTML).join('');
     }
 
-    function insertPlaceholders(selector, count) {
-        const container = document.querySelector(selector);
-        container.innerHTML = '';
-        for (let i = 0; i < count; i++) {
-            container.innerHTML += `<div class="product-item-placeholder"></div>`;
-        }
-    }
-
     insertProducts('.top-seller-products', topSellerProducts);
-    //insertProducts('.favorite-products', favoriteProducts);
     insertProducts('.onSale-products', onSaleProducts);
-    //insertProducts('.feature-products', featureProducts);
     
     const items = document.querySelectorAll('.product-item');
     const productTips = document.querySelectorAll('.product-tip');
@@ -79,6 +73,10 @@ async function displayProducts() {
             productTip.style.display = 'none';
         });
     });
+    } else {
+        console.log('No products found.');
+    }
+
 }
 
 
