@@ -388,6 +388,10 @@ th {
     background-color: yellow;
     color: rgb(0, 0, 0);
 }
+.productBtn-addImage{
+  background-color: yellow;
+  color: rgb(0, 0, 0);
+}
 
 #customer-table button, #product-table button{
     border-radius: 5px;

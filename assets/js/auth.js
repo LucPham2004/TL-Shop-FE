@@ -44,7 +44,7 @@ async function checkLogin() {
         if(data.code == 200) {
             return true
         } else {
-            confirm("Phiên làm việc đã hết. Bạn có muốn mở rộng buổi làm việc?");
+            confirm("Phiên làm việc đã hết. Vui lòng đăng nhập lại.");
             logout();
             return false
         }

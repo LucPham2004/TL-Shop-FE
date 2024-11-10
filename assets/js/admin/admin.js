@@ -3,17 +3,28 @@ if (/mobile/i.test(userAgent)) {
     alert("Vui lòng sử dụng bằng máy tính!");
     window.location.href = "/index.html";
 }
+const roles = checkRoles();
+const isLoggedIn = checkLogin();
+if(!isLoggedIn || !roles.includes("ADMIN")) {
+    alert("Bạn không có quyền truy cập trang này!");
+    window.location.href = "/index.html";
+}
+
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {
     await displaySummaryData();
-    await displayOrders_Customers_Products_Summary();
-    await showHomepageImages();
 
     const loginCheck = checkLogin();
     if(loginCheck == false) {
         console.log("loginCheck = false")
     }
+
+    const customers = await fetchCustomers();
+    showCustomersInAdminPage(customers);
+    
+    const products = await fetchProductsWithDetails();
+    showProductsInAdminPage(products);
 
     const brands = await fetchBrandData();
     showBrandsInAdminPage(brands);
@@ -21,11 +32,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     const categories = await fetchCategoryData();
     showCategoriesInAdminPage(categories);
 
-    const customers = await fetchCustomers();
-    showCustomersInAdminPage(customers);
-    
-    const products = await fetchProductsWithDetails();
-    showProductsInAdminPage(products);
+    await displayOrders_Customers_Products_Summary();
+    await showHomepageImages();
 });
 
 async function fethSummary() {
