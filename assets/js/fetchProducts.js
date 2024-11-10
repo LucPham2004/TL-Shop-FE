@@ -78,30 +78,29 @@ async function fetchTopProducts() {
 
 async function fetchProductsWithDetails() {
     try {
-        let productsWithDetailsInStorage = JSON.parse(localStorage.getItem('productsWithDetails')) || [];
-        if(productsWithDetailsInStorage.length != 0) {
-            return productsWithDetailsInStorage;
-        } else {
+        
             const loader = document.getElementById('loader');
             loader.style.display = 'block';
 
             const response = await fetch(domain + '/api/v1/products/withdetails');
             const products = await response.json();
             
+            // console.log(products)
+            // products.forEach(product => {
+            //     price = product.productPrice * (100 - product.discountPercent) / 100;
 
-            products.forEach(product => {
-                price = product.productPrice * (100 - product.discountPercent) / 100;
-
-                addProductWithDetailToLocalStorage({ id: `${product.id}`, productName: `${product.productName}`, 
-                                            price: `${price}`, productPrice: `${product.productPrice}`,
-                                            discountPercent: `${product.discountPercent}`, 
-                                            categories: `${product.categories}`, brandName: `${product.brandName}`, 
-                                            productImage: `${product.productImage}`})
-            })
+            //     addProductWithDetailToLocalStorage({ id: `${product.id}`, productName: `${product.productName}`, 
+            //                                 price: `${price}`, productPrice: `${product.productPrice}`,
+            //                                 discountPercent: `${product.discountPercent}`, 
+            //                                 categories: `${product.categories}`, brandName: `${product.brandName}`, 
+            //                                 productImage: `${product.productImage}`, 
+            //                                 productDescription: `${product.productDescription}`,
+            //                                 productReviews: `${product.productReviews}`})
+            // })
             loader.style.display = 'none';
 
             return products;
-        }
+        
 
     } catch (error) {
         console.log('Error fetching products:', error);

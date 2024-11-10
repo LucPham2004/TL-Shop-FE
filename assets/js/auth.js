@@ -23,7 +23,7 @@ async function checkLogin() {
     }
 
     try {
-        const response = await fetch(domain + '/api/v1/auth/status', {
+        const response = await fetch('https://tl-shop-8b8514452c4e.herokuapp.com/api/v1/auth/status', {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',

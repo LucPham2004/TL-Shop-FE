@@ -13,6 +13,7 @@ if(!isLoggedIn || !roles.includes("ADMIN")) {
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {
+    await showHomepageImages();
     await displaySummaryData();
 
     const loginCheck = checkLogin();
@@ -33,7 +34,6 @@ document.addEventListener("DOMContentLoaded", async function() {
     showCategoriesInAdminPage(categories);
 
     await displayOrders_Customers_Products_Summary();
-    await showHomepageImages();
 });
 
 async function fethSummary() {
