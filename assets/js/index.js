@@ -1,15 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    displayProducts();
-    showHomepageImages();
-
     
-
-});
-
-// Display products in homepage
-async function displayProducts() {
-
     function insertPlaceholders(selector, count) {
         const container = document.querySelector(selector);
         container.innerHTML = '';
@@ -20,6 +11,16 @@ async function displayProducts() {
 
     insertPlaceholders('.top-seller-products', 12);
     insertPlaceholders('.onSale-products', 12);
+
+    displayProducts();
+    showHomepageImages();
+
+    
+
+});
+
+// Display products in homepage
+async function displayProducts() {
 
     const products = await fetchTopProducts();
 
