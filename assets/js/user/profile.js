@@ -1,3 +1,10 @@
+const roles = checkRoles();
+const isLoggedIn = checkLogin();
+if(!isLoggedIn || !roles.includes("USER")) {
+    alert("Vui lòng đăng nhập hoặc đăng ký tài khoản!");
+    window.location.href = "/login.html";
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     displayCustomerInfo();
     fetchCustomerOrders();
