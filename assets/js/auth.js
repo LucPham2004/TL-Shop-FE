@@ -102,15 +102,14 @@ async function logout() {
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Đăng xuất thất bại');
-        }
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         window.location.href = '/index.html';
 
     } catch (error) {
-        console.error('Có lỗi xảy ra:', error);
-        alert('Đăng xuất thất bại.');
+        console.log('Có lỗi xảy ra:', error);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        window.location.href = '/index.html';
     }
 }

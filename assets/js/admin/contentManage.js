@@ -1,11 +1,4 @@
 
-const roles = checkRoles();
-const isLoggedIn = checkLogin();
-if(!isLoggedIn || !roles.includes("ADMIN")) {
-    alert("Bạn không có quyền truy cập trang này!");
-    window.location.href = "/index.html";
-}
-
 document.addEventListener("DOMContentLoaded", async function() {
     await showHomepageImages();
 });
