@@ -1,3 +1,4 @@
+
 const userAgent = navigator.userAgent;
 if (/mobile/i.test(userAgent)) {
     alert("Vui lòng sử dụng bằng máy tính!");
@@ -10,85 +11,15 @@ if(!isLoggedIn || !roles.includes("ADMIN")) {
     window.location.href = "/index.html";
 }
 
-const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 // Show shop data from server
 document.addEventListener("DOMContentLoaded", async function() {
-    await showHomepageImages();
     await displaySummaryData();
 
-    const loginCheck = checkLogin();
-    if(loginCheck == false) {
-        console.log("loginCheck = false")
-    }
-
-    const customers = await fetchCustomers();
-    showCustomersInAdminPage(customers);
-    
-    const products = await fetchProductsWithDetails();
-    showProductsInAdminPage(products);
-
-    const brands = await fetchBrandData();
-    showBrandsInAdminPage(brands);
-
-    const categories = await fetchCategoryData();
-    showCategoriesInAdminPage(categories);
-
-    await displayOrders_Customers_Products_Summary();
 });
 
-async function fethSummary() {
-    try {
-        const response = await fetch(domain + `/api/v1/admin/dashboard`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        return await response.json();
-        
-    } catch (error) {
-        console.error('Error fetching summary:', error);
-    }
-}
-
-async function displayOrders_Customers_Products_Summary() {
-    const data = await fethSummary();
-    console.log(data);
-    
-    const listorders = document.querySelector('#orders-summary tbody');
-    listorders.innerHTML = ``;
-    listorders.innerHTML = `
-        <td style="text-align:center;">${data.totalOrders}</td>
-        <td style="text-align:center;">${data.processingOrdersCount}</td>
-        <td style="text-align:center;">${data.shippingOrdersCount}</td>
-        <td style="text-align:center;">${data.deliveredOrdersCount}</td>
-        <td style="text-align:center;">${data.cancelledOrdersCount}</td>
-    `
-
-    const listcustomers = document.querySelector('#customers-summary tbody');
-    listcustomers.innerHTML = ``;
-    listcustomers.innerHTML = `
-        <td style="text-align:center;">${data.totalCustomers}</td>
-        <td style="text-align:center;">${data.enabledCustomersCount}</td>
-        <td style="text-align:center;">${data.nonLockedCustomersCount}</td>
-        <td style="text-align:center;">${data.disabledCustomersCount}</td>
-        <td style="text-align:center;">${data.lockedCustomersCount}</td>
-    `
-
-    const listproducts = document.querySelector('#products-summary tbody');
-    listproducts.innerHTML = ``;
-    listproducts.innerHTML = `
-        <td style="text-align:center;">${data.totalProducts}</td>
-        <td style="text-align:center;">${data.totalBrands}</td>
-        <td style="text-align:center;">${data.totalCategories}</td>
-        <td style="text-align:center;">${data.reviewedProductsCount}</td>
-        <td style="text-align:center;">${data.enabledProductsCount}</td>
-        <td style="text-align:center;">${data.disabledProductsCount}</td>
-    `
-
-}
 
 async function displaySummaryData() {
-    const data = await fethSummary();
+    const data = await fetchSummary();
 
     document.getElementById('totalRevenue').innerText = `${data.totalRevenue.toLocaleString()} đ`;
 
@@ -138,28 +69,18 @@ async function displaySummaryData() {
 }
 
 
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
+async function fetchSummary() {
+    try {
+        const response = await fetch(domain + `/api/v1/admin/summary`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        return await response.json();
+        
+    } catch (error) {
+        console.log('Error fetching summary:', error);
+    }
 }
 
-function removeVietnameseTones(str) {
-    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
-    return str;
-}
-
-function convertProductName(productName) {
-    // Bỏ dấu tiếng Việt
-    let noToneName = removeVietnameseTones(productName);
-    
-    // Thay thế khoảng trắng bằng dấu gạch ngang
-    let convertedName = noToneName.replace(/\s+/g, '-');
-    
-    return convertedName;
-}
-
-function extractDate(datetimeString) {
-    let datePart = datetimeString.split('T')[0];
-    
-    return datePart;
-}
+// Helping functions

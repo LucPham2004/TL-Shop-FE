@@ -134,10 +134,6 @@ function clearCart() {
     localStorage.removeItem('cart');
 }
 
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
-}
-
 window.onload = function() {
     loadCart();
 };

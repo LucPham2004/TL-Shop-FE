@@ -85,18 +85,6 @@ async function fetchProductsWithDetails() {
             const response = await fetch(domain + '/api/v1/products/withdetails');
             const products = await response.json();
             
-            // console.log(products)
-            // products.forEach(product => {
-            //     price = product.productPrice * (100 - product.discountPercent) / 100;
-
-            //     addProductWithDetailToLocalStorage({ id: `${product.id}`, productName: `${product.productName}`, 
-            //                                 price: `${price}`, productPrice: `${product.productPrice}`,
-            //                                 discountPercent: `${product.discountPercent}`, 
-            //                                 categories: `${product.categories}`, brandName: `${product.brandName}`, 
-            //                                 productImage: `${product.productImage}`, 
-            //                                 productDescription: `${product.productDescription}`,
-            //                                 productReviews: `${product.productReviews}`})
-            // })
             loader.style.display = 'none';
 
             return products;
@@ -135,26 +123,4 @@ function clearProductsInLocalStorage() {
 
 function clearTopProductsInLocalStorage() {
     localStorage.removeItem('topProducts');
-}
-
-// Minor functions
-
-function removeVietnameseTones(str) {
-    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
-    return str;
-}
-
-function convertProductName(productName) {
-    // Bỏ dấu tiếng Việt
-    let noToneName = removeVietnameseTones(productName);
-    
-    // Thay thế khoảng trắng bằng dấu gạch ngang
-    let convertedName = noToneName.replace(/\s+/g, '-');
-    
-    return convertedName;
-}
-
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
 }

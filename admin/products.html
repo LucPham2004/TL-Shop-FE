@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm TL Shop</title>
+    <link rel="icon" href="../assets/img/logo/Logo.png">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+			<!-- Menu bên trái -->
+			<div class="col-md-2" id="menu-container">
+				<div class="col-md-12" id="menu">
+					<ul class="nav flex-column" id="tabContent-tab" aria-orientation="vertical">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tabContent-home-tab" href="../admin/admin.html">Tổng Quan Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-content-tab"href="../admin/content.html">Quản Lý Nội Dung</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-orders-tab" href="../admin/orders.html">Đơn hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-customer-tab" href="../admin/customers.html">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-product-tab" href="../admin/products.html">Sản Phẩm</a>
+                        </li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Nội dung hiển thị bên phải -->
+			<div class="col-md-11" id="content-tab">
+                <div class="product-tab">
+                    <h3>Sản phẩm</h3>
+                    
+                    <table class="table table-bordered" id="products-summary">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Tổng sản phẩm</th>
+                                <th style="width: 15%;">Tổng thương hiệu</th>
+                                <th style="width: 15%;">Tổng danh mục sản phẩm</th>
+                                <th style="width: 15%;">Đã có đánh giá</th>
+                                <th style="width: 15%;">Được kích hoạt</th>
+                                <th style="width: 15%;">Bị vô hiệu hóa</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="funtionsAndSearch">
+                        <div class="product-funtions">
+                            <div class="addProduct">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm-container" aria-expanded="false" aria-controls="addProductForm-container">
+                                    Thêm sản phẩm
+                                </button>
+                            </div>
+                            <div class="addBrand">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#brand-container" aria-expanded="false" aria-controls="brand-container">
+                                    Thương hiệu
+                                </button>
+                            </div>
+                            <div class="addCategory">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#category-container" aria-expanded="false" aria-controls="category-container">
+                                    Danh mục sản phẩm
+                                </button>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="button" onclick="nonfilterProducts()">Hủy tìm kiếm</button>
+                            </div>
+                        </div>
+                        <div class="search-container">
+                            <div class="search-box">
+                                <input type="text" id="searchInput" placeholder="seach..."/>
+                                <button id="searchButton" title="search" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-forms">
+                        <div class="collapse" id="addProductForm-container">
+                            <div class="card card-body">
+                                <h5>Thông tin sản phẩm</h5>
+                                <form id="addproductForm">
+                                    <label for="productName">Tên Sản Phẩm:</label>
+                                    <input type="text" id="productName" name="productName" required>
+                            
+                                    <label for="productDescription">Mô Tả Sản Phẩm:</label>
+                                    <textarea id="productDescription" name="productDescription" required></textarea>
+                            
+                                    <label for="productPrice">Giá Sản Phẩm:</label>
+                                    <input type="number" step="0.01" id="productPrice" name="productPrice" required>
+                            
+                                    <label for="discountPercent">Phần Trăm Giảm Giá:</label>
+                                    <input type="number" step="0.01" id="discountPercent" name="discountPercent">
+                            
+                                    <label for="productBrandName">Thương Hiệu:</label>
+                                    <input type="text" id="productBrandName" name="productBrandName" required>
+                            
+                                    <label for="categories">Danh Mục (dấu phẩy ngăn cách):</label>
+                                    <input type="text" id="categories" name="categories">
+                            
+                                    <h5>Mẫu mã Sản Phẩm</h5>
+                                    <div id="productDetails">
+                                        
+                                    </div>
+                                    <button type="button" onclick="addDetail()">Thêm Mẫu</button>
+
+                                    <label for="productImages">Tải Lên Hình Ảnh:</label>
+                                    <input type="file" id="productImages" name="productImages" multiple>
+                            
+                                    <button type="submit">Tạo Sản Phẩm</button><br>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div id="addProductImage-container">
+                            <label for="addProductImages">Tải Lên Hình Ảnh:</label>
+                            <input type="file" id="addProductImages" name="productImages" multiple>
+
+                            <button type="submit" id="addImage_submit">Tải ảnh lên</button><br>
+                            <button type="button" onclick="cancelAddImages()">Hủy</button><br>
+                        </div>
+
+                        <div class="collapse" id="brand-container">
+                            <div class="brandForms">
+                                <div id="addBrand">
+                                    <div class="card card-body">
+                                        <h5>Tạo Thương Hiệu Mới</h5>
+                                        <form id="addBrandForm">
+                                            <label for="brandName">Tên Thương Hiệu:</label>
+                                            <input type="text" id="brandName" name="brandName" required><br><br>
+                                            <button type="submit">Tạo Thương Hiệu</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="deleteBrand">
+                                    <div class="card card-body">
+                                        <h5>Xóa Thương Hiệu</h5>
+                                        <form id="deleteBrandForm">
+                                            <label for="brandId">ID Thương Hiệu:</label>
+                                            <input type="text" id="brandId" name="brandId" required><br><br>
+                                            <button type="submit">Xóa Thương Hiệu</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="allBrands">
+                                <div id="brandTable" class="horizontal-table">
+                                    <div class="column">
+                                        <div class="header">ID</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="header">Name</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse" id="category-container">
+                            <div class="categoryForms">
+                                <div id="addCategory">
+                                    <div class="card card-body">
+                                        <h5>Tạo Danh Mục Mới</h5>
+                                        <form id="addCategoryForm">
+                                            <label for="categoryName">Tên Danh Mục:</label>
+                                            <input type="text" id="categoryName" name="categoryName" required><br><br>
+                                            <button type="submit">Tạo Danh Mục</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div id="deleteCategory">
+                                    <div class="card card-body">
+                                        <h5>Xóa Danh mục sản phẩm</h5>
+                                        <form id="deleteCategoryForm">
+                                            <label for="categoryId">ID Danh mục sản phẩm:</label>
+                                            <input type="text" id="categoryId" name="categoryId" required><br><br>
+                                            <button type="submit">Xóa Danh mục sản phẩm</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="allCategories">
+                                <div id="categoryTable" class="horizontal-table">
+                                    <div class="column">
+                                        <div class="header">ID</div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="header">Name</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Các sản phẩm</h5>
+                    <div class="product-content">
+                        <table class="table table-bordered" id="product-table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>Mô Tả</th>
+                                <th>Tổng Số Lượng</th>
+                                <th>Hãng/Thể Loại</th>
+                                <th>Đánh Giá</th>
+                                <th>Chức năng</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+			</div>
+        </div>
+    </div>
+	
+	<div id="loader" class="loader"></div>
+
+
+	<script src="../assets/js/auth.js"></script>
+    <script src="./assets/js/utils.js"></script>
+	<script src="../assets/js/fetchCategory.js"></script>
+	<script src="../assets/js/fetchBrands.js"></script>
+	<script src="../assets/js/fetchProducts.js"></script>
+	<script src="../assets/js/admin/productsManage.js"></script>
+	<script src="../assets/js/admin/brandsManage.js"></script>
+	<script src="../assets/js/admin/categoriesManage.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

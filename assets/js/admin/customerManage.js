@@ -1,4 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
+
+const roles = checkRoles();
+const isLoggedIn = checkLogin();
+if(!isLoggedIn || !roles.includes("ADMIN")) {
+    alert("Bạn không có quyền truy cập trang này!");
+    window.location.href = "/index.html";
+}
+
+document.addEventListener("DOMContentLoaded", async function() {
+    fetchCustomerSummary();
+    const customers = await fetchCustomers();
+    showCustomersInAdminPage(customers);
 
     // Searching customers
     const searchBtn = document.getElementById('CustomerSearchBtn');
@@ -87,6 +98,28 @@ function showCustomersInAdminPage(customers) {
         tbody.appendChild(tr);
     })
 };
+
+async function fetchCustomerSummary() {
+    try {
+        const data = await fetch(domain + `/api/v1/admin/customers`);
+        if (!data.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const listcustomers = document.querySelector('#customers-summary tbody');
+        listcustomers.innerHTML = ``;
+        listcustomers.innerHTML = `
+            <td style="text-align:center;">${data.totalCustomers}</td>
+            <td style="text-align:center;">${data.enabledCustomersCount}</td>
+            <td style="text-align:center;">${data.nonLockedCustomersCount}</td>
+            <td style="text-align:center;">${data.disabledCustomersCount}</td>
+            <td style="text-align:center;">${data.lockedCustomersCount}</td>
+        `
+        
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+    }
+}
 
 async function nonfilterCustomers() {
     const customers = await fetchCustomers();

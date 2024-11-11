@@ -1,7 +1,15 @@
-document.addEventListener("DOMContentLoaded", async function() {
 
+const roles = checkRoles();
+const isLoggedIn = checkLogin();
+if(!isLoggedIn || !roles.includes("ADMIN")) {
+    alert("Bạn không có quyền truy cập trang này!");
+    window.location.href = "/index.html";
+}
+document.addEventListener("DOMContentLoaded", async function() {
     const loader = document.getElementById('loader');
     loader.style.display = 'block';
+
+    fetchOrderSummary();
 
     const orders = await fetchOrders();
     showOrders(orders);
@@ -86,7 +94,7 @@ function searchOrdersAndDisplay(keyword) {
 // Fetch Orders Data
 async function fetchOrders() {
     try {
-        const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus');
+        const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus?pageNum=1');
         return orderResponse.json();
     } catch (error) {
         console.error('Error fetching Order orders: ', error);
@@ -152,6 +160,28 @@ function showOrders(orders) {
         ordersList.appendChild(orderItem);
         ordersList.appendChild(orderProductsRow);
     });
+}
+
+async function fetchOrderSummary() {
+    try {
+        const data = await fetch(domain + `/api/v1/admin/orders?pageNum=1`);
+        if (!data.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const listorders = document.querySelector('#orders-summary tbody');
+        listorders.innerHTML = ``;
+        listorders.innerHTML = `
+            <td style="text-align:center;">${data.totalOrders}</td>
+            <td style="text-align:center;">${data.processingOrdersCount}</td>
+            <td style="text-align:center;">${data.shippingOrdersCount}</td>
+            <td style="text-align:center;">${data.deliveredOrdersCount}</td>
+            <td style="text-align:center;">${data.cancelledOrdersCount}</td>
+        `
+        
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+    }
 }
 
 async function filterOrders() {

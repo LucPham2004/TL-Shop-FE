@@ -6,8 +6,6 @@
     <title>ADMIN</title>
     <link rel="icon" href="../assets/img/logo/Logo.png">
     <link rel="stylesheet" href="../assets/css/admin.css">
-	<link rel="stylesheet" href="../assets/css/index.css">
-    <link rel="stylesheet" href="../assets/css/register.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -18,28 +16,22 @@
 			<!-- Menu bên trái -->
 			<div class="col-md-2" id="menu-container">
 				<div class="col-md-12" id="menu">
-					<ul class="nav flex-column nav-pills" id="tabContent-tab" role="tablist" aria-orientation="vertical">
-					<li class="nav-item">
-						<a class="nav-link active" id="tabContent-home-tab" data-toggle="pill" href="#tabContent-home" role="tab" aria-controls="tabContent-home" aria-selected="true">Tổng Quan Shop</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="tabContent-content-tab" data-toggle="pill" href="#tabContent-content" role="tab" aria-controls="tabContent-content" aria-selected="false">Quản Lý Nội Dung</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="tabContent-orders-tab" data-toggle="pill" href="#tabContent-orders" role="tab" aria-controls="tabContent-orders" aria-selected="false">Đơn hàng</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="tabContent-customer-tab" data-toggle="pill" href="#tabContent-customer" role="tab" aria-controls="tabContent-customer" aria-selected="false">Khách Hàng</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="tabContent-product-tab" data-toggle="pill" href="#tabContent-product" role="tab" aria-controls="tabContent-product" aria-selected="false">Sản Phẩm</a>
-					</li>
-					<!-- <li class="nav-item">
-						<a class="nav-link" id="tabContent-messages-tab" data-toggle="pill" href="#tabContent-messages" role="tab" aria-controls="tabContent-messages" aria-selected="false">Messages</a>
-					</li> -->
-					<!-- <li class="nav-item">
-						<a class="nav-link" id="tabContent-settings-tab" data-toggle="pill" href="#tabContent-settings" role="tab" aria-controls="tabContent-settings" aria-selected="false">Settings</a>
-					</li> -->
+					<ul class="nav flex-column" id="tabContent-tab" aria-orientation="vertical">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tabContent-home-tab" href="../admin/admin.html">Tổng Quan Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-content-tab"href="../admin/content.html">Quản Lý Nội Dung</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-orders-tab" href="../admin/orders.html">Đơn hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-customer-tab" href="../admin/customers.html">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-product-tab" href="../admin/products.html">Sản Phẩm</a>
+                        </li>
 					</ul>
 				</div>
 			</div>
@@ -47,616 +39,133 @@
       
 			<!-- Nội dung hiển thị bên phải -->
 			<div class="col-md-11" id="content-tab">
-				<div class="tab-content" id="tabContent">
-					<div class="tab-pane fade show active" id="tabContent-home" role="tabpanel" aria-labelledby="tabContent-home-tab">
-						<main class="app-content">
-							<div class="row">
-							  <div class="col-md-12">
-								<div class="app-title">
-									<h5 class="breadcrumb-item">
-										<b>Bảng điều khiển</b>
-										<a href="/index.html"><b style="margin-left: 20px;font-size:medium;">Trang chủ TL-Shop</b></a>
-									</h5>
-								</div>
-							  </div>
-							</div>
-							<div class="row">
-							  
-							  <!--Left-->
-							  <div class="col-md-12 col-lg-6">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="tile">
-											<h3 class="tile-title">Doanh thu</h3>
-											<div class="embed-responsive embed-responsive-16by9">
-												<p id="totalRevenue"></p>
-											</div>
-										</div>
-									</div>
-									<!-- col-12 -->
-									<div class="col-md-12">
-										<div class="tile">
-											<h3 class="tile-title">Khách hàng mới</h3>
-											<div>
-												<table class="table table-hover">
-													<thead>
-													<tr>
-														<th>ID khách hàng</th>
-														<th>Tên khách hàng</th>
-														<th>Địa chỉ</th>
-														<th>Số điện thoại</th>
-													</tr>
-													</thead>
-													<tbody id="newCustomers">
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-									<!-- / col-12 -->
-								</div>
-							</div>
-							<!--END left-->
-							<!--Right-->
-							<div class="col-md-12 col-lg-6">
-								<div class="row">
-									<!-- col-6 -->
-									<div class="col-md-6">
-										<div class="widget-small primary coloured-icon"><i class='icon fas fa-users fa-3x'></i>
-											<div class="info">
-												<h4>Tổng khách hàng</h4>
-												<p id="totalCustomers"></p>
-												<p class="info-tong">Tổng số khách hàng được quản lý.</p>
-											</div>
-										</div>
-									</div>
-									<!-- col-6 -->
-									<div class="col-md-6">
-										<div class="widget-small info coloured-icon"><i class='icon fas fa-boxes fa-3x'></i>
-											<div class="info">
-												<h4>Tổng sản phẩm</h4>
-												<p id="totalProducts"></p>
-												<p class="info-tong">Tổng số sản phẩm được quản lý.</p>
-											</div>
-										</div>
-									</div>
-									<!-- col-6 -->
-									<div class="col-md-6">
-										<div class="widget-small warning coloured-icon"><i class='icon fas fa-shopping-cart fa-3x'></i>
-											<div class="info">
-												<h4>Tổng đơn hàng</h4>
-												<p id="totalOrders"></p>
-												<p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
-											</div>
-										</div>
-									</div>
-									<!-- col-6 -->
-									<div class="col-md-6">
-										<div class="widget-small danger coloured-icon"><i class='icon fas fa-exclamation-triangle fa-3x'></i>
-											<div class="info">
-												<h4>Sắp hết hàng</h4>
-												<p id="lowStock"></p>
-												<p class="info-tong">Số sản phẩm cảnh báo cần nhập thêm.</p>
-											</div>
-										</div>
-									</div>
-									<!-- col-12 -->
-									<div class="col-md-12">
-										<div class="tile">
-											<h3 class="tile-title">Tình trạng đơn hàng</h3>
-											<div>
-												<table class="table table-bordered">
-													<thead>
-													<tr>
-														<th>ID đơn hàng</th>
-														<th>Tên khách hàng</th>
-														<th>Tổng tiền</th>
-														<th>Trạng thái</th>
-													</tr>
-													</thead>
-													<tbody id="orderList">
-													</tbody>
-												</table>
-											</div>
-											<!-- / div trống-->
-										</div>
-									</div>
-									<!-- / col-12 -->
-								</div>
-							</div>
-							<!--END right-->
-							</div>
-						  </main>
-					</div>
-					<div class="tab-pane fade" id="tabContent-content" role="tabpanel" aria-labelledby="tabContent-content-tab">
-						<div class="content-tab">
-							<div class="banner" style="width: 100%;">
-								<div class="container-fluid" style="padding: 0;">
-									<div id="carouselExampleIndicators" class="carousel slide">
-										<div class="carousel-indicators">
-											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-											<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-										</div>
-										<div class="carousel-inner">
-										</div>
-										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
-									</div>
-									<div class="changeBanner">
-										<h3>Thay đổi banner</h3>
-										<label for="#selectBanner">Lựa chọn tấm banner</label>
-										<input type="file" id="selectBanner" accept="image/*" multiple>
-										<button class="changeBtn" onclick="updateBannerImages()">Update Banners</button>
-									</div>
-								</div>
-							</div>
-							
-							<div class="poster">
-								<div class="container-fluid">
-									<div class="poster-main">
-										<div class="poster-main-left">
-											<a href="#" style="text-decoration: none; color: black">
-												<img id="poster-main"class="card-img-top" alt="...">
-											</a>
-										</div>
-										<div class="poster-main-right">
-											<div class="poster-main-right-div" style="margin-bottom: 10px;">
-												<a href="#" style="text-decoration: none; color: black">
-													<img id="poster2" alt="...">
-												</a>
-											</div>
-											<div class="poster-main-right-div">
-												<a href="#" style="text-decoration: none; color: black">
-													<img id="poster3" alt="...">
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="changePoster">
-										<h3>Thay đổi Poster</h3>
-										<label for="#selectPoster">Lựa chọn tấm Poster</label>
-										<input type="file" id="selectPoster" accept="image/*" multiple>
-										<button class="changeBtn" onclick="updatePosterImages()">Update Poster</button>
-									</div>
-								</div>
-							</div>
-							
-							<div class="sample">
-								<div class="container">
-									<div class="sample-product" id="sample-product-1">
-										<div class="sample-content">
-											<h3 id="sampleTitle1" style="color: black;">Modern And Creative Poster Design</h3>
-											<i></i>
-											<p id="sampleDescription1" class="description" style="color: black;">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
-											<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
-										</div>
-										<img id="sample1" alt="Sample Shoe">
-									</div>
-									<button class="changeBtn" type="button" onclick="changeSample1()">Thay đổi Mẫu 1</button>
-								</div>
-							</div>
-							
-							<div class="sample">
-								<div class="container">
-									<div class="sample-product" id="sample-product-2">
-										<img id="sample2" alt="Sample Shoe" >
-										<div class="sample-content">
-											<h3 id="sampleTitle2" style="color: black;">Modern And Creative Poster Design</h3>
-											<i></i>
-											<p id="sampleDescription2" class="description" style="color: black;">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
-											<a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
-										</div>
-									</div>
-									<button class="changeBtn" type="button" onclick="changeSample2()">Thay đổi Mẫu 2</button>
-								</div>
-							</div>
+				<main class="app-content">
+					<div class="row">
+						<div class="col-md-12">
+						<div class="app-title">
+							<h5 class="breadcrumb-item">
+								<b>Bảng điều khiển</b>
+								<a href="/index.html"><b style="margin-left: 20px;font-size:medium;">Trang chủ TL-Shop</b></a>
+							</h5>
+						</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="tabContent-orders" role="tabpanel" aria-labelledby="tabContent-orders-tab">
-						<div class="orders">
-							<h3>Tổng quan các đơn hàng</h3>
-
-							<table class="table table-bordered" id="orders-summary">
-								<thead>
-									<tr>
-										<th style="width: 20%;">Tổng đơn hàng</th>
-										<th style="width: 20%;">Đơn hàng đang xử lý</th>
-										<th style="width: 20%;">Đơn hàng đang vận chuyển</th>
-										<th style="width: 20%;">Đơn hàng hoàn thành</th>
-										<th style="width: 20%;">Đơn hàng đã hủy</th>
-									</tr>
-									</thead>
-								<tbody>
-								</tbody>
-							</table>
-
-							<div style="display: flex; justify-content:right;" class="search-container">
-								<div class="search-box">
-									<input type="text" id="OrderSearchInput" placeholder="seach..."/>
-									<button id="OrderSearchBtn" title="search" type="button">
-										<i class="fas fa-search"></i>
-									</button>
-								</div>
-							</div>
-							
-							<h5>Lọc đơn hàng</h5>
-							<form id="filterForm">
-								<label for="startDate">Ngày đầu:</label>
-								<input type="date" id="startDate" name="startDate">
-								
-								<label for="endDate">Ngày cuối:</label>
-								<input type="date" id="endDate" name="endDate">
-
-								<label for="minAmount">Tối thiểu:</label>
-								<input type="number" id="minAmount" name="minAmount" step="0.01">
-								
-								<label for="maxAmount">Tối đa:</label>
-								<input type="number" id="maxAmount" name="maxAmount" step="0.01">
+					<div class="row">
 						
-								<label for="orderStatus">Trạng thái đơn hàng:</label>
-								<select id="orderStatus" name="orderStatus">
-									<option value="">--Select Status--</option>
-									<option value="Đã đặt hàng!">Đã đặt hàng</option>
-									<option value="Đang giao hàng!">Đang giao hàng</option>
-									<option value="Đã giao hàng!">Đã giao hàng</option>
-									<option value="Bị hủy bỏ!">Bị hủy bỏ</option>
-								</select>
-						
-								<button type="button" onclick="filterOrders()">Lọc</button>
-								<button type="button" onclick="nonfilterOrders()">Hủy lọc</button>
-							</form>
-
-							<div>
-								<h5 class="tile-title">Các đơn hàng</h5>
-								<table class="table table-bordered">
-									<thead>
-									<tr>
-										<th style="width: 10%;">ID đơn hàng</th>
-										<th style="width: 15%;">Tên khách hàng</th>
-										<th style="width: 15%;">Tổng tiền</th>
-										<th style="width: 15%;">Ngày đặt hàng</th>
-										<th style="width: 15%;">Trạng thái</th>
-										<th style="width: 30%;">Chức năng</th>
-									</tr>
-									</thead>
-									<tbody id="ordersList">
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="tabContent-customer" role="tabpanel" aria-labelledby="tabContent-customer-tab">
-						<div class="customer-tab">
-							<h3>Khách hàng</h3>
-
-							<table class="table table-bordered" id="customers-summary">
-								<thead>
-									<tr>
-										<th style="width: 20%;">Tổng khách hàng</th>
-										<th style="width: 20%;">Tài khoản được kích khoạt</th>
-										<th style="width: 20%;">Tài khoản không bị khóa</th>
-										<th style="width: 20%;">Tài khoản bị vô hiệu hóa</th>
-										<th style="width: 20%;">Tài khoản bị khóa</th>
-									</tr>
-									</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<div class="funtionsAndSearch">
-								<div class="customer-funtions">
-									<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#registerForm" aria-expanded="false" aria-controls="registerForm">
-										Thêm tài khoản
-									</button>
-
-									<button class="btn btn-primary" type="button" onclick="nonfilterCustomers()">Hủy tìm kiếm</button>
-									
-									<div class="collapse" id="registerForm">
-										<div class="card card-body">
-											<form id="signup_form">
-												<div class="form-item">
-													<label for="fullName">Họ và Tên:</label>
-													<input type="text" id="fullName" name="fullName" required>
-												</div>
-												<div class="form-item">
-													<label for="email">Email:</label>
-													<input type="email" id="email" name="email" required>
-												</div>
-												<div class="form-item">
-													<label for="phone">Số Điện Thoại:</label>
-													<input type="text" id="phone" name="phone" required>
-												</div>
-												<div class="form-item">
-													<label for="password">Mật Khẩu:</label>
-													<input type="password" id="password" name="password" required>
-												</div>
-												<div class="form-item">
-													<button type="submit" id="register">Đăng Ký</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-								<div class="search-container">
-									<div class="search-box">
-										<input type="text" id="CustomerSearchInput" placeholder="seach..."/>
-										<button id="CustomerSearchBtn" title="search" type="button">
-											<i class="fas fa-search"></i>
-										</button>
+						<!--Left-->
+						<div class="col-md-12 col-lg-6">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="tile">
+									<h3 class="tile-title">Doanh thu</h3>
+									<div class="embed-responsive embed-responsive-16by9">
+										<p id="totalRevenue"></p>
 									</div>
 								</div>
 							</div>
-							<div class="customer-content">
-								<table class="table table-bordered" id="customer-table">
-									<thead>
-									<tr>
-										<th>ID</th>
-										<th>Tên</th>
-										<th>Email</th>
-										<th>Số điện thoại</th>
-										<th>Địa chỉ</th>
-										<th>Chức năng</th>
-									</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-							<!-- Modal for editing customer -->
-							<div id="editModal" style="display:none;">
-								<h2>Chỉnh sửa thông tin khách hàng</h2>
-								<form id="editCustomerForm">
-									<input type="hidden" id="editCustomerId" name="id">
-									<label for="editCustomerName">Tên:</label>
-									<input type="text" id="editCustomerName" name="name">
-
-									<label for="editCustomerEmail">Email:</label>
-									<input type="email" id="editCustomerEmail" name="email">
-									
-									<label for="editCustomerPhone">Số điện thoại:</label>
-									<input type="text" id="editCustomerPhone" name="phone">
-									
-									<label for="editCustomerAddress">Địa chỉ:</label>
-									<input type="text" id="editCustomerAddress" name="address">
-									
-									<button type="submit">Lưu</button>
-									<button type="button" onclick="closeEditModal()">Hủy</button>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="tabContent-product" role="tabpanel" aria-labelledby="tabContent-product-tab">
-						<div class="product-tab">
-							<h3>Sản phẩm</h3>
-							
-							<table class="table table-bordered" id="products-summary">
-								<thead>
-									<tr>
-										<th style="width: 15%;">Tổng sản phẩm</th>
-										<th style="width: 15%;">Tổng thương hiệu</th>
-										<th style="width: 15%;">Tổng danh mục sản phẩm</th>
-										<th style="width: 15%;">Đã có đánh giá</th>
-										<th style="width: 15%;">Được kích hoạt</th>
-										<th style="width: 15%;">Bị vô hiệu hóa</th>
-									</tr>
-									</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<div class="funtionsAndSearch">
-								<div class="product-funtions">
-									<div class="addProduct">
-										<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm-container" aria-expanded="false" aria-controls="addProductForm-container">
-											Thêm sản phẩm
-										</button>
-									</div>
-									<div class="addBrand">
-										<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#brand-container" aria-expanded="false" aria-controls="brand-container">
-											Thương hiệu
-										</button>
-									</div>
-									<div class="addCategory">
-										<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#category-container" aria-expanded="false" aria-controls="category-container">
-											Danh mục sản phẩm
-										</button>
-									</div>
+							<!-- col-12 -->
+							<div class="col-md-12">
+								<div class="tile">
+									<h3 class="tile-title">Khách hàng mới</h3>
 									<div>
-										<button class="btn btn-primary" type="button" onclick="nonfilterProducts()">Hủy tìm kiếm</button>
-									</div>
-								</div>
-								<div class="search-container">
-									<div class="search-box">
-										<input type="text" id="searchInput" placeholder="seach..."/>
-										<button id="searchButton" title="search" type="button">
-											<i class="fas fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div class="product-forms">
-								<div class="collapse" id="addProductForm-container">
-									<div class="card card-body">
-										<h5>Thông tin sản phẩm</h5>
-										<form id="addproductForm">
-											<label for="productName">Tên Sản Phẩm:</label>
-											<input type="text" id="productName" name="productName" required>
-									
-											<label for="productDescription">Mô Tả Sản Phẩm:</label>
-											<textarea id="productDescription" name="productDescription" required></textarea>
-									
-											<label for="productPrice">Giá Sản Phẩm:</label>
-											<input type="number" step="0.01" id="productPrice" name="productPrice" required>
-									
-											<label for="discountPercent">Phần Trăm Giảm Giá:</label>
-											<input type="number" step="0.01" id="discountPercent" name="discountPercent">
-									
-											<label for="productBrandName">Thương Hiệu:</label>
-											<input type="text" id="productBrandName" name="productBrandName" required>
-									
-											<label for="categories">Danh Mục (dấu phẩy ngăn cách):</label>
-											<input type="text" id="categories" name="categories">
-									
-											<h5>Mẫu mã Sản Phẩm</h5>
-											<div id="productDetails">
-												
-											</div>
-											<button type="button" onclick="addDetail()">Thêm Mẫu</button>
-
-											<label for="productImages">Tải Lên Hình Ảnh:</label>
-											<input type="file" id="productImages" name="productImages" multiple>
-									
-											<button type="submit">Tạo Sản Phẩm</button><br>
-										</form>
-									</div>
-								</div>
-
-								<div id="addProductImage-container">
-									<label for="addProductImages">Tải Lên Hình Ảnh:</label>
-									<input type="file" id="addProductImages" name="productImages" multiple>
-
-									<button type="submit" id="addImage_submit">Tải ảnh lên</button><br>
-									<button type="button" onclick="cancelAddImages()">Hủy</button><br>
-								</div>
-
-								<div class="collapse" id="brand-container">
-									<div class="brandForms">
-										<div id="addBrand">
-											<div class="card card-body">
-												<h5>Tạo Thương Hiệu Mới</h5>
-												<form id="addBrandForm">
-													<label for="brandName">Tên Thương Hiệu:</label>
-													<input type="text" id="brandName" name="brandName" required><br><br>
-													<button type="submit">Tạo Thương Hiệu</button>
-												</form>
-											</div>
-										</div>
-										<div id="deleteBrand">
-											<div class="card card-body">
-												<h5>Xóa Thương Hiệu</h5>
-												<form id="deleteBrandForm">
-													<label for="brandId">ID Thương Hiệu:</label>
-													<input type="text" id="brandId" name="brandId" required><br><br>
-													<button type="submit">Xóa Thương Hiệu</button>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div id="allBrands">
-										<div id="brandTable" class="horizontal-table">
-											<div class="column">
-												<div class="header">ID</div>
-											</div>
-											<div class="column">
-												<div class="header">Name</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="collapse" id="category-container">
-									<div class="categoryForms">
-										<div id="addCategory">
-											<div class="card card-body">
-												<h5>Tạo Danh Mục Mới</h5>
-												<form id="addCategoryForm">
-													<label for="categoryName">Tên Danh Mục:</label>
-													<input type="text" id="categoryName" name="categoryName" required><br><br>
-													<button type="submit">Tạo Danh Mục</button>
-												</form>
-											</div>
-										</div>
-										<div id="deleteCategory">
-											<div class="card card-body">
-												<h5>Xóa Danh mục sản phẩm</h5>
-												<form id="deleteCategoryForm">
-													<label for="categoryId">ID Danh mục sản phẩm:</label>
-													<input type="text" id="categoryId" name="categoryId" required><br><br>
-													<button type="submit">Xóa Danh mục sản phẩm</button>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div id="allCategories">
-										<div id="categoryTable" class="horizontal-table">
-											<div class="column">
-												<div class="header">ID</div>
-											</div>
-											<div class="column">
-												<div class="header">Name</div>
-											</div>
-										</div>
+										<table class="table table-hover">
+											<thead>
+											<tr>
+												<th>ID khách hàng</th>
+												<th>Tên khách hàng</th>
+												<th>Địa chỉ</th>
+												<th>Số điện thoại</th>
+											</tr>
+											</thead>
+											<tbody id="newCustomers">
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
-
-							<h5>Các sản phẩm</h5>
-							<div class="product-content">
-								<table class="table table-bordered" id="product-table">
-									<thead>
-									<tr>
-										<th>ID</th>
-										<th>Tên Sản Phẩm</th>
-										<th>Giá</th>
-										<th>Mô Tả</th>
-										<th>Tổng Số Lượng</th>
-										<th>Hãng/Thể Loại</th>
-										<th>Đánh Giá</th>
-										<th>Chức năng</th>
-									</tr>
-									</thead>
-									<tbody>
-										
-									</tbody>
-								</table>
-							</div>
+							<!-- / col-12 -->
 						</div>
 					</div>
-					<!-- <div class="tab-pane fade" id="tabContent-messages" role="tabpanel" aria-labelledby="tabContent-messages-tab">
-						<h3>Messages</h3>
-						<p>Nội dung cho Messages.</p>
-					</div> -->
-					<!-- <div class="tab-pane fade" id="tabContent-settings" role="tabpanel" aria-labelledby="tabContent-settings-tab">
-						<h3>Settings</h3>
-						<p>No Settings yet.</p>
-					</div> -->
-				</div>
+					<!--END left-->
+					<!--Right-->
+					<div class="col-md-12 col-lg-6">
+						<div class="row">
+							<!-- col-6 -->
+							<div class="col-md-6">
+								<div class="widget-small primary coloured-icon"><i class='icon fas fa-users fa-3x'></i>
+									<div class="info">
+										<h4>Tổng khách hàng</h4>
+										<p id="totalCustomers"></p>
+										<p class="info-tong">Tổng số khách hàng được quản lý.</p>
+									</div>
+								</div>
+							</div>
+							<!-- col-6 -->
+							<div class="col-md-6">
+								<div class="widget-small info coloured-icon"><i class='icon fas fa-boxes fa-3x'></i>
+									<div class="info">
+										<h4>Tổng sản phẩm</h4>
+										<p id="totalProducts"></p>
+										<p class="info-tong">Tổng số sản phẩm được quản lý.</p>
+									</div>
+								</div>
+							</div>
+							<!-- col-6 -->
+							<div class="col-md-6">
+								<div class="widget-small warning coloured-icon"><i class='icon fas fa-shopping-cart fa-3x'></i>
+									<div class="info">
+										<h4>Tổng đơn hàng</h4>
+										<p id="totalOrders"></p>
+										<p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
+									</div>
+								</div>
+							</div>
+							<!-- col-6 -->
+							<div class="col-md-6">
+								<div class="widget-small danger coloured-icon"><i class='icon fas fa-exclamation-triangle fa-3x'></i>
+									<div class="info">
+										<h4>Sắp hết hàng</h4>
+										<p id="lowStock"></p>
+										<p class="info-tong">Số sản phẩm cảnh báo cần nhập thêm.</p>
+									</div>
+								</div>
+							</div>
+							<!-- col-12 -->
+							<div class="col-md-12">
+								<div class="tile">
+									<h3 class="tile-title">Tình trạng đơn hàng</h3>
+									<div>
+										<table class="table table-bordered">
+											<thead>
+											<tr>
+												<th>ID đơn hàng</th>
+												<th>Tên khách hàng</th>
+												<th>Tổng tiền</th>
+												<th>Trạng thái</th>
+											</tr>
+											</thead>
+											<tbody id="orderList">
+											</tbody>
+										</table>
+									</div>
+									<!-- / div trống-->
+								</div>
+							</div>
+							<!-- / col-12 -->
+						</div>
+					</div>
+					<!--END right-->
+					</div>
+				</main>
 			</div>
         </div>
-    </div>
-    
-	<div id="notification" style="display:none; position:fixed; top:10%; left:45%; background-color:lightgray; padding:10px; border-radius:5px;">
-        Xóa Đơn hàng thành công!
     </div>
 	
 	<div id="loader" class="loader"></div>
 
-	<script>
-		function showNotification() {
-			var notification = document.getElementById("notification");
-			notification.style.display = "block";
-			setTimeout(function() {
-				notification.style.display = "none";
-			}, 5000);
-		}
-	</script>
-
 	<script src="../assets/js/auth.js"></script>
-	<script src="../assets/js/fetchCategory.js"></script>
-	<script src="../assets/js/fetchBrands.js"></script>
-	<script src="../assets/js/fetchProducts.js"></script>
-	<script src="../assets/js/fetchCustomers.js"></script>
+    <script src="../assets/js/utils.js"></script>
 	<script src="../assets/js/admin/admin.js"></script>
-	<script src="../assets/js/admin/contentManage.js"></script>
-	<script src="../assets/js/admin/orderManage.js"></script>
-	<script src="../assets/js/admin/customerManage.js"></script>
-	<script src="../assets/js/admin/productsManage.js"></script>
-	<script src="../assets/js/admin/brandsManage.js"></script>
-	<script src="../assets/js/admin/categoriesManage.js"></script>
-	<script src="../assets/js/register.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 

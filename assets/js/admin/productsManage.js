@@ -1,7 +1,22 @@
 
-// Products Methods
-// Search products
-document.addEventListener("DOMContentLoaded", function() {
+const roles = checkRoles();
+const isLoggedIn = checkLogin();
+if(!isLoggedIn || !roles.includes("ADMIN")) {
+    alert("Bạn không có quyền truy cập trang này!");
+    window.location.href = "/index.html";
+}
+
+document.addEventListener("DOMContentLoaded", async function() {
+    fetchProductSummary();
+    const products = await fetchProductsWithDetails();
+    showProductsInAdminPage(products);
+
+    const brands = await fetchBrandData();
+    showBrandsInAdminPage(brands);
+
+    const categories = await fetchCategoryData();
+    showCategoriesInAdminPage(categories);
+
     const searchBtn = document.getElementById('searchButton');
     const searchInput = document.getElementById('searchInput');
     if(searchBtn) {
@@ -93,6 +108,29 @@ function showProductsInAdminPage(products){
 
         tbody.appendChild(tr);
     });
+}
+
+async function fetchProductSummary() {
+    try {
+        const data = await fetch(domain + `/api/v1/admin/products`);
+        if (!data.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const listproducts = document.querySelector('#products-summary tbody');
+        listproducts.innerHTML = ``;
+        listproducts.innerHTML = `
+            <td style="text-align:center;">${data.totalProducts}</td>
+            <td style="text-align:center;">${data.totalBrands}</td>
+            <td style="text-align:center;">${data.totalCategories}</td>
+            <td style="text-align:center;">${data.reviewedProductsCount}</td>
+            <td style="text-align:center;">${data.enabledProductsCount}</td>
+            <td style="text-align:center;">${data.disabledProductsCount}</td>
+    `
+        
+    } catch (error) {
+        console.error('Error fetching summary:', error);
+    }
 }
 
 // Creare product and upload images

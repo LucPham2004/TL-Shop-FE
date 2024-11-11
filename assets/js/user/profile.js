@@ -136,7 +136,7 @@ async function fetchCustomerOrders() {
         const loader = document.getElementById('loader');
         loader.style.display = 'block';
 
-        const orderResponse = await fetch(domain + '/api/v1/orders/customer/' + getCustomerId());
+        const orderResponse = await fetch(domain + `/api/v1/orders/customer?customerId=${getCustomerId()}&pageNum=1`);
         const orders = await orderResponse.json();
 
         const ordersContainer = document.getElementById("orders-container");

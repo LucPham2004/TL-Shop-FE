@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm TL Shop</title>
+    <link rel="icon" href="../assets/img/logo/Logo.png">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+	<link rel="stylesheet" href="../assets/css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+			<!-- Menu bên trái -->
+			<div class="col-md-2" id="menu-container">
+				<div class="col-md-12" id="menu">
+					<ul class="nav flex-column" id="tabContent-tab" aria-orientation="vertical">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tabContent-home-tab" href="../admin/admin.html">Tổng Quan Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-content-tab"href="../admin/content.html">Quản Lý Nội Dung</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-orders-tab" href="../admin/orders.html">Đơn hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-customer-tab" href="../admin/customers.html">Khách Hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-product-tab" href="../admin/products.html">Sản Phẩm</a>
+                        </li>
+					</ul>
+				</div>
+			</div>
+			
+			<!-- Nội dung hiển thị bên phải -->
+			<div class="col-md-11" id="content-tab">
+                <div class="content-tab">
+                    <div class="banner" style="width: 100%;">
+                        <div class="container-fluid" style="padding: 0;">
+                            <div id="carouselExampleIndicators" class="carousel slide">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <div class="changeBanner">
+                                <h3>Thay đổi banner</h3>
+                                <label for="#selectBanner">Lựa chọn tấm banner</label>
+                                <input type="file" id="selectBanner" accept="image/*" multiple>
+                                <button class="changeBtn" onclick="updateBannerImages()">Update Banners</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="poster">
+                        <div class="container-fluid">
+                            <div class="poster-main">
+                                <div class="poster-main-left">
+                                    <a href="#" style="text-decoration: none; color: black">
+                                        <img id="poster-main"class="card-img-top" alt="...">
+                                    </a>
+                                </div>
+                                <div class="poster-main-right">
+                                    <div class="poster-main-right-div" style="margin-bottom: 10px;">
+                                        <a href="#" style="text-decoration: none; color: black">
+                                            <img id="poster2" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="poster-main-right-div">
+                                        <a href="#" style="text-decoration: none; color: black">
+                                            <img id="poster3" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="changePoster">
+                                <h3>Thay đổi Poster</h3>
+                                <label for="#selectPoster">Lựa chọn tấm Poster</label>
+                                <input type="file" id="selectPoster" accept="image/*" multiple>
+                                <button class="changeBtn" onclick="updatePosterImages()">Update Poster</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sample">
+                        <div class="container">
+                            <div class="sample-product" id="sample-product-1">
+                                <div class="sample-content">
+                                    <h3 id="sampleTitle1" style="color: black;">Modern And Creative Poster Design</h3>
+                                    <i></i>
+                                    <p id="sampleDescription1" class="description" style="color: black;">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
+                                    <a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
+                                </div>
+                                <img id="sample1" alt="Sample Shoe">
+                            </div>
+                            <button class="changeBtn" type="button" onclick="changeSample1()">Thay đổi Mẫu 1</button>
+                        </div>
+                    </div>
+                    
+                    <div class="sample">
+                        <div class="container">
+                            <div class="sample-product" id="sample-product-2">
+                                <img id="sample2" alt="Sample Shoe" >
+                                <div class="sample-content">
+                                    <h3 id="sampleTitle2" style="color: black;">Modern And Creative Poster Design</h3>
+                                    <i></i>
+                                    <p id="sampleDescription2" class="description" style="color: black;">Poster Design for sports shoes. Modern and creative poster design in Photoshop. Poster Design for sports shoes. Modern and creative poster design in Photoshop</p>
+                                    <a href="shop.html"><button class="shopNow-btn">Shop Ngay!</button></a>
+                                </div>
+                            </div>
+                            <button class="changeBtn" type="button" onclick="changeSample2()">Thay đổi Mẫu 2</button>
+                        </div>
+                    </div>
+                </div>
+			</div>
+        </div>
+    </div>
+
+	<div id="loader" class="loader"></div>
+
+	<script src="../assets/js/auth.js"></script>
+	<script src="../assets/js/admin/contentManage.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -462,33 +462,3 @@ function displayStars(rating) {
 
     return stars;
 }
-
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
-}
-
-function removeVietnameseTones(str) {
-    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    str = str.replace(/đ/g, 'd').replace(/Đ/g, 'D');
-    return str;
-}
-
-function convertProductName(productName) {
-    // Bỏ dấu tiếng Việt
-    let noToneName = removeVietnameseTones(productName);
-    
-    // Thay thế khoảng trắng bằng dấu gạch ngang
-    let convertedName = noToneName.replace(/\s+/g, '-');
-    
-    return convertedName;
-}
-
-function extractDate(datetimeString) {
-    let modifiedString = datetimeString.replace('T', ' ');
-    let datePart = modifiedString.split('.')[0];
-    
-    return datePart;
-}
-function formatNumber(number) {
-    return number.toLocaleString('vi-VN');
-}

@@ -122,7 +122,7 @@ async function showProductsInShopPage(products){
                 <p class="product-name">${product.productName}</p>
                 <p class="description">${product.categories}</p>
                 <p class="price">${formatNumber(price)} đ 
-                    <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
+                    <span class="originPrice" style="text-decoration: line-through;">${formatNumber(parseInt(product.productPrice))} đ</span>
                 </p>
             </a>
             <div class="product-tip" id="product-tip">
