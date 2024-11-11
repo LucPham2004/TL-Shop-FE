@@ -6,14 +6,14 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 async function showHomepageImages() {
     try {
-        const response = await fetch(domain + '/api/v1/admin/managehomepage/getfilenames');
-        const data = await response.text();  // Lấy dữ liệu dưới dạng chuỗi
-        const parsedData = JSON.parse(data); // Phân tích cú pháp JSON
+        // const response = await fetch(domain + '/api/v1/admin/managehomepage/getfilenames');
+        // const data = await response.text();  // Lấy dữ liệu dưới dạng chuỗi
+        // const parsedData = JSON.parse(data); // Phân tích cú pháp JSON
 
-        // Lấy tên file từ các mục 'banner', 'poster', và 'sample'
-        const bannerFiles = parsedData.banner.split(" ").slice(0, 3);
-        const posterFiles = parsedData.poster.split(" ").slice(0, 3);
-        const sampleFiles = parsedData.sample.split(" ").slice(0, 2);
+        // // Lấy tên file từ các mục 'banner', 'poster', và 'sample'
+        // const bannerFiles = parsedData.banner.split(" ").slice(0, 3);
+        // const posterFiles = parsedData.poster.split(" ").slice(0, 3);
+        // const sampleFiles = parsedData.sample.split(" ").slice(0, 2);
 
         // Cập nhật các banner
         const bannerCarousel = document.querySelector('.banner .carousel-inner');

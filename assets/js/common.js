@@ -149,12 +149,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function changeLoginOrProfileHeaderPart() {
     const accountDiv = document.querySelector('.account');
-    const isLoggedIn = checkLogin();
     const roles = checkRoles();
-
-
+    const token = JSON.parse(localStorage.getItem('token')) || [];
     
-    if(isLoggedIn && roles.includes("ADMIN")) {
+    if(token && roles.includes("ADMIN")) {
         accountDiv.innerHTML = `
         <div class="dropdown">
             <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

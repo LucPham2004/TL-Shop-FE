@@ -1,4 +1,4 @@
-const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";  // http://127.0.0.1:8080 // https://tl-shop-8b8514452c4e.herokuapp.com
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.login-form');
 
@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
         } catch (error) {
-            console.error('Có lỗi xảy ra:', error);
             alert('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
         }
     });

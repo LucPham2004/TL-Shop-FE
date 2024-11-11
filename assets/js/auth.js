@@ -14,44 +14,43 @@ function getCookie(name) {
     return null;
 }
 
-// Check if user logged in or not
-async function checkLogin() {
-    const token = JSON.parse(localStorage.getItem('token')) || [];
+// // Check if user logged in or not
+// async function checkLogin() {
+//     const token = JSON.parse(localStorage.getItem('token')) || [];
 
-    if (token.length == 0) {
-        return false;
-    }
+//     if (token.length == 0) {
+//         return false;
+//     }
 
-    try {
-        const response = await fetch('https://tl-shop-8b8514452c4e.herokuapp.com/api/v1/auth/status', {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
+//     try {
+//         const response = await fetch('http://127.0.0.1:8080/api/v1/auth/status', {
+//             method: 'GET', 
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Authorization': `Bearer ${token}`
+//             }
+//         });
 
-        if (!response.ok) {
-            if (response.status === 401) {
-                console.error('Unauthorized: Token không hợp lệ hoặc đã hết hạn.');
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+//         if (!response.ok) {
+//             if (response.status === 401) {
+//                 console.log('Unauthorized: Token không hợp lệ hoặc đã hết hạn.');
+//             }
+//         }
 
-        const data = await response.json();
-        console.log(data.message);
+//         const data = await response.json();
+//         console.log(data.message);
 
-        if(data.code == 200) {
-            return true
-        } else {
-            confirm("Phiên làm việc đã hết. Vui lòng đăng nhập lại.");
-            logout();
-            return false
-        }
-    } catch (error) {
-        console.error('Có lỗi xảy ra:', error);
-    }
-}
+//         if(data.code == 200) {
+//             return true
+//         } else {
+//             confirm("Phiên làm việc đã hết. Vui lòng đăng nhập lại.");
+//             logout();
+//             return false
+//         }
+//     } catch (error) {
+//         console.error('Có lỗi xảy ra:', error);
+//     }
+// }
 
 function checkRoles() {
     let customerInfo = JSON.parse(localStorage.getItem('user')) || [];

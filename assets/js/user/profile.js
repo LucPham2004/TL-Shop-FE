@@ -1,7 +1,7 @@
 const roles = checkRoles();
-const isLoggedIn = checkLogin();
-if(!isLoggedIn || !roles.includes("USER")) {
+if(!roles.includes("USER")) {
     alert("Vui lòng đăng nhập hoặc đăng ký tài khoản!");
+    logout();
     window.location.href = "/login.html";
 }
 
@@ -136,15 +136,25 @@ async function fetchCustomerOrders() {
         const loader = document.getElementById('loader');
         loader.style.display = 'block';
 
-        const orderResponse = await fetch(domain + `/api/v1/orders/customer?customerId=${getCustomerId()}&pageNum=1`);
-        const orders = await orderResponse.json();
+        const token = JSON.parse(localStorage.getItem('token')) || [];
+
+        const orderResponse = await fetch(domain + `/api/v1/orders/customer?customerId=${getCustomerId()}&pageNum=0`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+        }});
+        const ordersPage = await orderResponse.json();
+        const orders = ordersPage.content;
+        console.log(orders);
 
         const ordersContainer = document.getElementById("orders-container");
         ordersContainer.innerHTML = '';
         const userAgent = navigator.userAgent;
 
-        if(orders.length == 0) {
-            ordersContainer.innerHTML = `Bạn chưa có đơn hàng nào cả. Hãy đi mua sắm vài món đi nào.`;
+        if(orders.numberOfElements == 0) {
+            ordersContainer.innerHTML = `Không tìm thấy đơn hàng nào. Hãy đi mua sắm vài món đi nào.`;
+            loader.style.display = 'none';
             return;
         }
 

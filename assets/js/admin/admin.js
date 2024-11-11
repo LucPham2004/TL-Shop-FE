@@ -5,8 +5,7 @@ if (/mobile/i.test(userAgent)) {
     window.location.href = "/index.html";
 }
 const roles = checkRoles();
-const isLoggedIn = checkLogin();
-if(!isLoggedIn || !roles.includes("ADMIN")) {
+if(!roles.includes("ADMIN")) {
     alert("Bạn không có quyền truy cập trang này!");
     window.location.href = "/index.html";
 }
@@ -52,8 +51,8 @@ async function displaySummaryData() {
     // Populate order list
     const orderListTable = document.getElementById('orderList');
     let j = 1;
-    data.orderList.forEach(order => {
-        if(j > 10) {
+    data.orderList.content.forEach(order => {
+        if(j > 9) {
             return;
         }
         const row = document.createElement('tr');

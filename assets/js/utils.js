@@ -1,5 +1,5 @@
 
-const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";
+const domain = "https://tl-shop-8b8514452c4e.herokuapp.com";        //https://tl-shop-8b8514452c4e.herokuapp.com // http://127.0.0.1:8080
 const imageBaseURL = "https://github.com/LucPham2004/TL-Shop/raw/main/src/main/resources/static";
 
 

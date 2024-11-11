@@ -1,7 +1,6 @@
 
 const roles = checkRoles();
-const isLoggedIn = checkLogin();
-if(!isLoggedIn || !roles.includes("ADMIN")) {
+if(!roles.includes("ADMIN")) {
     alert("Bạn không có quyền truy cập trang này!");
     window.location.href = "/index.html";
 }
@@ -94,10 +93,11 @@ function searchOrdersAndDisplay(keyword) {
 // Fetch Orders Data
 async function fetchOrders() {
     try {
-        const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus?pageNum=1');
-        return orderResponse.json();
+        const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus?pageNum=0');
+        const ordersPage = orderResponse.json();
+        return orders = ordersPage.content;
     } catch (error) {
-        console.error('Error fetching Order orders: ', error);
+        console.log('Error fetching Order orders: ', error);
     }
 }
 
@@ -164,7 +164,7 @@ function showOrders(orders) {
 
 async function fetchOrderSummary() {
     try {
-        const data = await fetch(domain + `/api/v1/admin/orders?pageNum=1`);
+        const data = await fetch(domain + `/api/v1/admin/orders?pageNum=0`);
         if (!data.ok) {
             throw new Error('Network response was not ok');
         }
