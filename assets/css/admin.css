@@ -4,27 +4,44 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 14%;
+  width: 16%;
   height: 100%;
   padding-top: 20px;
 }
 #menu {
-  padding: 10px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: large;
 }
 #content-tab {
-    margin-left: 14%;
-    width: 86%;
+    margin-left: 16%;
+    width: 84%;
     padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: #f5f5f5;
     min-height: 100vh;
 }
-
-
+#menu li {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+#menu li:hover {
+  background-color: rgb(237, 237, 237);
+}
+#menu li:hover a {
+  color: #007bff;
+}
+.nav-item.active {
+  background-color: #208cff;
+}
+.nav-item.active a{
+  color: white;
+}
 
 .app-content {
     min-height: calc(100vh - 50px);
