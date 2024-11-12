@@ -100,10 +100,8 @@ function showCustomersInAdminPage(customers) {
 
 async function fetchCustomerSummary() {
     try {
-        const data = await fetch(domain + `/api/v1/admin/customers`);
-        if (!data.ok) {
-            throw new Error('Network response was not ok');
-        }
+        const response = await fetch(domain + `/api/v1/admin/customers`);
+        const data = await response.json();
 
         const listcustomers = document.querySelector('#customers-summary tbody');
         listcustomers.innerHTML = ``;

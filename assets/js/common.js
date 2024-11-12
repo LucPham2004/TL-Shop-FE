@@ -165,7 +165,7 @@ function changeLoginOrProfileHeaderPart() {
             </ul>
         </div>
     `;
-    } else if (isLoggedIn && roles.includes("USER")) {
+    } else if (token && roles.includes("USER")) {
         // Hiển thị phần dropdown
         accountDiv.innerHTML = `
             <div class="dropdown">

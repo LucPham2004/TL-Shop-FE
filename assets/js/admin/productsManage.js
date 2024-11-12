@@ -111,10 +111,8 @@ function showProductsInAdminPage(products){
 
 async function fetchProductSummary() {
     try {
-        const data = await fetch(domain + `/api/v1/admin/products`);
-        if (!data.ok) {
-            throw new Error('Network response was not ok');
-        }
+        const response = await fetch(domain + `/api/v1/admin/products`);
+        const data = await response.json();
         
         const listproducts = document.querySelector('#products-summary tbody');
         listproducts.innerHTML = ``;

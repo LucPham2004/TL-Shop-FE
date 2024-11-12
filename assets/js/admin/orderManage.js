@@ -94,7 +94,7 @@ function searchOrdersAndDisplay(keyword) {
 async function fetchOrders() {
     try {
         const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus?pageNum=0');
-        const ordersPage = orderResponse.json();
+        const ordersPage = await orderResponse.json();
         return orders = ordersPage.content;
     } catch (error) {
         console.log('Error fetching Order orders: ', error);
@@ -164,10 +164,8 @@ function showOrders(orders) {
 
 async function fetchOrderSummary() {
     try {
-        const data = await fetch(domain + `/api/v1/admin/orders?pageNum=0`);
-        if (!data.ok) {
-            throw new Error('Network response was not ok');
-        }
+        const response = await fetch(domain + `/api/v1/admin/orders?pageNum=0`);
+        const data = await response.json();
 
         const listorders = document.querySelector('#orders-summary tbody');
         listorders.innerHTML = ``;
