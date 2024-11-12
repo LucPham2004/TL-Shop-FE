@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMIN</title>
     <link rel="icon" href="../assets/img/logo/Logo.png">
-    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/admin/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -21,9 +21,6 @@
                             <a class="nav-link" id="tabContent-home-tab" href="../admin/admin.html"><i class="fa-solid fa-house"></i> Tổng Quan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tabContent-content-tab"href="../admin/content.html"><i class="fa-solid fa-image"></i> Nội Dung</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" id="tabContent-orders-tab" href="../admin/orders.html"><i class="fa-solid fa-cart-shopping"></i> Đơn hàng</a>
                         </li>
                         <li class="nav-item">
@@ -31,6 +28,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="tabContent-product-tab" href="../admin/products.html"><i class="fa-solid fa-cubes"></i> Sản Phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tabContent-content-tab"href="../admin/content.html"><i class="fa-solid fa-image"></i> Nội Dung</a>
                         </li>
 					</ul>
 				</div>
@@ -44,7 +44,7 @@
 						<div class="col-md-12">
 						<div class="app-title">
 							<h5 class="breadcrumb-item">
-								<b>Bảng điều khiển</b>
+								<b>Thông tin tổng quan Shop</b>
 								<a href="/index.html"><b style="margin-left: 20px;font-size:medium;">Trang chủ TL-Shop</b></a>
 							</h5>
 						</div>
@@ -68,13 +68,13 @@
 								<div class="tile">
 									<h3 class="tile-title">Khách hàng mới</h3>
 									<div>
-										<table class="table table-hover">
+										<table class="table table-bordered" id="newCustomerTable">
 											<thead>
 											<tr>
-												<th>ID khách hàng</th>
+												<th>ID</th>
 												<th>Tên khách hàng</th>
 												<th>Địa chỉ</th>
-												<th>Số điện thoại</th>
+												<th>Email</th>
 											</tr>
 											</thead>
 											<tbody id="newCustomers">
@@ -135,10 +135,10 @@
 								<div class="tile">
 									<h3 class="tile-title">Tình trạng đơn hàng</h3>
 									<div>
-										<table class="table table-bordered">
+										<table class="table table-bordered" id="ordersSummary">
 											<thead>
 											<tr>
-												<th>ID đơn hàng</th>
+												<th>ID</th>
 												<th>Tên khách hàng</th>
 												<th>Tổng tiền</th>
 												<th>Trạng thái</th>

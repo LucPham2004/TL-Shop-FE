@@ -1,6 +1,6 @@
 #menu-container {
 
-  background-color: #f5f5f5;
+  background-color: #fdfdfd;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@
     padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #f5f5f5;
+    background-color: #fdfdfd;
     min-height: 100vh;
 }
 #menu li {
@@ -234,7 +234,7 @@
     color: #FFF;
     margin-bottom: 30px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 2px 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .widget-small .icon {
@@ -260,7 +260,7 @@
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    padding: 0 20px;
+    padding: 0 10px;
     -ms-flex-item-align: center;
         align-self: center;
   }
@@ -363,6 +363,18 @@ th, td {
     overflow: hidden; 
     text-overflow: ellipsis; 
     white-space: nowrap; 
+}
+#newCustomerTable {
+    th:nth-child(1), td:nth-child(1) { width: 10%; text-align: center;}
+    th:nth-child(2), td:nth-child(2) { width: 30%; }
+    th:nth-child(3), td:nth-child(3) { width: 25%; }
+    th:nth-child(4), td:nth-child(4) { width: 30%; }
+}
+#ordersSummary {
+  th:nth-child(1), td:nth-child(1) { width: 10%; text-align: center;}
+  th:nth-child(2), td:nth-child(2) { width: 35%; }
+  th:nth-child(3), td:nth-child(3) { width: 30%; }
+  th:nth-child(4), td:nth-child(4) { width: 20%; }
 }
 #customer-table{
     th:nth-child(1), td:nth-child(1) { width: 5%; text-align: center;}
@@ -760,8 +772,6 @@ th {
 }
 
 
-
-
 .funtionsAndSearch {
   display: flex;
   justify-content: space-between;
@@ -797,6 +807,11 @@ th {
 }
 .addBrand, .addCategory{
     width: max-content;
+}
+
+
+#addProductForm-container {
+  width: 55%;
 }
 
 .product-forms .card {
@@ -836,7 +851,7 @@ th {
 
 .product-forms button[type="submit"],
 .product-forms button[type="button"] {
-  padding: 10px 15px;
+  padding: 10px;
   font-size: 14px;
   width: 200px;
   color: #fff;
@@ -858,6 +873,12 @@ th {
   color: #007bff;
 }
 
+.productDetail {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
 .horizontal-table .header {
   font-weight: bold;

@@ -130,6 +130,25 @@ async function fetchProductSummary() {
     }
 }
 
+const buttons = document.querySelectorAll('.toggle-button');
+
+    // Lặp qua từng nút và thêm sự kiện click
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            const targetId = this.getAttribute('data-bs-target');
+            const targetElement = document.querySelector(targetId);
+
+            // Kiểm tra và đóng các phần tử collapse khác đang mở
+            document.querySelectorAll('.collapse.show').forEach(openElement => {
+                if (openElement !== targetElement) {
+                    new bootstrap.Collapse(openElement, {
+                        toggle: true
+                    });
+                }
+            });
+        });
+    });
+
 // Creare product and upload images
 document.getElementById('addproductForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -339,7 +358,7 @@ function addDetail() {
         <label for="detailQuantity${detailCount}">Số Lượng:</label>
         <input type="number" id="detailQuantity${detailCount}" name="details[${detailCount}].quantity" required> 
 
-        <button type="button" onclick="cancelAddDetail(this)">Hủy</button>
+        <button style="margin-bottom: 15px;width:70px;" type="button" onclick="cancelAddDetail(this)">Bỏ</button>
     `;
     detailsDiv.appendChild(newDetail);
     detailCount++;

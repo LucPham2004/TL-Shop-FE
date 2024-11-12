@@ -32,9 +32,9 @@ async function displaySummaryData() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="text-align:center;">${customer.id}</td>
-            <td style="text-align:center;">${customer.name}</td>
-            <td style="text-align:center;">${customer.address || 'N/A'}</td>
-            <td style="text-align:center;"><span class="tag tag-success">${customer.phone}</span></td>
+            <td style="text-align:left;">${customer.name}</td>
+            <td style="text-align:left;">${customer.address || 'N/A'}</td>
+            <td style="text-align:left;"><span class="tag tag-success">${customer.email}</span></td>
         `;
         newCustomersTable.appendChild(row);
         i++;
@@ -52,13 +52,13 @@ async function displaySummaryData() {
     const orderListTable = document.getElementById('orderList');
     let j = 1;
     data.orderList.content.forEach(order => {
-        if(j > 9) {
+        if(j > 10) {
             return;
         }
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="text-align:center;">${order.id}</td>
-            <td style="text-align:center;">${order.customerName}</td>
+            <td style="text-align:left;">${order.customerName}</td>
             <td style="text-align:center;">${formatNumber(order.total)} đ</td>
             <td style="text-align:center;"><span class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
         `;
