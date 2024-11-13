@@ -4,6 +4,8 @@ if(!roles.includes("ADMIN")) {
     alert("Bạn không có quyền truy cập trang này!");
     window.location.href = "/index.html";
 }
+const token = JSON.parse(localStorage.getItem('token')) || [];
+
 document.addEventListener("DOMContentLoaded", async function() {
     const loader = document.getElementById('loader');
     loader.style.display = 'block';
@@ -110,10 +112,10 @@ function showOrders(orders) {
         const orderItem = document.createElement('tr');
 
         orderItem.innerHTML = `
-            <td>${order.id}</td>
+            <td style="text-align:center;">${order.id}</td>
             <td>${order.customerName}</td>
-            <td>${formatNumber(parseInt(order.total))} VNĐ</td>
-            <td>${extractDate(order.date)}</td>
+            <td style="text-align:center;">${formatNumber(parseInt(order.total))} VNĐ</td>
+            <td style="text-align:center;">${extractDate(order.date)}</td>
             <td style="text-align:center;"><span style="font-size:15px;" class="badge ${order.status === 'Processing' ? 'bg-info' : order.status === 'Delivering' ? 'bg-warning' : order.status === 'Completed' ? 'bg-success' : 'bg-danger'}">${order.status}</span></td>
             <td>
                 <button type="button" class="SetOrderStatusBtn" onclick="setOrderStatus(${order.id})">Đổi trạng thái</button>
@@ -246,7 +248,8 @@ function setOrderStatus(orderId) {
             fetch(domain + '/api/v1/orders', {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ id: parseInt(orderId), status: status })
             }).then(response => {
@@ -294,6 +297,9 @@ async function deleteOrder(id) {
     if(confirm("Bạn có chắc muốn xóa đơn hàng này?")) {
         const response = await fetch(domain + `/api/v1/orders/${parseInt(id)}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
 
         if (response.ok) {

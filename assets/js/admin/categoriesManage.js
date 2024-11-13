@@ -23,7 +23,8 @@ document.getElementById('addCategoryForm').addEventListener('submit', function(e
     fetch(domain + '/api/v1/category', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: categoryName
     })
@@ -47,7 +48,8 @@ document.getElementById('deleteCategoryForm').addEventListener('submit', functio
         fetch(domain + `/api/v1/category/${categoryId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: categoryId
         })

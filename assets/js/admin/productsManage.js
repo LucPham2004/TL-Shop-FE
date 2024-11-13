@@ -5,6 +5,8 @@ if(!roles.includes("ADMIN")) {
     window.location.href = "/index.html";
 }
 
+const token = JSON.parse(localStorage.getItem('token')) || [];
+
 document.addEventListener("DOMContentLoaded", async function() {
     fetchProductSummary();
     const products = await fetchProductsWithDetails();
@@ -165,8 +167,8 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
     const productImages = document.getElementById('productImages').files;
     const FirstImageFile = productImages[0];
 
-    formData.set('productImage', '/img/products/' + convertProductName(formData.get('productName'))
-                                    + "/" + `${convertProductName(formData.get('productName'))}_1.${FirstImageFile.name.split('.').pop()}`);
+    // formData.set('productImage', '/img/products/' + convertProductName(formData.get('productName'))
+    //                                 + "/" + `${convertProductName(formData.get('productName'))}_1.${FirstImageFile.name.split('.').pop()}`);
     formData.set('productQuantity', productQuantity);
     formData.set('reviewCount', 0);
     formData.set('averageRating', 0);
@@ -174,7 +176,7 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
     const productDTO = {
         productName: formData.get('productName'),
         productDescription: formData.get('productDescription'),
-        productImage: formData.get('productImage'),
+        //productImage: formData.get('productImage'),
         productPrice: parseFloat(formData.get('productPrice')),
         productQuantity: parseInt(productQuantity),
         productQuantitySold: 0,
@@ -200,7 +202,8 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
     fetch(domain + '/api/v1/products', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(productDTO)
     })
@@ -288,9 +291,13 @@ async function deleteProduct(id) {
     if(confirm("Bạn có chắc muốn xóa sản phẩm?")) {
         const response = await fetch(domain + `/api/v1/products/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
 
         if (response.ok) {
+            alert("Xoá sản phẩm thành công!")
             const products = await fetchProductsWithDetails();
             showProductsInAdminPage(products);
         } else {

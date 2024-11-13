@@ -24,6 +24,7 @@ async function displaySummaryData() {
 
     // Populate new customers
     const newCustomersTable = document.getElementById('newCustomers');
+    newCustomersTable.innerHTML = '';
     let i = 1;
     data.new_customers.forEach(customer => {
         if(i > 5) {
@@ -50,6 +51,7 @@ async function displaySummaryData() {
 
     // Populate order list
     const orderListTable = document.getElementById('orderList');
+    orderListTable.innerHTML = '';
     let j = 1;
     data.orderList.content.forEach(order => {
         if(j > 10) {

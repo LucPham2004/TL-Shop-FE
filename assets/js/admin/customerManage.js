@@ -4,6 +4,7 @@ if(!roles.includes("ADMIN")) {
     alert("Bạn không có quyền truy cập trang này!");
     window.location.href = "/index.html";
 }
+const token = JSON.parse(localStorage.getItem('token')) || [];
 
 document.addEventListener("DOMContentLoaded", async function() {
     fetchCustomerSummary();
@@ -130,6 +131,9 @@ async function deleteCustomer(id, email) {
     if(confirm("Bạn có chắc muốn xóa tài khoản của khách hàng này?")) {
         const response = await fetch(domain + `/api/v1/customers?id=${id}&email=${email}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
 
         if (response.ok) {

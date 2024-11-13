@@ -23,7 +23,8 @@ document.getElementById('addBrandForm').addEventListener('submit', function(even
     fetch(domain + '/api/v1/brand', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: brandName
     })
@@ -47,7 +48,8 @@ document.getElementById('deleteBrandForm').addEventListener('submit', function(e
         fetch(domain + `/api/v1/brand/${brandId}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: brandId
         })
