@@ -87,10 +87,11 @@ function showCustomersInAdminPage(customers) {
             <td>${customer.email}</td>
             <td>${customer.phone}</td>
             <td>${customer.address}</td>
+            <td>${extractDate(customer.dayCreated)}</td>
             <td>
                 <button class="customerBtn-edit" onclick="openEditModal(${customer.id}, '${customer.name}', '${customer.email}', '${customer.phone}', '${customer.address}')">Sửa</button>
                 <button class="customerBtn-delete" onclick="deleteCustomer(${customer.id}, '${customer.email}')">Xóa</button>
-                <button class="customerBtn-showOrders" onclick="showOrders(${customer.id})">Xem Đơn Hàng</button>
+                <!-- <button class="customerBtn-showOrders" onclick="showOrders(${customer.id})">Xem Đơn Hàng</button> -->
             </td>
         `;
 

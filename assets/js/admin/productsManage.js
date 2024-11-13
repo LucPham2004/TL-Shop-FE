@@ -100,11 +100,11 @@ function showProductsInAdminPage(products){
             <td>${product.averageRating}</td>
             <td>
                 <button class="productBtn-edit" onclick="editProduct(${product})">Sửa</button>
-                <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
                 <button class="productBtn-delete" onclick="deleteProduct(${product.id})">Xóa</button>
             </td>
         `;
 
+        // <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
         tbody.appendChild(tr);
     });
 }

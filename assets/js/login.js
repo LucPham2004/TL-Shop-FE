@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(loginRequest)
             });
 
-			console.log(response);
-
             if (!response.ok) {
                 throw new Error('Đăng nhập thất bại');
             }
