@@ -200,3 +200,48 @@
         width: 95%;
     }
 }
+
+.placeholder {
+    background: #e6e5e5;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.placeholder-text,
+.placeholder-img,
+.placeholder-btn {
+    background: #e6e5e5;
+    border-radius: 4px;
+}
+
+.placeholder-pulse {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.placeholder-img {
+    width: 200px;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.placeholder-text {
+    margin: 8px 0;
+}
+
+.placeholder-btn {
+    width: 100px;
+    height: 30px;
+    border: none;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
