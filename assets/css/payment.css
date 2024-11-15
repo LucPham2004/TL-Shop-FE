@@ -83,29 +83,98 @@
 
 .summary {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
     margin-top: 20px;
 }
-.customer_info {
+.summary h4 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.customer-info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: max-content;
+}
+.customer-info p {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.customer-info .info-label {
+    width: 30%;
+}
+.customer-info .info-text {
+    text-align: end;
+    width: 70%;
+}
+
+.receipt-container {
+    background-color: white;
+    padding: 20px;
+    width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.receipt-header, .receipt-body, .receipt-summary {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.receipt-header {
     display: flex;
     flex-direction: row;
-    gap: 20%;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
 }
-.order_total {
+
+.receipt-header p, .receipt-summary p {
+    margin: 5px 0;
+}
+
+.receipt-body .item {
     display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
 }
-.summary h6 {
-    margin-left: 61%;
-    width: 15%;
-    font-weight: bold;
+
+.receipt-summary {
+    border-top: 1px solid gray;
 }
-.order_total p {
-    width: 8%;
+
+.receipt-item p {
+    width: 50%;
 }
-#sumPrice {
-    color: red;
-    font-weight: bolder;
+
+.receipt-item span {
+    text-align: end;
+    width: 50%;
 }
+
+.receipt-item {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    width: 100%;
+}
+
+
+
 #placeOrder {
     display: flex;
     justify-content: end;

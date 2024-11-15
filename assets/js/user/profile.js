@@ -4,6 +4,7 @@ if(!roles.includes("USER")) {
     logout();
     window.location.href = "/login.html";
 }
+const token = JSON.parse(localStorage.getItem('token')) || [];
 
 document.addEventListener('DOMContentLoaded', function() {
     displayCustomerInfo();
@@ -136,8 +137,6 @@ async function fetchCustomerOrders() {
         const loader = document.getElementById('loader');
         loader.style.display = 'block';
 
-        const token = JSON.parse(localStorage.getItem('token')) || [];
-
         const orderResponse = await fetch(domain + `/api/v1/orders/customer?customerId=${getCustomerId()}&pageNum=0`, {
             method: 'GET',
             headers: {
@@ -262,7 +261,8 @@ async function cancelOrder(orderId) {
         await fetch(domain + '/api/v1/orders', {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ id: parseInt(orderId), status: "Cancelled" })
         }).then(response => {
@@ -290,6 +290,9 @@ async function deleteOrder(id) {
 
         const response = await fetch(domain + `/api/v1/orders/${parseInt(id)}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
         });
 
         if (response.ok) {

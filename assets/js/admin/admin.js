@@ -47,7 +47,7 @@ async function displaySummaryData() {
 
     document.getElementById('totalOrders').innerHTML = `<b>${data.totalOrders} đơn hàng</b>`;
 
-    document.getElementById('lowStock').innerHTML = `<b>${data.lowRemainingProducts.length} sản phẩm</b>`;
+    document.getElementById('lowStock').innerHTML = `<b>${data.lowRemainingProducts} sản phẩm</b>`;
 
     // Populate order list
     const orderListTable = document.getElementById('orderList');

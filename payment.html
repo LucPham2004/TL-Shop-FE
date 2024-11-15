@@ -26,12 +26,16 @@
             </div>
             <div id="products"></div>
             <div class="summary">
-                <div class="order_total">
-                    <h6>Tổng cộng:</h6>
-                    <p id="sumQuantity"></p>
-                    <p id="sumPrice"></p>
-                </div>
-                <div class="customer_info">
+                <div class="customer-info">
+                    <h4>Thông Tin Người Dùng</h4>
+                    <p>
+                        <span class="info-label"><strong>Họ và tên:</strong></span> 
+                        <span class="info-text" id="name"></span>
+                    </p>
+                    <p>
+                        <span class="info-label"><strong>Email:</strong></span> 
+                        <span class="info-text" id="email"></span>
+                    </p>
                     <p>
                         <span class="info-label"><strong>Số điện thoại:</strong></span> 
                         <span class="info-text" id="phone"></span>
@@ -40,7 +44,44 @@
                         <span class="info-label"><strong>Địa chỉ:</strong></span> 
                         <span class="info-text" id="address"></span>
                     </p>
+                    <p style="color: gray; font-style: italic; font-size: 14px;">Quý khách vui lòng kiểm tra thông tin trước khi đặt hàng</p>
                 </div>
+
+                <div class="receipt-container">
+                    <h4>Hoá đơn đặt hàng</h4>
+                    <div class="receipt-header">
+                        <p><strong>TL Shop</strong></p>
+                        <p>Ngày: <span id="date"></span></p>
+                    </div>
+                    
+                    <!-- <h6 style="font-weight: bold;">Các sản phẩm:</h6> -->
+                    <div class="receipt-body">
+                        <div class="receipt-item" style="font-weight: bold;">
+                            <p>Tên sản phẩm</p>
+                            <span>Số tiền</span>
+                        </div>
+                    </div>
+                    
+                    <div class="receipt-summary">
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                            <p>Tổng cộng: </p>
+                            <span id="subtotal"></span>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                            <p>Phí giao hàng: </p>
+                            <span id="shipping"></span>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                            <p>GTGT (8%): </p>
+                            <span id="tax"></span>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; 
+                            font-weight: bold; border-top: 1px solid gray;">
+                            <p>Tổng thanh toán: </p>
+                            <span id="total" style="color: red;"></span>
+                        </div>
+                    </div>
+                </div>                
             </div>
             <div id="placeOrder">
                 <button type="button" id="placeOrderBtn">Đặt Hàng</button>

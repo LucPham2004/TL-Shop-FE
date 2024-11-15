@@ -9,17 +9,21 @@ document.addEventListener("DOMContentLoaded", function() {
 function displayProductsInCart(cart) {
     const orderContainer = document.getElementById("products");
     orderContainer.innerHTML = '';
+    
+    const receiptBody = document.querySelector(".receipt-body");
 
-    let sumQuantity = 0;
-    let sumPrice = 0;
+    let subtotal = 0;
 
     cart.forEach(product => {
         const cartItem = document.createElement("div");
         cartItem.classList.add("product-item");
 
-        sumQuantity += parseInt(product.quantity);
-        sumPrice += product.quantity * product.price;
+        const receiItem = document.createElement("div");
+        receiItem.classList.add("receipt-item");
 
+        subtotal += product.quantity * product.price;
+
+        // Display cart items
         cartItem.innerHTML = `
             <img alt="Giày ${product.productName}" src="${imageBaseURL + product.productImage}">
             <div class="productItem-info">
@@ -38,10 +42,27 @@ function displayProductsInCart(cart) {
             </div>
         `
         orderContainer.appendChild(cartItem);
+
+        // Display receipt items
+        receiItem.innerHTML = `
+            <p>${product.productName}</p>
+            <span>${formatNumber(parseInt(product.quantity * product.price))} đ</span>
+        `
+
+        receiptBody.appendChild(receiItem);
     });
 
-    document.getElementById("sumQuantity").innerHTML = sumQuantity;
-    document.getElementById("sumPrice").innerHTML = `${formatNumber(parseInt(sumPrice))} đ`;
+    document.getElementById("date").textContent = new Date().toLocaleDateString();
+
+    // Calculate order total
+    const shipping = 15000.00;
+    const tax = 0.08 * subtotal;
+    const total = subtotal + shipping + tax;
+
+    document.getElementById("subtotal").textContent = `${formatNumber(parseInt(subtotal))} đ`;
+    document.getElementById("shipping").textContent = `${formatNumber(parseInt(shipping))} đ`;
+    document.getElementById("tax").textContent = `${formatNumber(parseInt(tax))} đ`;
+    document.getElementById("total").textContent = `${formatNumber(parseInt(total))} đ`;
 
 }
 
@@ -80,7 +101,6 @@ document.getElementById("placeOrderBtn").addEventListener("click", function() {
     })
 
     createOrder(customerId, orderDetails);
-    clearCart();
 });
 
 async function createOrder(customerId, orderDetails) {
@@ -102,12 +122,15 @@ async function createOrder(customerId, orderDetails) {
             productImage: detail.productImage
         }))
     };
+    
+    const token = JSON.parse(localStorage.getItem('token')) || [];
 
     try {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(orderData)
         });
@@ -118,10 +141,12 @@ async function createOrder(customerId, orderDetails) {
 
         const data = await response.json();
         window.alert("Đơn hàng được đặt thành công!")
+        clearCart();
         window.location.href = '/user/profile.html';
         console.log('Order created successfully:', data);
         return data;
     } catch (error) {
+        alert("Có lỗi khi đặt hàng! Hãy thử lại sau.")
         console.error('Error creating order:', error);
     }
 }
@@ -130,6 +155,8 @@ function displayCustomerInfo() {
     try {
         let customerInfo = JSON.parse(localStorage.getItem('user')) || [];
 
+        const userName = document.getElementById('name');
+        const email = document.getElementById('email');
         const phoneSpan = document.getElementById('phone');
         const addressSpan = document.getElementById('address');
 
@@ -138,6 +165,8 @@ function displayCustomerInfo() {
             address = "Chưa có địa chỉ";
         }
 
+        userName.innerHTML = `${customerInfo.name}`;
+        email.innerHTML = `${customerInfo.email}`;
         phoneSpan.innerHTML = `${customerInfo.phone}`;
         addressSpan.innerHTML = `${address}`;
 
