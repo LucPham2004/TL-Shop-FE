@@ -4,7 +4,6 @@ if(!roles.includes("USER")) {
     logout();
     window.location.href = "/login.html";
 }
-const token = JSON.parse(localStorage.getItem('token')) || [];
 
 document.addEventListener('DOMContentLoaded', async function() {
     displayCustomerInfo();
@@ -99,8 +98,6 @@ async function fetchCustomerInfo() {
         } else {
             const loader = document.getElementById('loader');
             loader.style.display = 'block';
-
-            const token = JSON.parse(localStorage.getItem('token')) || [];
         
             const response = await fetch(domain + '/api/v1/customers/' + parseInt(getCustomerId()), {
                 method: 'GET',

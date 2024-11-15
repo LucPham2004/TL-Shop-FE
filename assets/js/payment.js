@@ -122,8 +122,6 @@ async function createOrder(customerId, orderDetails) {
             productImage: detail.productImage
         }))
     };
-    
-    const token = JSON.parse(localStorage.getItem('token')) || [];
 
     try {
         const response = await fetch(url, {

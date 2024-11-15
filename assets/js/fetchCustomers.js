@@ -1,6 +1,9 @@
 async function fetchCustomers() {
     try {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
         const response = await fetch(domain + '/api/v1/customers');
+        loader.style.display = 'none';
         return await response.json();
 
     } catch (error) {

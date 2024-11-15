@@ -4,7 +4,6 @@ if(!roles.includes("ADMIN")) {
     alert("Bạn không có quyền truy cập trang này!");
     window.location.href = "/index.html";
 }
-const token = JSON.parse(localStorage.getItem('token')) || [];
 
 document.addEventListener("DOMContentLoaded", async function() {
     const loader = document.getElementById('loader');

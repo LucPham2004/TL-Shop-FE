@@ -150,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function() {
 function changeLoginOrProfileHeaderPart() {
     const accountDiv = document.querySelector('.account');
     const roles = checkRoles();
-    const token = JSON.parse(localStorage.getItem('token')) || [];
     
     if(token && roles.includes("ADMIN")) {
         accountDiv.innerHTML = `

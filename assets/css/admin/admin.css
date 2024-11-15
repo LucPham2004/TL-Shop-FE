@@ -410,9 +410,9 @@ th, td {
     th:nth-child(3), td:nth-child(3) { width: 10%; text-align: center;}
     th:nth-child(4), td:nth-child(4) { width: 20%; }
     th:nth-child(5), td:nth-child(5) { width: 8%; text-align: center;}
-    th:nth-child(6), td:nth-child(6) { width: 20%; }
+    th:nth-child(6), td:nth-child(6) { width: 10%; }
     th:nth-child(7), td:nth-child(7) { width: 8%; text-align: center;}
-    th:nth-child(8), td:nth-child(8) { width: 10%; }
+    th:nth-child(8), td:nth-child(8) { width: 20%; }
 }
 th {
     background-color: #f2f2f2;
@@ -1095,4 +1095,25 @@ th {
 
 .sample-content button:last-of-type:hover {
   background-color: #c82333;
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 90%;
+  left: 2%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none; 
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

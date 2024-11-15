@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			const token = data.result.jwt;
             loader.style.display = 'none';
             
-            if (user) {
+            if (user && token) {
                 localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('token', JSON.stringify(token));
+                localStorage.setItem('timeLogedin', JSON.stringify(Date.now()));
                 window.location.href = 'index.html';
             } else {
                 throw new Error('Không có thông tin người dùng');

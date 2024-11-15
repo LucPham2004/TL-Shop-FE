@@ -72,10 +72,13 @@ async function displaySummaryData() {
 
 async function fetchSummary() {
     try {
+        const loader = document.getElementById('loader');
+        loader.style.display = 'block';
         const response = await fetch(domain + `/api/v1/admin/summary`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+        loader.style.display = 'none';
 
         return await response.json();
         

@@ -5,11 +5,10 @@ if(!roles.includes("ADMIN")) {
     window.location.href = "/index.html";
 }
 
-const token = JSON.parse(localStorage.getItem('token')) || [];
 
 document.addEventListener("DOMContentLoaded", async function() {
     fetchProductSummary();
-    const products = await fetchProductsWithDetails();
+    const products = await fetchProductsFullInfo();
     showProductsInAdminPage(products);
 
     const brands = await fetchBrandData();
@@ -95,18 +94,19 @@ function showProductsInAdminPage(products){
         tr.innerHTML = `
             <td>${product.id}</td>
             <td>${product.productName}</td>
-            <td>${formatNumber(product.productPrice)} đ</td>
+            <td>${formatNumber(parseInt(product.productPrice))} đ</td>
             <td>${product.productDescription}</td>
-            <td>${product.productQuantity}</td>
+            <td>${product.quantity}</td>
             <td>${product.brandName}, ${product.categories}</td>
             <td>${product.averageRating}</td>
             <td>
                 <button class="productBtn-edit" onclick="editProduct(${product})">Sửa</button>
+                <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
                 <button class="productBtn-delete" onclick="deleteProduct(${product.id})">Xóa</button>
             </td>
         `;
 
-        // <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
+        // 
         tbody.appendChild(tr);
     });
 }
@@ -164,8 +164,8 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
             productQuantity += quantity;
         }
     }
-    const productImages = document.getElementById('productImages').files;
-    const FirstImageFile = productImages[0];
+    //const productImages = document.getElementById('productImages').files;
+    //const FirstImageFile = productImages[0];
 
     // formData.set('productImage', '/img/products/' + convertProductName(formData.get('productName'))
     //                                 + "/" + `${convertProductName(formData.get('productName'))}_1.${FirstImageFile.name.split('.').pop()}`);
@@ -211,7 +211,11 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
-        alert("Tạo sản phẩm thành công!")
+        alert("Tạo sản phẩm thành công!");
+        clearProductsFullInfoInLocalStorage();
+        clearTopProductsInLocalStorage();
+        clearProductsInLocalStorage();
+        clearProductsWithDetailsInLocalStorage();
         return response.json();
     })
     .then(data => {
