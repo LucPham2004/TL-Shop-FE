@@ -97,9 +97,10 @@ async function fetchOrders() {
     try {
         const orderResponse = await fetch(domain + '/api/v1/orders/sortByStatus?pageNum=0');
         const ordersPage = await orderResponse.json();
+        console.log(ordersPage.content)
         return orders = ordersPage.content;
     } catch (error) {
-        console.log('Error fetching Order orders: ', error);
+        console.log('Error fetching orders: ', error);
     }
 }
 
