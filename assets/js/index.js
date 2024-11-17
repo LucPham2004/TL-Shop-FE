@@ -25,8 +25,9 @@ async function displayProducts() {
     const products = await fetchTopProducts();
 
     if(products) {
+        console.log(products)
         const topSellerProducts = products.slice(0, 12);
-        const onSaleProducts = products.slice(24, 36);
+        const onSaleProducts = products.slice(12, 24);
 
     function createProductHTML(product) {
         price = product.productPrice * (100 - product.discountPercent) / 100;
@@ -37,7 +38,7 @@ async function displayProducts() {
                     <p class="product-name">${product.productName}</p>
                     <p class="description">${product.categories}</p>
                     <p class="price">${formatNumber(price)} đ
-                        <span class="originPrice" style="text-decoration: line-through;">${formatNumber(product.productPrice)} đ</span>
+                        <span class="originPrice" style="text-decoration: line-through;">${formatNumber(parseInt(product.productPrice))} đ</span>
                     </p>
                 </a>
                 <div class="product-tip" id="product-tip">

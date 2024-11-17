@@ -96,17 +96,17 @@ function showProductsInAdminPage(products){
             <td>${product.productName}</td>
             <td>${formatNumber(parseInt(product.productPrice))} đ</td>
             <td>${product.productDescription}</td>
-            <td>${product.quantity}</td>
+            <td>${product.quantity ? product.quantity : product.productQuantity}</td>
             <td>${product.brandName}, ${product.categories}</td>
             <td>${product.averageRating}</td>
             <td>
-                <button class="productBtn-edit" onclick="editProduct(${product})">Sửa</button>
-                <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
+                <button class="productBtn-edit" onclick="editProduct(${product.id})">Sửa</button>
                 <button class="productBtn-delete" onclick="deleteProduct(${product.id})">Xóa</button>
             </td>
         `;
 
-        // 
+        // <button class="productBtn-addImage" onclick="addProductImageBtn('${convertProductName(product.productName)}')">Thêm ảnh</button>
+                
         tbody.appendChild(tr);
     });
 }
@@ -218,52 +218,58 @@ document.getElementById('addproductForm').addEventListener('submit', function(ev
         clearProductsWithDetailsInLocalStorage();
         return response.json();
     })
-    .then(data => {
-        uploadProductImages(productDTO.productName, "productImages");
-    })
+    // .then(data => {
+    //     uploadProductImages(productDTO.productName, "productImages");
+    // })
     .catch(error => {
         console.error('There was a problem with your fetch operation:', error);
         alert('Đã xảy ra lỗi khi tạo sản phẩm: ' + error.message);
     });
 });
 
-async function uploadProductImages (productName, imageInputId) {
-    const productImages = document.getElementById(imageInputId).files;
+// Legacy function
 
-    if (productImages.length > 0) {
-        const imageFormData = new FormData();
-        imageFormData.append('productName', convertProductName(productName));
-        for (let i = 0; i < productImages.length; i++) {
-            const originalFile = productImages[i];
-            const newFileName = `${convertProductName(productName)}_${i + 1}.${originalFile.name.split('.').pop()}`;
-            const renamedFile = new File([originalFile], newFileName, { type: originalFile.type });
-            console.log(newFileName)
-            imageFormData.append('productImages', renamedFile);
-        }
 
-        fetch(domain + '/api/v1/products/uploadImages', {
-            method: 'POST',
-            body: imageFormData
-        })
-        .then(imageResponse => {
-            if (!imageResponse.ok) {
-                throw new Error('Network response was not ok ' + imageResponse.statusText);
-            }
-            alert("Tải ảnh sản phẩm thành công!")
-            return imageResponse.text();
-        })
-        .then(imageData => {
-            document.getElementById(imageInputId).value = '';
-        })
-        .catch(imageError => {
-            console.error('There was a problem with your image upload operation:', imageError);
-            alert('Đã xảy ra lỗi khi tải lên hình ảnh: ' + imageError.message);
-        });
-    } else {
-        console.log("Không có hình ảnh nào được tải lên!");
-        alert("Không có hình ảnh nào được tải lên!")
-    }
-}
+// async function uploadProductImages (productName, imageInputId) {
+//     const productImages = document.getElementById(imageInputId).files;
+
+//     if (productImages.length > 0) {
+//         const imageFormData = new FormData();
+//         imageFormData.append('productName', convertProductName(productName));
+//         for (let i = 0; i < productImages.length; i++) {
+//             const originalFile = productImages[i];
+//             const newFileName = `${convertProductName(productName)}_${i + 1}.${originalFile.name.split('.').pop()}`;
+//             const renamedFile = new File([originalFile], newFileName, { type: originalFile.type });
+//             console.log(newFileName)
+//             imageFormData.append('productImages', renamedFile);
+//         }
+
+//         fetch(domain + '/api/v1/products/uploadImages', {
+//             method: 'POST',
+//             body: imageFormData
+//         })
+//         .then(imageResponse => {
+//             if (!imageResponse.ok) {
+//                 throw new Error('Network response was not ok ' + imageResponse.statusText);
+//             }
+//             alert("Tải ảnh sản phẩm thành công!")
+//             return imageResponse.text();
+//         })
+//         .then(imageData => {
+//             document.getElementById(imageInputId).value = '';
+//         })
+//         .catch(imageError => {
+//             console.error('There was a problem with your image upload operation:', imageError);
+//             alert('Đã xảy ra lỗi khi tải lên hình ảnh: ' + imageError.message);
+//         });
+//     } else {
+//         console.log("Không có hình ảnh nào được tải lên!");
+//         alert("Không có hình ảnh nào được tải lên!")
+//     }
+// }
+
+
+
 
 async function addProductImageBtn(productName) {
     console.log(productName);
@@ -280,15 +286,83 @@ function cancelAddImages() {
     addProductImageContainer.style.display = "none";
 }
 
-function editProduct() {
+function editProduct(productId) {
+    const products =  JSON.parse(localStorage.getItem('productsFullInfo')) || [];
+    console.log(products)
+    const product = products.find(p => parseInt(p.id) === parseInt(productId));
+    console.log(product)
+    if (!product) {
+      alert("Không tìm thấy sản phẩm!");
+      return;
+    }
+  
+    // Điền thông tin vào modal
+    document.getElementById("product-id").value = product.id;
+    document.getElementById("product-name").value = product.productName;
+    document.getElementById("product-description").value = product.productDescription;
+    document.getElementById("product-price").value = product.productPrice;
+    document.getElementById("discount-percent").value = product.discountPercent;
+    document.getElementById("brand-name").value = product.brandName;
+    document.getElementById("categories").value = product.categories;
+  
+    // Hiển thị modal
+    document.getElementById("editProductModal").style.display = "block";
+  }
+  
+  // Hàm đóng modal
+  function closeModal() {
+    document.getElementById("editProductModal").style.display = "none";
+  }
+  
+  // Hàm lưu thay đổi sản phẩm
+  async function saveProductChanges() {
+    const id = document.getElementById("product-id").value;
 
-}
+    const productData = {
+        id: parseInt(id),
+        productName: document.getElementById("product-name").value,
+        productDescription: document.getElementById("product-description").value,
+        productPrice: parseFloat(document.getElementById("product-price").value),
+        discountPercent: parseFloat(document.getElementById("discount-percent").value),
+        brandName: document.getElementById("brand-name").value,
+        categories: document.getElementById("categories").value.split(",").map(c => c.trim())
+    };
 
-async function nonfilterProducts() {
-    const products = await fetchProductsWithDetails();
-    showProductsInAdminPage(products);
+    try {
+        const response = await fetch(domain + '/api/v1/products/edit', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(productData)
+        });
 
-} 
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Có lỗi xảy ra khi cập nhật sản phẩm!');
+        }
+
+        const updatedProduct = await response.json();
+        console.log(updatedProduct);
+        closeModal();
+        alert(`Cập nhật sản phẩm thành công!`);
+        clearProductsFullInfoInLocalStorage();
+        clearTopProductsInLocalStorage();
+        clearProductsInLocalStorage();
+        clearProductsWithDetailsInLocalStorage();
+    } catch (error) {
+        console.error('Error:', error);
+        alert(error.message);
+    }
+  }
+
+
+// async function nonfilterProducts() {
+//     const products = await fetchProductsWithDetails();
+//     showProductsInAdminPage(products);
+
+// } 
 
 // Delete product
 async function deleteProduct(id) {

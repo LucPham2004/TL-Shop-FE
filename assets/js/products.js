@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateSizeOptions(event.target.value);
             });
 
-            addProductImages(product.productImage);
+            showProductImages(product.productImage);
         })
         .catch(error => {
             document.querySelector(".main-container").textContent = "Server có thể đã dừng hoạt động. Mong quý khách thông cảm";
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.log('Error fetching products:', error));
 });
 
-function addProductImages(productImage) {
+function showProductImages(productImage) {
     const picsDiv = document.querySelector('.pics');
     
     const underscoreIndex = productImage.lastIndexOf('_');

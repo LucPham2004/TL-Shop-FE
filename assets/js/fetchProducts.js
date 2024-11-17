@@ -84,6 +84,7 @@ async function fetchProductsWithDetails() {
 
             const response = await fetch(domain + '/api/v1/products/withdetails');
             const products = await response.json();
+            console.log(products)
             
             loader.style.display = 'none';
 

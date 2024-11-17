@@ -90,13 +90,11 @@
         <div class="review-container">
             <div class="reviewForm-container">
                 <form id="reviewForm">
-                    <div class="d-flex mb-2">
-                        <div class="">
-                            <label for="reviewTitle">Tiêu đề:</label>
-                            <input type="text" id="reviewTitle" required>
-                        </div>
-                        <div class="">
-                            <label for="rating">Đánh giá:</label>
+                    <div class="d-flex" style="align-items: center; gap: 20px;">
+                        <img class="user-icon" alt="user-icon" src="../assets/img/logo/user.png">
+                            <div class="input-container">
+                                <input type="text" id="reviewTitle" required placeholder="Tiêu đề..." class="rounded-input" />
+                            </div>
                             <select id="rating" required>
                                 <option value="5">5★</option>
                                 <option value="4">4★</option>
@@ -104,14 +102,13 @@
                                 <option value="2">2★</option>
                                 <option value="1">1★</option>
                             </select>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="comment">Bình luận:</label>
-                            <textarea id="comment" class="w-100" required></textarea>
+                    <div class="d-flex mb-2">
+                        <div class="input-container">
+                            <input type="text" id="comment" required placeholder="Nội dung..." 
+                                class="rounded-input" style="width: 370px; margin-left: 50px;"/>
                         </div>
-                        <button class="col-12 ms-2" type="submit">Thêm Đánh giá</button>
+                        <button class="col-12 ms-2" type="submit">Gửi</button>
                     </div>
                 </form>
                 <div style="display: flex;justify-content:center;"><hr style="width:80%;"></div>

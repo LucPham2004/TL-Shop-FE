@@ -83,9 +83,9 @@
                                     Danh mục sản phẩm
                                 </button>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <button class="btn btn-primary" type="button" onclick="nonfilterProducts()">Hủy tìm kiếm</button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="search-container">
                             <div class="search-box">
@@ -125,9 +125,6 @@
                                         
                                     </div>
                                     <button type="button" onclick="addDetail()">Thêm Mẫu</button>
-
-                                    <label for="productImages">Tải Lên Hình Ảnh:</label>
-                                    <input type="file" id="productImages" name="productImages" multiple>
                             
                                     <button type="submit">Tạo Sản Phẩm</button><br>
                                 </form>
@@ -311,6 +308,49 @@
                             </tbody>
                         </table>
                     </div>
+                    <div id="editProductModal" class="modal hidden">
+                        <div class="modal-content">
+                          <span class="close" onclick="closeModal()">×</span>
+                          <h2>Chỉnh sửa sản phẩm</h2>
+                          <form id="editProductForm">
+
+                            <input type="hidden" id="product-id">
+                            
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="product-name">Tên sản phẩm:</label>
+                                <input type="text" id="product-name" required>
+                            </div>
+
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="product-description">Mô tả sản phẩm:</label>
+                                <textarea id="product-description" required></textarea>
+                            </div>
+
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="product-price">Giá sản phẩm:</label>
+                                <input type="number" id="product-price" step="0.01" required>
+                            </div>
+
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="discount-percent">Phần trăm giảm giá:</label>
+                                <input type="number" id="discount-percent" step="0.01" required>
+                            </div>
+                      
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="brand-name">Thương hiệu:</label>
+                                <input type="text" id="brand-name" required>
+                            </div>
+                      
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                                <label for="categories">Danh mục:</label>
+                                <input type="text" id="categories" placeholder="Phân cách bởi dấu phẩy" required>
+                            </div>
+                      
+                            <button type="button" onclick="saveProductChanges()">Lưu</button>
+                          </form>
+                        </div>
+                      </div>
+                      
                 </div>
 			</div>
         </div>

@@ -410,9 +410,9 @@ th, td {
     th:nth-child(3), td:nth-child(3) { width: 10%; text-align: center;}
     th:nth-child(4), td:nth-child(4) { width: 20%; }
     th:nth-child(5), td:nth-child(5) { width: 8%; text-align: center;}
-    th:nth-child(6), td:nth-child(6) { width: 10%; }
+    th:nth-child(6), td:nth-child(6) { width: 20%; }
     th:nth-child(7), td:nth-child(7) { width: 8%; text-align: center;}
-    th:nth-child(8), td:nth-child(8) { width: 20%; }
+    th:nth-child(8), td:nth-child(8) { width: 10%; }
 }
 th {
     background-color: #f2f2f2;
@@ -872,6 +872,7 @@ th {
 .product-forms button[type="submit"],
 .product-forms button[type="button"] {
   padding: 10px;
+  margin-bottom: 20px;
   font-size: 14px;
   width: 200px;
   color: #fff;
@@ -960,6 +961,56 @@ th {
   align-items: center;
   gap: 10px;
 }
+
+
+/* edit product */
+
+.modal {
+  display: none; /* Ẩn modal ban đầu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 50%;
+  position: relative;
+}
+
+#editProductForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#editProductForm input, #editProductForm textarea, #editProductForm button {
+  width: 75%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#editProductForm button:hover {
+  background-color: #007bff;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
 
 /* Search button */
 
